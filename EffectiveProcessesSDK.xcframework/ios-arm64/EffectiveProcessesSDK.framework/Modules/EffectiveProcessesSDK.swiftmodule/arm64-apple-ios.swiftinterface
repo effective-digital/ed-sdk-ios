@@ -1,0 +1,1637 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -enable-bare-slash-regex -module-name EffectiveProcessesSDK
+import Combine
+import DeveloperToolsSupport
+@_exported import EffectiveProcessesSDK
+import Foundation
+import Kingfisher
+import Lottie
+import ObjectiveC
+import PDFKit
+import Photos
+import Resolver
+import RxCocoa
+import RxSwift
+import Swift
+import SwiftUI
+import UIKit
+import UniformTypeIdentifiers
+import UserNotifications
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@objc @_inheritsConvenienceInitializers public class APIClient : ObjectiveC.NSObject, Foundation.URLSessionTaskDelegate {
+  public static let shared: EffectiveProcessesSDK.APIClient
+  public func execute<T>(_ from: EffectiveProcessesSDK.Endpoint, tokenRequired: Swift.Bool = true, checkTokenExpired: Swift.Bool = APIConstant.SHOULD_CHECK_TOKEN_EXPIRED, completion: @escaping (EffectiveProcessesSDK.Result<T>) -> ()) where T : Swift.Decodable, T : Swift.Encodable
+  public func upload<T>(_ from: EffectiveProcessesSDK.Endpoint, progressHandler: ((Swift.Double) -> Swift.Void)?, completion: @escaping (EffectiveProcessesSDK.Result<T>) -> ()) where T : Swift.Decodable, T : Swift.Encodable
+  @objc public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
+  @objc override dynamic public init()
+  @objc deinit
+}
+public struct APIConstant {
+  public static var BASE_URL: Swift.String
+  public static var API_BASE_URL: Swift.String
+  public static var TOKEN: Swift.String
+  public static var APP_UNIQUE_ID: Swift.String
+  public static var SHOULD_CHECK_TOKEN_EXPIRED: Swift.Bool
+  @SwiftUI.AppStorage @_projectedValueProperty($LANGUAGE) public static var LANGUAGE: Swift.String {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    _modify
+  }
+  public static var $LANGUAGE: SwiftUI.Binding<Swift.String> {
+    get
+  }
+  public static var TOKEN_EXPIRED: Swift.Bool {
+    get
+  }
+}
+extension Swift.Array {
+  public mutating func groupMe<U>(by key: (Element) -> U) -> [[Element]] where U : Swift.Hashable
+}
+public protocol BannerUsecase {
+  func getOfferList(callback: @escaping (EffectiveProcessesSDK.Result<[EffectiveProcessesSDK.ProcessItemNew]>) -> Swift.Void)
+  func gerListOfAvailableLanguages(callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.Languages>) -> Swift.Void)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) open class BannerView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public func getOffer(callback: ((Swift.Bool) -> Swift.Void)? = nil)
+  @_Concurrency.MainActor(unsafe) convenience public init(targetName: Swift.String, token: Swift.String, shouldCheckExpiredToken: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class BaseScreen : EffectiveProcessesSDK.CTFormsView {
+  @_Concurrency.MainActor(unsafe) public func handleStates(state: RxRelay.BehaviorRelay<EffectiveProcessesSDK.EPState>, completion: @escaping (Any?) -> (Swift.Void))
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+extension SwiftUI.Binding where Value : Swift.Equatable {
+  public init(_ source: SwiftUI.Binding<Value?>, replacingNilWith nilProxy: Value)
+}
+public enum FormAlignment {
+  case top, center, none
+  public static func == (a: EffectiveProcessesSDK.FormAlignment, b: EffectiveProcessesSDK.FormAlignment) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class ContentSizeObservingScrollView : UIKit.UIScrollView {
+  @_Concurrency.MainActor(unsafe) public var contentSizeDidChange: ((CoreFoundation.CGSize) -> Swift.Void)?
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var contentSize: CoreFoundation.CGSize {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) open class CTFormsView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) public var scrollView: EffectiveProcessesSDK.ContentSizeObservingScrollView {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) final public let formContainerStackView: UIKit.UIStackView
+  @_Concurrency.MainActor(unsafe) convenience public init(alignment: EffectiveProcessesSDK.FormAlignment = .top)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didMoveToSuperview()
+  @_Concurrency.MainActor(unsafe) public var distanceToBottom: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @objc deinit
+}
+public struct ImagePickerResult {
+  public struct EditingInfo {
+    public let image: UIKit.UIImage
+    public let crop: CoreFoundation.CGRect
+  }
+  public let image: UIKit.UIImage?
+  public let edits: EffectiveProcessesSDK.ImagePickerResult.EditingInfo?
+  public let location: Foundation.URL?
+  public let asset: Photos.PHAsset?
+}
+public class CTImagePicker {
+  public init(sourceType: UIKit.UIImagePickerController.SourceType, allowsEditing: Swift.Bool = false)
+  @discardableResult
+  public func pickImage(over context: UIKit.UIViewController, animated: Swift.Bool, completionHandler: ((EffectiveProcessesSDK.ImagePickerResult?) -> Swift.Void)? = nil) -> EffectiveProcessesSDK.ImagePickerTask
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class ImagePickerTask {
+  public func cancel()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class CTListCell<T> : UIKit.UICollectionViewCell {
+  @_Concurrency.MainActor(unsafe) open var item: T!
+  @_Concurrency.MainActor(unsafe) weak open var parentController: UIKit.UIViewController?
+  @_Concurrency.MainActor(unsafe) final public let separatorView: UIKit.UIView
+  @_Concurrency.MainActor(unsafe) open func addSeparatorView(leftPadding: CoreFoundation.CGFloat = 0)
+  @_Concurrency.MainActor(unsafe) open func addSeparatorView(leadingAnchor: UIKit.NSLayoutXAxisAnchor)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) open func setupViews()
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class CTListHeaderView<T, U, H> : UIKit.UIView, UIKit.UICollectionViewDelegate, UIKit.UICollectionViewDataSource where T : EffectiveProcessesSDK.CTListCell<U>, H : UIKit.UICollectionReusableView {
+  @_Concurrency.MainActor(unsafe) public var collectionView: UIKit.UICollectionView! {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) open var source: [U] {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) final public let cellId: Swift.String
+  @_Concurrency.MainActor(unsafe) final public let headerId: Swift.String
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc open func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
+  @_Concurrency.MainActor(unsafe) public func setupHeader(_ header: H)
+  @_Concurrency.MainActor(unsafe) @objc open func collectionView(_ collectionView: UIKit.UICollectionView, viewForSupplementaryElementOfKind kind: Swift.String, at indexPath: Foundation.IndexPath) -> UIKit.UICollectionReusableView
+  @_Concurrency.MainActor(unsafe) @objc open func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc open func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc open func collectionView(_ collectionView: UIKit.UICollectionView, willDisplaySupplementaryView view: UIKit.UICollectionReusableView, forElementKind elementKind: Swift.String, at indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) convenience public init(scrollDirection: UIKit.UICollectionView.ScrollDirection = .vertical)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class CTListView<T, U> : EffectiveProcessesSDK.CTListHeaderView<T, U, UIKit.UICollectionReusableView> where T : EffectiveProcessesSDK.CTListCell<U> {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+public struct CachedAsyncImage<Content> : SwiftUI.View where Content : SwiftUI.View {
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public init(url: Foundation.URL?, urlCache: Foundation.URLCache = .shared, scale: CoreFoundation.CGFloat = 1) where Content == SwiftUI.Image
+  public init(urlRequest: Foundation.URLRequest?, urlCache: Foundation.URLCache = .shared, scale: CoreFoundation.CGFloat = 1) where Content == SwiftUI.Image
+  public init<I, P>(url: Foundation.URL?, urlCache: Foundation.URLCache = .shared, scale: CoreFoundation.CGFloat = 1, @SwiftUI.ViewBuilder content: @escaping (SwiftUI.Image) -> I, @SwiftUI.ViewBuilder placeholder: @escaping () -> P) where Content == SwiftUI._ConditionalContent<I, P>, I : SwiftUI.View, P : SwiftUI.View
+  public init<I, P>(urlRequest: Foundation.URLRequest?, urlCache: Foundation.URLCache = .shared, scale: CoreFoundation.CGFloat = 1, @SwiftUI.ViewBuilder content: @escaping (SwiftUI.Image) -> I, @SwiftUI.ViewBuilder placeholder: @escaping () -> P) where Content == SwiftUI._ConditionalContent<I, P>, I : SwiftUI.View, P : SwiftUI.View
+  public init(url: Foundation.URL?, urlCache: Foundation.URLCache = .shared, scale: CoreFoundation.CGFloat = 1, transaction: SwiftUI.Transaction = Transaction(), @SwiftUI.ViewBuilder content: @escaping (SwiftUI.AsyncImagePhase) -> Content)
+  public init(urlRequest: Foundation.URLRequest?, urlCache: Foundation.URLCache = .shared, scale: CoreFoundation.CGFloat = 1, transaction: SwiftUI.Transaction = Transaction(), @SwiftUI.ViewBuilder content: @escaping (SwiftUI.AsyncImagePhase) -> Content)
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK16CachedAsyncImageV4bodyQrvp", 0) __<Content>
+}
+public struct CellDescriptor {
+  public var sectionName: Swift.String
+  public let sectionBGColor: UIKit.UIColor
+  public let cellClass: UIKit.UITableViewCell.Type
+  public let reuseIdentifier: Swift.String
+  public let configure: (UIKit.UITableViewCell) -> Swift.Void
+  public init<T>(sectionBGColor: UIKit.UIColor, sectionName: Swift.String, configure: @escaping (T) -> Swift.Void) where T : UIKit.UITableViewCell
+}
+@objc @_Concurrency.MainActor(unsafe) open class CircularImageView : UIKit.UIImageView {
+  @_Concurrency.MainActor(unsafe) public init(width: CoreFoundation.CGFloat, image: UIKit.UIImage? = nil)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+extension Swift.Encodable {
+  public var json: [Swift.String : Any]? {
+    get
+  }
+  public var encodeString: Swift.String? {
+    get
+  }
+  public var jsonString: Swift.String? {
+    get
+  }
+}
+extension Swift.Encodable {
+  public func encoded() throws -> Foundation.Data
+}
+open class CurrencyInputViewModel : EffectiveProcessesSDK.ViewModelState {
+  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(value: Swift.Double)
+  @Combine.Published @_projectedValueProperty($value) public var value: Swift.Double {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $value: Combine.Published<Swift.Double>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($outvalue) public var outvalue: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $outvalue: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public protocol CurrencyProvider {
+  var currencyView: (Swift.String, Foundation.Date) -> (EffectiveProcessesSDK.DatePickerFieldModel, UIKit.UIView) { get set }
+}
+public protocol EPPosition : Swift.Decodable, Swift.Encodable {
+  var top: Swift.Int? { get set }
+  var bottom: Swift.Int? { get set }
+  var left: Swift.Int? { get set }
+  var right: Swift.Int? { get set }
+  var all: Swift.Int? { get set }
+}
+public protocol EPSize : Swift.Decodable, Swift.Encodable {
+  var height: Swift.Int? { get set }
+  var width: Swift.Int? { get set }
+}
+public struct EPColor : Swift.Codable {
+  public var light: Swift.String?
+  public var dark: Swift.String?
+  public var color: SwiftUI.Color {
+    get
+  }
+  public var uiColor: UIKit.UIColor {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol ColorStyle : Swift.Decodable, Swift.Encodable {
+  var primaryColor: EffectiveProcessesSDK.EPColor? { get set }
+  var secondaryColor: EffectiveProcessesSDK.EPColor? { get set }
+  var tertiaryColor: EffectiveProcessesSDK.EPColor? { get set }
+  var primaryFont: Swift.String? { get set }
+  var secondaryFont: Swift.String? { get set }
+}
+public struct EPMargine : EffectiveProcessesSDK.EPPosition {
+  public var top: Swift.Int?
+  public var bottom: Swift.Int?
+  public var left: Swift.Int?
+  public var right: Swift.Int?
+  public var all: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct EPPadding : EffectiveProcessesSDK.EPPosition {
+  public var top: Swift.Int?
+  public var bottom: Swift.Int?
+  public var left: Swift.Int?
+  public var right: Swift.Int?
+  public var all: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct EPRadius : EffectiveProcessesSDK.EPPosition {
+  public var top: Swift.Int?
+  public var bottom: Swift.Int?
+  public var left: Swift.Int?
+  public var right: Swift.Int?
+  public var all: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol SizeStyle : EffectiveProcessesSDK.EPSize {
+  var margine: EffectiveProcessesSDK.EPMargine? { get set }
+  var padding: EffectiveProcessesSDK.EPPadding? { get set }
+  var cornerRadius: EffectiveProcessesSDK.EPRadius? { get set }
+}
+public struct GeneralStyle : EffectiveProcessesSDK.ColorStyle, EffectiveProcessesSDK.SizeStyle {
+  public var tertiaryColor: EffectiveProcessesSDK.EPColor?
+  public var height: Swift.Int?
+  public var width: Swift.Int?
+  public var cornerRadius: EffectiveProcessesSDK.EPRadius?
+  public var margine: EffectiveProcessesSDK.EPMargine?
+  public var padding: EffectiveProcessesSDK.EPPadding?
+  public var primaryColor: EffectiveProcessesSDK.EPColor?
+  public var secondaryColor: EffectiveProcessesSDK.EPColor?
+  public var primaryFont: Swift.String?
+  public var secondaryFont: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct LabelStyleNew : EffectiveProcessesSDK.UIStyleGeneral {
+  public var tertiaryColor: EffectiveProcessesSDK.EPColor?
+  public var height: Swift.Int?
+  public var width: Swift.Int?
+  public var cornerRadius: EffectiveProcessesSDK.EPRadius?
+  public var margine: EffectiveProcessesSDK.EPMargine?
+  public var padding: EffectiveProcessesSDK.EPPadding?
+  public var primaryColor: EffectiveProcessesSDK.EPColor?
+  public var secondaryColor: EffectiveProcessesSDK.EPColor?
+  public var primaryFont: Swift.String?
+  public var secondaryFont: Swift.String?
+  public var textAlighment: Swift.String?
+  public var numberOfLines: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct IconStyleNew : EffectiveProcessesSDK.UIStyleGeneral {
+  public var tertiaryColor: EffectiveProcessesSDK.EPColor?
+  public var height: Swift.Int?
+  public var width: Swift.Int?
+  public var cornerRadius: EffectiveProcessesSDK.EPRadius?
+  public var margine: EffectiveProcessesSDK.EPMargine?
+  public var padding: EffectiveProcessesSDK.EPPadding?
+  public var primaryColor: EffectiveProcessesSDK.EPColor?
+  public var secondaryColor: EffectiveProcessesSDK.EPColor?
+  public var primaryFont: Swift.String?
+  public var secondaryFont: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol UIStyleGeneral : EffectiveProcessesSDK.ColorStyle, EffectiveProcessesSDK.SizeStyle {
+}
+public protocol UISubElements : EffectiveProcessesSDK.ColorStyle, EffectiveProcessesSDK.SizeStyle {
+  var labelStyle: EffectiveProcessesSDK.LabelStyleNew? { get set }
+  var iconStyle: EffectiveProcessesSDK.IconStyleNew? { get set }
+}
+public struct InputStyle : EffectiveProcessesSDK.UISubElements {
+  public var labelStyle: EffectiveProcessesSDK.LabelStyleNew?
+  public var iconStyle: EffectiveProcessesSDK.IconStyleNew?
+  public var tertiaryColor: EffectiveProcessesSDK.EPColor?
+  public var height: Swift.Int?
+  public var width: Swift.Int?
+  public var cornerRadius: EffectiveProcessesSDK.EPRadius?
+  public var margine: EffectiveProcessesSDK.EPMargine?
+  public var padding: EffectiveProcessesSDK.EPPadding?
+  public var primaryColor: EffectiveProcessesSDK.EPColor?
+  public var secondaryColor: EffectiveProcessesSDK.EPColor?
+  public var primaryFont: Swift.String?
+  public var secondaryFont: Swift.String?
+  public var type: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CardStyleNew : EffectiveProcessesSDK.UISubElements {
+  public var labelStyle: EffectiveProcessesSDK.LabelStyleNew?
+  public var iconStyle: EffectiveProcessesSDK.IconStyleNew?
+  public var tertiaryColor: EffectiveProcessesSDK.EPColor?
+  public var height: Swift.Int?
+  public var width: Swift.Int?
+  public var cornerRadius: EffectiveProcessesSDK.EPRadius?
+  public var margine: EffectiveProcessesSDK.EPMargine?
+  public var padding: EffectiveProcessesSDK.EPPadding?
+  public var primaryColor: EffectiveProcessesSDK.EPColor?
+  public var secondaryColor: EffectiveProcessesSDK.EPColor?
+  public var primaryFont: Swift.String?
+  public var secondaryFont: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct HeaderStyle : EffectiveProcessesSDK.UISubElements {
+  public var labelStyle: EffectiveProcessesSDK.LabelStyleNew?
+  public var iconStyle: EffectiveProcessesSDK.IconStyleNew?
+  public var tertiaryColor: EffectiveProcessesSDK.EPColor?
+  public var height: Swift.Int?
+  public var width: Swift.Int?
+  public var cornerRadius: EffectiveProcessesSDK.EPRadius?
+  public var margine: EffectiveProcessesSDK.EPMargine?
+  public var padding: EffectiveProcessesSDK.EPPadding?
+  public var primaryColor: EffectiveProcessesSDK.EPColor?
+  public var secondaryColor: EffectiveProcessesSDK.EPColor?
+  public var primaryFont: Swift.String?
+  public var secondaryFont: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ButtonStyle : EffectiveProcessesSDK.UIStyleGeneral {
+  public var tertiaryColor: EffectiveProcessesSDK.EPColor?
+  public var height: Swift.Int?
+  public var width: Swift.Int?
+  public var cornerRadius: EffectiveProcessesSDK.EPRadius?
+  public var margine: EffectiveProcessesSDK.EPMargine?
+  public var padding: EffectiveProcessesSDK.EPPadding?
+  public var primaryColor: EffectiveProcessesSDK.EPColor?
+  public var secondaryColor: EffectiveProcessesSDK.EPColor?
+  public var primaryFont: Swift.String?
+  public var secondaryFont: Swift.String?
+  public var axis: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct DetailStyle : EffectiveProcessesSDK.UIStyleGeneral {
+  public var tertiaryColor: EffectiveProcessesSDK.EPColor?
+  public var height: Swift.Int?
+  public var width: Swift.Int?
+  public var cornerRadius: EffectiveProcessesSDK.EPRadius?
+  public var margine: EffectiveProcessesSDK.EPMargine?
+  public var padding: EffectiveProcessesSDK.EPPadding?
+  public var primaryColor: EffectiveProcessesSDK.EPColor?
+  public var secondaryColor: EffectiveProcessesSDK.EPColor?
+  public var primaryFont: Swift.String?
+  public var secondaryFont: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct LabelTheStyle : EffectiveProcessesSDK.UIStyleGeneral {
+  public var tertiaryColor: EffectiveProcessesSDK.EPColor?
+  public var height: Swift.Int?
+  public var width: Swift.Int?
+  public var cornerRadius: EffectiveProcessesSDK.EPRadius?
+  public var margine: EffectiveProcessesSDK.EPMargine?
+  public var padding: EffectiveProcessesSDK.EPPadding?
+  public var primaryColor: EffectiveProcessesSDK.EPColor?
+  public var secondaryColor: EffectiveProcessesSDK.EPColor?
+  public var primaryFont: Swift.String?
+  public var secondaryFont: Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol ElementStyle {
+  var labelStyle: EffectiveProcessesSDK.LabelTheStyle? { get set }
+  var inputStyle: EffectiveProcessesSDK.InputStyle? { get set }
+  var cardStyle: EffectiveProcessesSDK.CardStyleNew? { get set }
+  var headerStyle: EffectiveProcessesSDK.HeaderStyle? { get set }
+  var buttonStyle: EffectiveProcessesSDK.ButtonStyle? { get set }
+}
+public struct SliderStyle : EffectiveProcessesSDK.UISubElements {
+  public var labelStyle: EffectiveProcessesSDK.LabelStyleNew?
+  public var iconStyle: EffectiveProcessesSDK.IconStyleNew?
+  public var height: Swift.Int?
+  public var width: Swift.Int?
+  public var cornerRadius: EffectiveProcessesSDK.EPRadius?
+  public var margine: EffectiveProcessesSDK.EPMargine?
+  public var padding: EffectiveProcessesSDK.EPPadding?
+  public var primaryColor: EffectiveProcessesSDK.EPColor?
+  public var secondaryColor: EffectiveProcessesSDK.EPColor?
+  public var tertiaryColor: EffectiveProcessesSDK.EPColor?
+  public var primaryFont: Swift.String?
+  public var secondaryFont: Swift.String?
+  public var type: Swift.Int?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct EPStyle : EffectiveProcessesSDK.ColorStyle, EffectiveProcessesSDK.ElementStyle {
+  public var labelStyle: EffectiveProcessesSDK.LabelTheStyle?
+  public var tertiaryColor: EffectiveProcessesSDK.EPColor?
+  public var primaryColor: EffectiveProcessesSDK.EPColor?
+  public var secondaryColor: EffectiveProcessesSDK.EPColor?
+  public var primaryFont: Swift.String?
+  public var secondaryFont: Swift.String?
+  public var inputStyle: EffectiveProcessesSDK.InputStyle?
+  public var cardStyle: EffectiveProcessesSDK.CardStyleNew?
+  public var headerStyle: EffectiveProcessesSDK.HeaderStyle?
+  public var buttonStyle: EffectiveProcessesSDK.ButtonStyle?
+  public var detailStyle: EffectiveProcessesSDK.DetailStyle?
+  public var slider: EffectiveProcessesSDK.SliderStyle?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension Foundation.Date {
+  public func dateString(ofStyle style: Foundation.DateFormatter.Style = .medium) -> Swift.String
+  public func string(withFormat format: Swift.String = "dd/MM/yyyy HH:mm") -> Swift.String
+  public func toNLBDateFormat() -> Swift.String?
+  public func toNLBDateFormatDash() -> Swift.String?
+  public func toDateString(with format: Swift.String) -> Swift.String
+  public var toIsoDateString: Swift.String {
+    get
+  }
+}
+extension Swift.Double {
+  public func formattedString(decimals: Swift.Int = 2) -> Swift.String
+  public func rounded(toPlaces places: Swift.Int) -> Swift.Double
+  public var isPositive: Swift.Bool {
+    get
+  }
+}
+open class DatePickerFieldModel : EffectiveProcessesSDK.ViewModelState {
+  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(selectedDate: Foundation.Date)
+  @Combine.Published @_projectedValueProperty($selectedDate) public var selectedDate: Foundation.Date {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $selectedDate: Combine.Published<Foundation.Date>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public protocol DateProvider {
+  var dateView: (Swift.String, Foundation.Date) -> (EffectiveProcessesSDK.DatePickerFieldModel, UIKit.UIView) { get set }
+}
+public protocol DescriptiveProtocol : AnyObject {
+  var descriptor: EffectiveProcessesSDK.CellDescriptor { get }
+}
+open class DropDownListModel : EffectiveProcessesSDK.ViewModelState {
+  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(prompt: Swift.String, options: [EffectiveProcessesSDK.Option], selection: EffectiveProcessesSDK.Option?)
+  @Combine.Published @_projectedValueProperty($prompt) public var prompt: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $prompt: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($options) public var options: [EffectiveProcessesSDK.Option] {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $options: Combine.Published<[EffectiveProcessesSDK.Option]>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($selection) public var selection: EffectiveProcessesSDK.Option? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $selection: Combine.Published<EffectiveProcessesSDK.Option?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public protocol EDStateUseCase {
+  var state: ((EffectiveProcessesSDK.ApplicationState) -> Swift.Void)? { get set }
+  var isLogedIn: Swift.Bool { get set }
+}
+public enum ApplicationState : Swift.Equatable {
+  public static func == (lhs: EffectiveProcessesSDK.ApplicationState, rhs: EffectiveProcessesSDK.ApplicationState) -> Swift.Bool
+  case sessionExpired(any Swift.Error), presentFlow(EffectiveProcessesSDK.ProcessInstance), logedOut, loggedIn(Swift.String)
+}
+public class EDStateUseCaseImpementation : EffectiveProcessesSDK.EDStateUseCase {
+  public var isLogedIn: (Swift.Bool)
+  public init(state: ((EffectiveProcessesSDK.ApplicationState) -> Swift.Void)? = nil)
+  public var state: ((EffectiveProcessesSDK.ApplicationState) -> Swift.Void)?
+  @objc deinit
+}
+extension EffectiveProcessesSDK.EPJourney {
+  public struct Configuration {
+  }
+}
+public protocol ViewModelState : Combine.ObservableObject {
+  func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+}
+public typealias Screen = (UIKit.UINavigationController?) -> UIKit.UIViewController
+public struct EPJourney {
+  public static var screen: (EffectiveProcessesSDK.ProcessInstance) -> ((any EffectiveProcessesSDK.EPOuterRouter)?) -> EffectiveProcessesSDK.Screen {
+    get
+  }
+}
+public protocol EPOuterRouter {
+  func onFlowFinished()
+}
+public protocol EPStepsRouter {
+  func showNextStep(router: any EffectiveProcessesSDK.EPOuterRouter, processInstance: EffectiveProcessesSDK.ProcessInstance)
+}
+@_inheritsConvenienceInitializers final public class StepsRouter : EffectiveProcessesSDK.Router<UIKit.UINavigationController>, EffectiveProcessesSDK.EPStepsRouter {
+  final public func showNextStep(router: any EffectiveProcessesSDK.EPOuterRouter, processInstance: EffectiveProcessesSDK.ProcessInstance)
+  override public init(rootViewController: UIKit.UINavigationController?)
+  @objc deinit
+}
+@_inheritsConvenienceInitializers final public class FlowRouter : EffectiveProcessesSDK.Router<UIKit.UIViewController>, EffectiveProcessesSDK.EPOuterRouter {
+  final public func onFlowFinished()
+  override public init(rootViewController: UIKit.UIViewController?)
+  @objc deinit
+}
+open class Router<Root> where Root : UIKit.UIViewController {
+  public init(rootViewController: Root?)
+  weak public var rootViewController: Root?
+  @objc deinit
+}
+public struct Constants {
+  public static var defaultStyle: EffectiveProcessesSDK.EPStyle? {
+    get
+    set
+  }
+}
+public class EPSdkMain {
+  @discardableResult
+  required public init(uniqeID: Swift.String, token: Swift.String, shouldCheckExpiredToken: Swift.Bool)
+  public static func registerDependancy()
+  @objc deinit
+}
+public protocol EPUseCase {
+  func processNextStep(with body: Foundation.Data?, process processId: Swift.String, transaction transitionId: Swift.String, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
+  func startOrResumeProcess(_ processId: Swift.String, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
+  func terminateProcess(_ processId: Swift.String, callback: @escaping () -> Swift.Void)
+  func uploadFile<T>(_ processId: Swift.String, transitionId: Swift.String, fileURL: Foundation.URL, fileName: Swift.String, mimeType: Swift.String, progressHandler: ((Swift.Double) -> Swift.Void)?, callback: @escaping (EffectiveProcessesSDK.Result<T>) -> Swift.Void) where T : Swift.Decodable, T : Swift.Encodable
+  var processInstancePath: Swift.String { get }
+}
+public class EPUseCaseDefaultImpl : EffectiveProcessesSDK.EPUseCase {
+  public func terminateProcess(_ processId: Swift.String, callback: @escaping () -> Swift.Void)
+  public func uploadFile<T>(_ processId: Swift.String, transitionId: Swift.String, fileURL: Foundation.URL, fileName: Swift.String, mimeType: Swift.String, progressHandler: ((Swift.Double) -> Swift.Void)?, callback: @escaping (EffectiveProcessesSDK.Result<T>) -> Swift.Void) where T : Swift.Decodable, T : Swift.Encodable
+  public func processNextStep(with body: Foundation.Data?, process processId: Swift.String, transaction transitionId: Swift.String, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
+  public func startOrResumeProcess(_ processId: Swift.String, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
+  public var processInstancePath: Swift.String {
+    get
+  }
+  public init(serverUrl: Foundation.URL)
+  @objc deinit
+}
+public enum FieldType : Swift.String {
+  case none
+  case string
+  case integer
+  case decimal
+  case date
+  case bool
+  case fk
+  case multipleSelect
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public class FilePreviewModel : EffectiveProcessesSDK.ViewModelState {
+  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(url: Foundation.URL?, document: EffectiveProcessesSDK.Document? = nil)
+  @Combine.Published @_projectedValueProperty($url) public var url: Foundation.URL? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $url: Combine.Published<Foundation.URL?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($document) public var document: EffectiveProcessesSDK.Document? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $document: Combine.Published<EffectiveProcessesSDK.Document?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) open class GenericViewTableView<T> : UIKit.UIView, UIKit.UITableViewDelegate, UIKit.UITableViewDataSource where T : EffectiveProcessesSDK.DescriptiveProtocol {
+  @_Concurrency.MainActor(unsafe) public var didSelect: (T) -> Swift.Void
+  @_Concurrency.MainActor(unsafe) public var didPullDown: () -> Swift.Void
+  @_Concurrency.MainActor(unsafe) public var onLoadData: () -> Swift.Void
+  @_Concurrency.MainActor(unsafe) public var source: [[T]] {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public var hasMoreData: Swift.Bool
+  @_Concurrency.MainActor(unsafe) convenience public init(source: [[T]], heightForRow: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func didMoveToSuperview()
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, viewForHeaderInSection section: Swift.Int) -> UIKit.UIView?
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, heightForFooterInSection section: Swift.Int) -> CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, heightForHeaderInSection section: Swift.Int) -> CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) @objc open func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, didDeselectRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, heightForRowAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, willDisplay cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class BundleMe {
+  @objc deinit
+}
+public var bundle: Foundation.Bundle? {
+  get
+}
+public enum HTTPMethod : Swift.String {
+  case get
+  case post
+  case put
+  case patch
+  case delete
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum HTTPNetworkError : Swift.String, Swift.Error {
+  case parametersNil
+  case headersNil
+  case encodingFailed
+  case decodingFailed
+  case missingURL
+  case couldNotParse
+  case noData
+  case FragmentResponse
+  case UnwrappingError
+  case dataTaskFailed
+  case success
+  case authenticationError
+  case badRequest
+  case pageNotFound
+  case failed
+  case serverSideError
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public typealias HTTPParameters = [Foundation.URLQueryItem]
+public typealias HTTPHeaders = [Swift.String : Swift.String]
+public struct Endpoint {
+  public init(path: Swift.String, httpMethod: EffectiveProcessesSDK.HTTPMethod, headers: EffectiveProcessesSDK.HTTPHeaders? = nil, body: Foundation.Data? = nil, queryItems: [Foundation.URLQueryItem]? = nil)
+}
+extension EffectiveProcessesSDK.Endpoint {
+  public var urlComponents: Foundation.URLComponents {
+    get
+  }
+  public var request: Foundation.URLRequest {
+    get
+  }
+}
+public enum HTTPNetworkRoute : Swift.String {
+  case posts
+  case comments
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct HTTPNetworkResponse {
+}
+public enum IndentedTextFieldType {
+  case name
+  case address
+  case city
+  public static func == (a: EffectiveProcessesSDK.IndentedTextFieldType, b: EffectiveProcessesSDK.IndentedTextFieldType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class BaseTextView : UIKit.UITextField {
+  @_Concurrency.MainActor(unsafe) public var editingDidChange: (Swift.String?) -> Swift.Void
+  @_Concurrency.MainActor(unsafe) public var didEndEditing: (UIKit.UITextField) -> Swift.Void
+  @_Concurrency.MainActor(unsafe) public var didBeginEditing: (UIKit.UITextField) -> Swift.Void
+  @_Concurrency.MainActor(unsafe) public var onValidate: (Swift.String) -> Swift.Void
+  @_Concurrency.MainActor(unsafe) public func setText(_ text: Swift.String)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc @_Concurrency.MainActor(unsafe) public class IndentedTextField : EffectiveProcessesSDK.BaseTextView, UIKit.UITextFieldDelegate {
+  @_Concurrency.MainActor(unsafe) public init(placeholder: Swift.String? = nil, padding: CoreFoundation.CGFloat, cornerRadius: CoreFoundation.CGFloat, keyboardType: UIKit.UIKeyboardType = .default, backgroundColor: UIKit.UIColor = .clear, isSecureTextEntry: Swift.Bool = false, TFType: EffectiveProcessesSDK.IndentedTextFieldType = .name, pattern: Swift.String)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func didMoveToWindow()
+  @_Concurrency.MainActor(unsafe) override public func setText(_ text: Swift.String)
+  @_Concurrency.MainActor(unsafe) @objc public func textFieldDidEndEditing(_ textField: UIKit.UITextField)
+  @_Concurrency.MainActor(unsafe) @objc public func textFieldDidBeginEditing(_ textField: UIKit.UITextField)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func textRect(forBounds bounds: CoreFoundation.CGRect) -> CoreFoundation.CGRect
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func editingRect(forBounds bounds: CoreFoundation.CGRect) -> CoreFoundation.CGRect
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc deinit
+}
+@objc public class Language : ObjectiveC.NSObject, Swift.Codable, Swift.Identifiable {
+  final public let id: Foundation.UUID
+  final public let langCode: Swift.String, langName: Swift.String
+  final public let languageDefault: Swift.Bool
+  public typealias ID = Foundation.UUID
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public typealias Languages = [EffectiveProcessesSDK.Language]
+public struct LinkModel : Swift.Identifiable {
+  public let id: Swift.String
+  public typealias ID = Swift.String
+}
+public typealias Links = [EffectiveProcessesSDK.LinkModel]
+public class LinkPreviewModel : EffectiveProcessesSDK.ViewModelState {
+  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(link: EffectiveProcessesSDK.LinkModel)
+  @Combine.Published @_projectedValueProperty($link) public var link: EffectiveProcessesSDK.LinkModel {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $link: Combine.Published<EffectiveProcessesSDK.LinkModel>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public class LinksPreviewModel : EffectiveProcessesSDK.ViewModelState {
+  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(links: EffectiveProcessesSDK.Links, body: Swift.String)
+  @Combine.Published @_projectedValueProperty($links) public var links: EffectiveProcessesSDK.Links {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $links: Combine.Published<EffectiveProcessesSDK.Links>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($body) public var body: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $body: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public protocol LinksListProvider {
+  var links: (Swift.String, EffectiveProcessesSDK.Links) -> (EffectiveProcessesSDK.LinksPreviewModel, UIKit.UIView) { get set }
+}
+public enum LogLevel : Swift.String {
+  case info
+  case warning
+  case error
+  case success
+  case none
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct Logger {
+  public static var minimumLogLevel: EffectiveProcessesSDK.LogLevel
+  public static func log(_ message: Any..., level: EffectiveProcessesSDK.LogLevel = Self.minimumLogLevel)
+}
+open class MultiSelectModel : EffectiveProcessesSDK.ViewModelState {
+  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(options: [EffectiveProcessesSDK.Option], multiSelection: Swift.Set<Swift.String>)
+  @Combine.Published @_projectedValueProperty($options) public var options: [EffectiveProcessesSDK.Option] {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $options: Combine.Published<[EffectiveProcessesSDK.Option]>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($multiSelection) public var multiSelection: Swift.Set<Swift.String> {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $multiSelection: Combine.Published<Swift.Set<Swift.String>>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public protocol MultiSelectProvider {
+  var multiView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.Set<Swift.String>) -> (EffectiveProcessesSDK.MultiSelectModel, UIKit.UIView) { get set }
+}
+public struct SectionDataModel<T> {
+}
+@_hasMissingDesignatedInitializers public class ActiveProcessModel : Foundation.ObservableObject {
+  public init(selectedItem: EffectiveProcessesSDK.ProcessItemNew, items: [EffectiveProcessesSDK.ProcessItemNew])
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+extension Swift.Array {
+  public func categorizeByOptionalBooleanProperty(keyPath: Swift.KeyPath<Element, Swift.Bool?>, trueSectionName: Swift.String, falseSectionName: Swift.String, nilSectionName: Swift.String) -> [EffectiveProcessesSDK.SectionDataModel<Element>]
+}
+public struct ViewOffsetKey : SwiftUI.PreferenceKey {
+  public static var defaultValue: CoreFoundation.CGFloat
+  public static func reduce(value: inout CoreFoundation.CGFloat, nextValue: () -> CoreFoundation.CGFloat)
+  public typealias Value = CoreFoundation.CGFloat
+}
+@_Concurrency.MainActor(unsafe) public struct ActiveProcessInstance : SwiftUI.View, EffectiveProcessesSDK.ModelBindable {
+  @SwiftUI.ObservedObject @_projectedValueProperty($model) @_Concurrency.MainActor(unsafe) public var model: EffectiveProcessesSDK.ActiveProcessModel {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  @_Concurrency.MainActor(unsafe) public var $model: SwiftUI.ObservedObject<EffectiveProcessesSDK.ActiveProcessModel>.Wrapper {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public init(model: EffectiveProcessesSDK.ActiveProcessModel, sectionOffsets: [CoreFoundation.CGFloat], isCurrentlyRefreshing: Swift.Bool = false, selectedPage: Swift.Int = 0)
+  @_Concurrency.MainActor(unsafe) public init()
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK21ActiveProcessInstanceV4bodyQrvp", 0) __
+  public typealias Model = EffectiveProcessesSDK.ActiveProcessModel
+}
+public struct ScrollViewOffsetKey : SwiftUI.PreferenceKey {
+  public static var defaultValue: CoreFoundation.CGFloat
+  public static func reduce(value: inout CoreFoundation.CGFloat, nextValue: () -> CoreFoundation.CGFloat)
+  public typealias Value = CoreFoundation.CGFloat
+}
+public struct ActiveProcessInstanceMock {
+  public static var model: EffectiveProcessesSDK.ActiveProcessModel
+}
+public struct ProcessInstance : Swift.Codable {
+  public let id: Swift.String?, action: Swift.String?, camundaStepName: Swift.String?
+  public let object: Swift.String?
+  public let fields: [EffectiveProcessesSDK.Field]?
+  public let record: EffectiveProcessesSDK.Record?
+  public let urlItems: [EffectiveProcessesSDK.URLItem]?
+  public var recordList: [EffectiveProcessesSDK.RecordList]?
+  public let recordDetails: [EffectiveProcessesSDK.RecordDetail]?
+  public let title: Swift.String?, status: Swift.String?, body: Swift.String?, imageURL: Swift.String?
+  public let terminated: Swift.Bool?
+  public let transitions: [EffectiveProcessesSDK.Transition]?
+  public var documents: [EffectiveProcessesSDK.Document]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct URLItem : Swift.Codable, Swift.Identifiable {
+  public let id: Swift.String, title: Swift.String, type: Swift.String
+  public typealias ID = Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RecordList : Swift.Codable, Swift.Identifiable {
+  public let upperLeft: Swift.String?, upperRight: Swift.String?, id: Swift.String?, lowerRight: Swift.String?
+  public let lowerLeft: Swift.String?
+  public typealias ID = Swift.String?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Document : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Field : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Option : Swift.Codable, Swift.Identifiable, Swift.Hashable {
+  public let id: Swift.String, value: Swift.String
+  public init(id: Swift.String, value: Swift.String)
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: EffectiveProcessesSDK.Option, b: EffectiveProcessesSDK.Option) -> Swift.Bool
+  public typealias ID = Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Record : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Answer : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct RecordDetail : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Transition : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum ButtonType : Swift.String {
+  case primary
+  case secondary
+  case destructive
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct ProcessItemNew : Swift.Codable, Swift.Identifiable, Swift.Hashable {
+  public var id: Foundation.UUID
+  public let type: Swift.String, instanceID: Swift.String, name: Swift.String, image: Swift.String
+  public let title: Swift.String, body: Swift.String, actionTitle: Swift.String
+  public let terminationEnabled: Swift.Bool?
+  public let terminationConfirmationMsg: Swift.String?
+  public init(id: Foundation.UUID, type: Swift.String, instanceID: Swift.String, name: Swift.String, image: Swift.String, title: Swift.String, body: Swift.String, actionTitle: Swift.String, terminationEnabled: Swift.Bool?, terminationConfirmationMsg: Swift.String?)
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case type
+    case instanceID
+    case name, image, title, body, actionTitle, terminationEnabled, terminationConfirmationMsg
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: EffectiveProcessesSDK.ProcessItemNew, b: EffectiveProcessesSDK.ProcessItemNew) -> Swift.Bool
+  public typealias ID = Foundation.UUID
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum TypeEnum : Swift.String, Swift.Codable {
+  case existingInstance
+  case process
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol NotificationManagerProtocol {
+  func setup()
+  var onNotificationRecived: (([Swift.AnyHashable : Any]) -> Swift.Void)? { get set }
+  var authorized: Swift.Bool { get set }
+  var fcmToken: Swift.String { get set }
+  var presentationOptions: UserNotifications.UNNotificationPresentationOptions { get set }
+  var lastUnAutherisedNotification: [Swift.AnyHashable : Any]? { get set }
+}
+@objc @_inheritsConvenienceInitializers public class PushNotificationManager : ObjectiveC.NSObject, EffectiveProcessesSDK.NotificationManagerProtocol {
+  public var lastUnAutherisedNotification: [Swift.AnyHashable : Any]?
+  public var presentationOptions: UserNotifications.UNNotificationPresentationOptions
+  public var onNotificationRecived: (([Swift.AnyHashable : Any]) -> Swift.Void)?
+  public var fcmToken: Swift.String
+  public var authorized: Swift.Bool
+  public func setup()
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension EffectiveProcessesSDK.PushNotificationManager : UserNotifications.UNUserNotificationCenterDelegate {
+  @objc dynamic public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, willPresent notification: UserNotifications.UNNotification, withCompletionHandler completionHandler: @escaping (UserNotifications.UNNotificationPresentationOptions) -> Swift.Void)
+  @objc dynamic public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, didReceive response: UserNotifications.UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void)
+  @objc dynamic public func userNotificationCenter(_ center: UserNotifications.UNUserNotificationCenter, openSettingsFor notification: UserNotifications.UNNotification?)
+}
+extension UIKit.UIApplication {
+  @_Concurrency.MainActor(unsafe) public class func openAppSettings()
+}
+public protocol RatingProvider {
+  var rating: (Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.StarRatingModel, UIKit.UIView) { get set }
+}
+open class StarRatingModel : EffectiveProcessesSDK.ViewModelState {
+  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(rating: Swift.Int, maximumRating: Swift.Int)
+  @Combine.Published @_projectedValueProperty($rating) public var rating: Swift.Int {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $rating: Combine.Published<Swift.Int>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  final public let maximumRating: Swift.Int
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public protocol RecordListSingleSelectionProvider {
+  var list: (Swift.String, Swift.String, EffectiveProcessesSDK.CardItems) -> (EffectiveProcessesSDK.SingleSelectListOptionsModel, UIKit.UIView) { get set }
+}
+public enum Result<T> {
+  case success(T)
+  case failure(any Swift.Error)
+}
+public struct Scan {
+  public static var screen: UIKit.UIViewController {
+    get
+  }
+}
+open class SingleSelectModel : EffectiveProcessesSDK.ViewModelState {
+  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(options: [EffectiveProcessesSDK.Option], multiSelection: Swift.Set<Swift.String>)
+  @Combine.Published @_projectedValueProperty($options) public var options: [EffectiveProcessesSDK.Option] {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $options: Combine.Published<[EffectiveProcessesSDK.Option]>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($singleSelection) public var singleSelection: Swift.Set<Swift.String> {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $singleSelection: Combine.Published<Swift.Set<Swift.String>>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+open class SingleSelectListOptionsModel : EffectiveProcessesSDK.ViewModelState {
+  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(items: EffectiveProcessesSDK.CardItems, singleSelection: Swift.Set<Swift.String>)
+  @Combine.Published @_projectedValueProperty($items) public var items: EffectiveProcessesSDK.CardItems {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $items: Combine.Published<EffectiveProcessesSDK.CardItems>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($singleSelection) public var singleSelection: Swift.Set<Swift.String> {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $singleSelection: Combine.Published<Swift.Set<Swift.String>>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public struct CardItem : Swift.Identifiable {
+  public let id: Swift.String
+  public typealias ID = Swift.String
+}
+public typealias CardItems = [EffectiveProcessesSDK.CardItem]
+public protocol SingleSelectListProvider {
+  var listView: (Swift.String, EffectiveProcessesSDK.CardItems, Swift.String) -> (EffectiveProcessesSDK.SingleSelectListOptionsModel, UIKit.UIView) { get set }
+}
+public protocol SingleSelectorDropDownProvider {
+  var selectorView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.String) -> (EffectiveProcessesSDK.DropDownListModel, UIKit.UIView) { get set }
+}
+public class SingleSelectorModel : EffectiveProcessesSDK.ViewModelState {
+  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(selectedElement: Swift.String)
+  @Combine.Published @_projectedValueProperty($selectedElement) public var selectedElement: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $selectedElement: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public struct Element : Swift.Identifiable {
+  public var id: Swift.String, value: Swift.String
+  public typealias ID = Swift.String
+}
+public protocol SingleSelectorProvider {
+  var selectorView: (Swift.String, [EffectiveProcessesSDK.Element], Swift.String) -> (EffectiveProcessesSDK.SingleSelectorModel, UIKit.UIView) { get set }
+}
+public protocol SingleSelectorCheckProvider {
+  var selectorView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.String) -> (EffectiveProcessesSDK.SingleSelectModel, UIKit.UIView) { get set }
+}
+public protocol SliderProvider {
+  var slider: (Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.SliderViewModel, UIKit.UIView) { get set }
+}
+open class SliderViewModel : EffectiveProcessesSDK.ViewModelState {
+  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(value: Swift.Double, placeholder: Swift.String, validation: Swift.String, minValue: Swift.String, maxValue: Swift.String, numberOfDecimal: Swift.Int, errorMessage: Swift.String)
+  @Combine.Published @_projectedValueProperty($inputValue) public var inputValue: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $inputValue: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($sliderValue) public var sliderValue: Swift.Double {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $sliderValue: Combine.Published<Swift.Double>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public var placeholder: Swift.String
+  public var validation: Swift.String
+  public var minValue: Swift.String
+  public var maxValue: Swift.String
+  public var numberOfDecimal: Swift.Int
+  public var errorMessage: Swift.String
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+@objc public protocol SneakPeekDelegate {
+  @objc optional func sneekPeek(_: EffectiveProcessesSDK.SneakPeekCollectionViewDelegate, didChangeActiveIndexTo activeIndex: Swift.Int)
+  @objc optional func sneakPeek(_: EffectiveProcessesSDK.SneakPeekCollectionViewDelegate, didSelectItemAt indexPath: Foundation.IndexPath)
+}
+@objc public class SneakPeekCollectionViewDelegate : ObjectiveC.NSObject {
+  final public let cellSneakPeekWidth: CoreFoundation.CGFloat
+  final public let cellSpacing: CoreFoundation.CGFloat
+  final public let scrollThreshold: CoreFoundation.CGFloat
+  final public let maximumItemsToScroll: Swift.Int
+  final public let numberOfItemsToShow: Swift.Int
+  final public let scrollDirection: UIKit.UICollectionView.ScrollDirection
+  weak public var delegate: (any EffectiveProcessesSDK.SneakPeekDelegate)?
+  public init(cellSpacing: CoreFoundation.CGFloat = 20, cellPeekWidth: CoreFoundation.CGFloat = 20, scrollThreshold: CoreFoundation.CGFloat = 50, maximumItemsToScroll: Swift.Int = 1, numberOfItemsToShow: Swift.Int = 1, scrollDirection: UIKit.UICollectionView.ScrollDirection = .horizontal)
+  open func scrollView(_ scrollView: UIKit.UIScrollView, indexForItemAtContentOffset contentOffset: CoreFoundation.CGPoint) -> Swift.Int
+  open func scrollView(_ scrollView: UIKit.UIScrollView, contentOffsetForItemAtIndex index: Swift.Int) -> CoreFoundation.CGFloat
+  @objc deinit
+}
+extension EffectiveProcessesSDK.SneakPeekCollectionViewDelegate : UIKit.UICollectionViewDelegateFlowLayout {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewWillEndDragging(_ scrollView: UIKit.UIScrollView, withVelocity velocity: CoreFoundation.CGPoint, targetContentOffset: Swift.UnsafeMutablePointer<CoreFoundation.CGPoint>)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewWillBeginDragging(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, sizeForItemAt indexPath: Foundation.IndexPath) -> CoreFoundation.CGSize
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, insetForSectionAt section: Swift.Int) -> UIKit.UIEdgeInsets
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Swift.Int) -> CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, layout collectionViewLayout: UIKit.UICollectionViewLayout, minimumLineSpacingForSectionAt section: Swift.Int) -> CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+}
+@_hasMissingDesignatedInitializers open class Spinner {
+  public static var style: UIKit.UIActivityIndicatorView.Style
+  public static var baseBackColor: UIKit.UIColor
+  public static var baseColor: UIKit.UIColor
+  public static func start(style: UIKit.UIActivityIndicatorView.Style = style, backColor: UIKit.UIColor = baseBackColor, baseColor: UIKit.UIColor = baseColor)
+  public static func stop()
+  @objc deinit
+}
+public enum EPState : Swift.Equatable {
+  public static func == (lhs: EffectiveProcessesSDK.EPState, rhs: EffectiveProcessesSDK.EPState) -> Swift.Bool
+  case idle, incomplete, working, failed, success(data: Any? = nil), dataChanged(data: [Swift.String : Swift.String]? = nil)
+}
+extension Swift.String {
+  public var formatDate: Swift.String? {
+    get
+  }
+  public var toDate: Foundation.Date {
+    get
+  }
+}
+@objc public class SwiftTimer : ObjectiveC.NSObject {
+  public init(timeInterval: Foundation.TimeInterval, userInfo: [Swift.String : Swift.AnyObject]?, repeats: Swift.Bool, timerAction: @escaping (EffectiveProcessesSDK.SwiftTimer) -> Swift.Void)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class SwiftUIWrapperView<Content> : UIKit.UIView where Content : EffectiveProcessesSDK.ModelBindable, Content : SwiftUI.View, Content.Model : Combine.ObservableObject {
+  @_Concurrency.MainActor(unsafe) public init(swiftUIView: Content)
+  @objc deinit
+}
+public protocol ModelBindable {
+  associatedtype Model
+  var model: Self.Model { get }
+}
+public struct TakePicture {
+  public static var screen: UIKit.UIViewController {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class TestClass {
+  public static var test: Swift.String {
+    get
+  }
+  @objc deinit
+}
+open class TextAreaModel : EffectiveProcessesSDK.ViewModelState {
+  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(text: Swift.String?, placeholder: Swift.String, validation: Swift.String)
+  @Combine.Published @_projectedValueProperty($text) public var text: Swift.String? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $text: Combine.Published<Swift.String?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public var placeholder: Swift.String
+  public var validation: Swift.String
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public protocol TextAreaProvider {
+  var textArea: (Swift.String, Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.TextAreaModel, UIKit.UIView) { get set }
+}
+extension UIKit.UICollectionView {
+  @_Concurrency.MainActor(unsafe) public func configureForSneakPeekingDelegate(scrollDirection: UIKit.UICollectionView.ScrollDirection = .horizontal)
+}
+extension UIKit.UIColor {
+  convenience public init(light: UIKit.UIColor, dark: UIKit.UIColor)
+  convenience public init(any: UIKit.UIColor)
+  public var light: UIKit.UIColor {
+    get
+  }
+  public var dark: UIKit.UIColor {
+    get
+  }
+  convenience public init(hex: Swift.String)
+}
+extension UIKit.UIColor {
+  public func invertedColor() -> UIKit.UIColor
+  convenience public init?(hexString: Swift.String)
+  convenience public init?(name: Swift.String)
+}
+extension UIKit.UIFont {
+  public static func modifier(name: Swift.String?) -> UIKit.UIFont
+}
+extension SwiftUI.Font {
+  public static func modifier(font: UIKit.UIFont?) -> SwiftUI.Font
+}
+extension UIKit.UINavigationBar {
+  @_Concurrency.MainActor(unsafe) public var barColor: UIKit.UIColor? {
+    get
+    set
+  }
+  @_Concurrency.MainActor(unsafe) public func attachToScrollView(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor(unsafe) public func reset()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func observeValue(forKeyPath _: Swift.String?, of _: Any?, change _: [Foundation.NSKeyValueChangeKey : Any]?, context _: Swift.UnsafeMutableRawPointer?)
+}
+@objc @_Concurrency.MainActor(unsafe) open class ScalableCover : UIKit.UIImageView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func removeFromSuperview()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func observeValue(forKeyPath _: Swift.String?, of _: Any?, change _: [Foundation.NSKeyValueChangeKey : Any]?, context _: Swift.UnsafeMutableRawPointer?)
+  @objc deinit
+}
+extension UIKit.UIScrollView {
+  @_Concurrency.MainActor(unsafe) public func addScalableCover(with image: UIKit.UIImage, maxHeight: CoreFoundation.CGFloat = 200)
+  @_Concurrency.MainActor(unsafe) public func removeScalableCover()
+}
+extension UIKit.UIView {
+  @available(iOS 9, *)
+  @_Concurrency.MainActor(unsafe) public func EPFillToSuperview(left: CoreFoundation.CGFloat = 0, right: CoreFoundation.CGFloat = 0, top: CoreFoundation.CGFloat = 0, bottom: CoreFoundation.CGFloat = 0)
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) open func EPAnchor(top: UIKit.NSLayoutYAxisAnchor?, leading: UIKit.NSLayoutXAxisAnchor?, bottom: UIKit.NSLayoutYAxisAnchor?, trailing: UIKit.NSLayoutXAxisAnchor?, padding: UIKit.UIEdgeInsets = .zero, size: CoreFoundation.CGSize = .zero) -> EffectiveProcessesSDK.AnchoredConstraints
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) open func EPFillSuperview(padding: UIKit.UIEdgeInsets = .zero) -> EffectiveProcessesSDK.AnchoredConstraints
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) open func EPFillSuperviewSafeAreaLayoutGuide(padding: UIKit.UIEdgeInsets = .zero) -> EffectiveProcessesSDK.AnchoredConstraints
+  @_Concurrency.MainActor(unsafe) open func EPCenterInSuperview(size: CoreFoundation.CGSize = .zero)
+  @_Concurrency.MainActor(unsafe) open func EPCenterXToSuperview()
+  @_Concurrency.MainActor(unsafe) open func EPCenterYToSuperview()
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) open func EPConstrainHeight(_ constant: CoreFoundation.CGFloat) -> EffectiveProcessesSDK.AnchoredConstraints
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) open func EPConstrainWidth(_ constant: CoreFoundation.CGFloat) -> EffectiveProcessesSDK.AnchoredConstraints
+  @_Concurrency.MainActor(unsafe) open func EPSetupShadow(opacity: Swift.Float = 0, radius: CoreFoundation.CGFloat = 0, offset: CoreFoundation.CGSize = .zero, color: UIKit.UIColor = .black)
+  @_Concurrency.MainActor(unsafe) convenience public init(backgroundColor: UIKit.UIColor = .clear)
+}
+extension UIKit.UIStackView {
+  @_Concurrency.MainActor(unsafe) public func EPAddBackground(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func EPCustomize(backgroundColor: UIKit.UIColor = .clear, radiusSize: CoreFoundation.CGFloat = 0)
+}
+extension UIKit.UIStackView {
+  @_Concurrency.MainActor(unsafe) public func EPCustomizeShadowCard(backgroundColor: UIKit.UIColor = .clear, radiusSize: CoreFoundation.CGFloat = 0, showShadowForCard: Swift.Bool = true) -> Self
+  @_Concurrency.MainActor(unsafe) public func addSubviewsNew(_ views: UIKit.UIView...)
+  @_Concurrency.MainActor(unsafe) public func addSubviews(_ views: [UIKit.UIView])
+}
+extension UIKit.UIStackView {
+  @_Concurrency.MainActor(unsafe) public func EPCustomizeBackgroundColor(backgroundColor: UIKit.UIColor = .clear) -> Self
+}
+extension UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public var parentViewController: UIKit.UIViewController? {
+    get
+  }
+}
+public struct AnchoredConstraints {
+  public var top: UIKit.NSLayoutConstraint?, leading: UIKit.NSLayoutConstraint?, bottom: UIKit.NSLayoutConstraint?, trailing: UIKit.NSLayoutConstraint?, width: UIKit.NSLayoutConstraint?, height: UIKit.NSLayoutConstraint?
+}
+extension UIKit.UIView {
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func stack(_ views: [UIKit.UIView], spacing: CoreFoundation.CGFloat = 0, alignment: UIKit.UIStackView.Alignment = .fill, distribution: UIKit.UIStackView.Distribution = .fill) -> UIKit.UIStackView
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func stack(_ views: UIKit.UIView..., spacing: CoreFoundation.CGFloat = 0, alignment: UIKit.UIStackView.Alignment = .fill, distribution: UIKit.UIStackView.Distribution = .fill) -> UIKit.UIStackView
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func hstack(_ views: UIKit.UIView..., spacing: CoreFoundation.CGFloat = 0, alignment: UIKit.UIStackView.Alignment = .fill, distribution: UIKit.UIStackView.Distribution = .fill) -> UIKit.UIStackView
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func withSize<T>(_ size: CoreFoundation.CGSize) -> T where T : UIKit.UIView
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func withHeight(_ height: CoreFoundation.CGFloat) -> UIKit.UIView
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func withWidth(_ width: CoreFoundation.CGFloat) -> UIKit.UIView
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func withBorder(width: CoreFoundation.CGFloat, color: UIKit.UIColor) -> UIKit.UIView
+}
+extension UIKit.UIEdgeInsets {
+  public static func allSides(_ side: CoreFoundation.CGFloat) -> UIKit.UIEdgeInsets
+}
+extension UIKit.UIImageView {
+  @_Concurrency.MainActor(unsafe) convenience public init(image: UIKit.UIImage?, contentMode: UIKit.UIView.ContentMode = .scaleAspectFill)
+  @_Concurrency.MainActor(unsafe) public func setRounded()
+}
+extension UIKit.UILabel {
+  @_Concurrency.MainActor(unsafe) convenience public init(text: Swift.String?, font: UIKit.UIFont? = UIFont.systemFont(ofSize: 14), textColor: UIKit.UIColor = .black, textAlignment: UIKit.NSTextAlignment = .left, numberOfLines: Swift.Int = 1)
+}
+extension Swift.Decodable {
+  public static func decode(data: Foundation.Data) throws -> Self
+  public static func decode(json: [Swift.String : Any]) throws -> Self
+}
+extension Swift.Encodable {
+  public func encode() -> [Swift.String : Any]?
+}
+extension Swift.Encodable {
+  public func toDictionaryNSOBJ(_ encoder: Foundation.JSONEncoder = JSONEncoder()) throws -> [Swift.String : ObjectiveC.NSObject]
+}
+extension Swift.Encodable {
+  public func toDictionary(_ encoder: Foundation.JSONEncoder = JSONEncoder()) throws -> [Swift.String : Any]
+}
+extension UIKit.UIStackView {
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func withMargins(_ margins: UIKit.UIEdgeInsets) -> UIKit.UIStackView
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func padLeft(_ left: CoreFoundation.CGFloat) -> UIKit.UIStackView
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func padTop(_ top: CoreFoundation.CGFloat) -> UIKit.UIStackView
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func padBottom(_ bottom: CoreFoundation.CGFloat) -> UIKit.UIStackView
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func addSpacer() -> UIKit.UIStackView
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func customize(backgroundColor: UIKit.UIColor = .clear, radiusSize: CoreFoundation.CGFloat = 0) -> UIKit.UIStackView
+  @discardableResult
+  @_Concurrency.MainActor(unsafe) public func padRight(_ right: CoreFoundation.CGFloat) -> UIKit.UIStackView
+}
+extension UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public func rounded()
+  @_Concurrency.MainActor(unsafe) public func shake(delegate: any QuartzCore.CAAnimationDelegate)
+  @_Concurrency.MainActor(unsafe) public func shadowForCard()
+  @_Concurrency.MainActor(unsafe) public func shadowForBottomCard()
+  @_Concurrency.MainActor(unsafe) public func addIconShadow()
+  @_Concurrency.MainActor(unsafe) public func roundWithShadowFrom(image: UIKit.UIImage)
+  @_Concurrency.MainActor(unsafe) public func roundCorners(_ corners: UIKit.UIRectCorner, radius: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor(unsafe) public func addSubview(_ subview: UIKit.UIView, constrainedTo anchorsView: UIKit.UIView, widthAnchorView: UIKit.UIView? = nil, multiplier: CoreFoundation.CGFloat = 1)
+  @_Concurrency.MainActor(unsafe) public func createTopBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor) -> QuartzCore.CALayer
+  @_Concurrency.MainActor(unsafe) public func createViewBackedTopBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor) -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) public func addTopBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func addViewBackedTopBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func addTopBorderWithHeightGradient(height: CoreFoundation.CGFloat, color: [CoreGraphics.CGColor])
+  @_Concurrency.MainActor(unsafe) public func createTopBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor, leftOffset: CoreFoundation.CGFloat, rightOffset: CoreFoundation.CGFloat, topOffset: CoreFoundation.CGFloat) -> QuartzCore.CALayer
+  @_Concurrency.MainActor(unsafe) public func createViewBackedTopBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor, leftOffset: CoreFoundation.CGFloat, rightOffset: CoreFoundation.CGFloat, topOffset: CoreFoundation.CGFloat) -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) public func addTopBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor, leftOffset: CoreFoundation.CGFloat, rightOffset: CoreFoundation.CGFloat, topOffset: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor(unsafe) public func addViewBackedTopBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor, leftOffset: CoreFoundation.CGFloat, rightOffset: CoreFoundation.CGFloat, topOffset: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor(unsafe) public func createRightBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor) -> QuartzCore.CALayer
+  @_Concurrency.MainActor(unsafe) public func createViewBackedRightBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor) -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) public func addRightBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func addViewBackedRightBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func createRightBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor, rightOffset: CoreFoundation.CGFloat, topOffset: CoreFoundation.CGFloat, bottomOffset: CoreFoundation.CGFloat) -> QuartzCore.CALayer
+  @_Concurrency.MainActor(unsafe) public func createViewBackedRightBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor, rightOffset: CoreFoundation.CGFloat, topOffset: CoreFoundation.CGFloat, bottomOffset: CoreFoundation.CGFloat) -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) public func addRightBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor, rightOffset: CoreFoundation.CGFloat, topOffset: CoreFoundation.CGFloat, bottomOffset: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor(unsafe) public func addViewBackedRightBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor, rightOffset: CoreFoundation.CGFloat, topOffset: CoreFoundation.CGFloat, bottomOffset: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor(unsafe) public func createBottomBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor) -> QuartzCore.CALayer
+  @_Concurrency.MainActor(unsafe) public func createViewBackedBottomBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor) -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) public func addBottomBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func addBottomBorderWithHeightGradient(height: CoreFoundation.CGFloat, color: [CoreGraphics.CGColor])
+  @_Concurrency.MainActor(unsafe) public func addViewBackedBottomBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func createBottomBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor, leftOffset: CoreFoundation.CGFloat, rightOffset: CoreFoundation.CGFloat, bottomOffset: CoreFoundation.CGFloat) -> QuartzCore.CALayer
+  @_Concurrency.MainActor(unsafe) public func createViewBackedBottomBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor, leftOffset: CoreFoundation.CGFloat, rightOffset: CoreFoundation.CGFloat, bottomOffset: CoreFoundation.CGFloat) -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) public func addBottomBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor, leftOffset: CoreFoundation.CGFloat, rightOffset: CoreFoundation.CGFloat, bottomOffset: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor(unsafe) public func addViewBackedBottomBorderWithHeight(height: CoreFoundation.CGFloat, color: UIKit.UIColor, leftOffset: CoreFoundation.CGFloat, rightOffset: CoreFoundation.CGFloat, bottomOffset: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor(unsafe) public func createLeftBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor) -> QuartzCore.CALayer
+  @_Concurrency.MainActor(unsafe) public func createViewBackedLeftBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor) -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) public func addLeftBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func addViewBackedLeftBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func createLeftBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor, leftOffset: CoreFoundation.CGFloat, topOffset: CoreFoundation.CGFloat, bottomOffset: CoreFoundation.CGFloat) -> QuartzCore.CALayer
+  @_Concurrency.MainActor(unsafe) public func createViewBackedLeftBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor, leftOffset: CoreFoundation.CGFloat, topOffset: CoreFoundation.CGFloat, bottomOffset: CoreFoundation.CGFloat) -> UIKit.UIView
+  @_Concurrency.MainActor(unsafe) public func addLeftBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor, leftOffset: CoreFoundation.CGFloat, topOffset: CoreFoundation.CGFloat, bottomOffset: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor(unsafe) public func addViewBackedLeftBorderWithWidth(width: CoreFoundation.CGFloat, color: UIKit.UIColor, leftOffset: CoreFoundation.CGFloat, topOffset: CoreFoundation.CGFloat, bottomOffset: CoreFoundation.CGFloat)
+  @_Concurrency.MainActor(unsafe) public func createGradientLayer(frame: CoreFoundation.CGRect, currentColorSet: [CoreGraphics.CGColor], locations: [Foundation.NSNumber] = [0.0, 1], startPoint: CoreFoundation.CGPoint = CGPoint(x: 0.0, y: 0.5), endPoint: CoreFoundation.CGPoint = CGPoint(x: 1.0, y: 0.5))
+}
+public struct URLEncoder {
+}
+open class UploadDocumentsModel : Foundation.ObservableObject {
+  public init(documentErrorDriver: (any Swift.Error)?, documentLodedDriver: (Swift.String?, [EffectiveProcessesSDK.Document], Swift.String)?, documetLoadProgressDriver: Swift.Double?)
+  @Combine.Published @_projectedValueProperty($documentErrorDriver) public var documentErrorDriver: (any Swift.Error)? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $documentErrorDriver: Combine.Published<(any Swift.Error)?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($documentLodedDriver) public var documentLodedDriver: (Swift.String?, [EffectiveProcessesSDK.Document], Swift.String)? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $documentLodedDriver: Combine.Published<(Swift.String?, [EffectiveProcessesSDK.Document], Swift.String)?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($documetLoadProgressDriver) public var documetLoadProgressDriver: Swift.Double? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $documetLoadProgressDriver: Combine.Published<Swift.Double?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class UploadDocumentsViewModel : ObjectiveC.NSObject, UIKit.UIDocumentPickerDelegate {
+  @_Concurrency.MainActor(unsafe) public var useCase: any EffectiveProcessesSDK.EPUseCase
+  @_Concurrency.MainActor(unsafe) @objc public func documentPicker(_ controller: UIKit.UIDocumentPickerViewController, didPickDocumentsAt urls: [Foundation.URL])
+  @_Concurrency.MainActor(unsafe) @objc public func documentPickerWasCancelled(_ controller: UIKit.UIDocumentPickerViewController)
+  @objc deinit
+}
+public protocol ViewDocumentProvider {
+  var fileView: (Foundation.URL?, EffectiveProcessesSDK.Document?) -> (EffectiveProcessesSDK.FilePreviewModel, UIKit.UIView) { get set }
+}
+extension EffectiveProcessesSDK.FormAlignment : Swift.Equatable {}
+extension EffectiveProcessesSDK.FormAlignment : Swift.Hashable {}
+extension EffectiveProcessesSDK.FieldType : Swift.Equatable {}
+extension EffectiveProcessesSDK.FieldType : Swift.Hashable {}
+extension EffectiveProcessesSDK.FieldType : Swift.RawRepresentable {}
+extension EffectiveProcessesSDK.HTTPMethod : Swift.Equatable {}
+extension EffectiveProcessesSDK.HTTPMethod : Swift.Hashable {}
+extension EffectiveProcessesSDK.HTTPMethod : Swift.RawRepresentable {}
+extension EffectiveProcessesSDK.HTTPNetworkError : Swift.Equatable {}
+extension EffectiveProcessesSDK.HTTPNetworkError : Swift.Hashable {}
+extension EffectiveProcessesSDK.HTTPNetworkError : Swift.RawRepresentable {}
+extension EffectiveProcessesSDK.HTTPNetworkRoute : Swift.Equatable {}
+extension EffectiveProcessesSDK.HTTPNetworkRoute : Swift.Hashable {}
+extension EffectiveProcessesSDK.HTTPNetworkRoute : Swift.RawRepresentable {}
+extension EffectiveProcessesSDK.IndentedTextFieldType : Swift.Equatable {}
+extension EffectiveProcessesSDK.IndentedTextFieldType : Swift.Hashable {}
+extension EffectiveProcessesSDK.LogLevel : Swift.Equatable {}
+extension EffectiveProcessesSDK.LogLevel : Swift.Hashable {}
+extension EffectiveProcessesSDK.LogLevel : Swift.RawRepresentable {}
+extension EffectiveProcessesSDK.ButtonType : Swift.Equatable {}
+extension EffectiveProcessesSDK.ButtonType : Swift.Hashable {}
+extension EffectiveProcessesSDK.ButtonType : Swift.RawRepresentable {}
+extension EffectiveProcessesSDK.ProcessItemNew.CodingKeys : Swift.Equatable {}
+extension EffectiveProcessesSDK.ProcessItemNew.CodingKeys : Swift.Hashable {}
+extension EffectiveProcessesSDK.ProcessItemNew.CodingKeys : Swift.RawRepresentable {}
+extension EffectiveProcessesSDK.TypeEnum : Swift.Equatable {}
+extension EffectiveProcessesSDK.TypeEnum : Swift.Hashable {}
+extension EffectiveProcessesSDK.TypeEnum : Swift.RawRepresentable {}
