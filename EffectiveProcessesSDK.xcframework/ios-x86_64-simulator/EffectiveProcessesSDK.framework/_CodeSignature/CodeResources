@@ -8,13 +8,25 @@
 		<data>
 		72TeWkJuihZ22L62rDZnbNqOtxI=
 		</data>
+		<key>GeoLocationError.json</key>
+		<data>
+		zkZVzxRNbQBkil4g3BioKH7naeM=
+		</data>
+		<key>GeoLocationProgress.json</key>
+		<data>
+		sMsGgN7wbryDxU0IIlr8TdXa9Y0=
+		</data>
+		<key>GeoLocationSuccess.json</key>
+		<data>
+		4T08fRLbzksFjCHhIIt1fvqvu+o=
+		</data>
 		<key>Headers/CTNetworkKit.h</key>
 		<data>
 		wOi51qFC/PgR5kbcoZy9kxqEbHY=
 		</data>
 		<key>Headers/EffectiveProcessesSDK-Swift.h</key>
 		<data>
-		km2oNPBPtbAmIJ3gpN50THPYtgo=
+		wmZUEffpTXGx2RILwFJb/JVVjg8=
 		</data>
 		<key>Headers/EffectiveProcessesSDK.h</key>
 		<data>
@@ -26,23 +38,23 @@
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		cZc2N+b2O43kDxSxaVHZ4BVS+Ds=
+		gwjzP8fu2Lt13llJCfQCh0h3sx8=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		dUQwwxNlniy3hNkjvRPAoCedzcY=
+		Io6QTq+2zCZcAsFIpgnjbJQsE0s=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		Wh9SIleY6lrF1kKEu2uIoJFV4oU=
+		gPF7gXrHZhT2SpO4GYeVLL4ZVeM=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		dUQwwxNlniy3hNkjvRPAoCedzcY=
+		Io6QTq+2zCZcAsFIpgnjbJQsE0s=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		m/+Kb9c5Q5HrJMqjBXl6cGas84M=
+		+VbrndA0FY7spbkNAEMEAJGJEVA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -66,6 +78,27 @@
 			e4yRh4hBvdctqnnXs8cJLAYE0WgOtF92Zeui1UEZeZU=
 			</data>
 		</dict>
+		<key>GeoLocationError.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Rl628Y6X/QekDxE9Sm+Iv5T5PLM8cLyBI3hcbezLx1U=
+			</data>
+		</dict>
+		<key>GeoLocationProgress.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			UE2Nf313Ef11NKH8Tuft0qTuGyTI/27EjNBcgxk8AgM=
+			</data>
+		</dict>
+		<key>GeoLocationSuccess.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			NVFui/C/pgleJWzQtUHz96nuY1Y7AHBXEe2kzdaGhNA=
+			</data>
+		</dict>
 		<key>Headers/CTNetworkKit.h</key>
 		<dict>
 			<key>hash2</key>
@@ -77,7 +110,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rUm94KCF1rs/LOs+wHz3PiUSzGcm/1Sqe0hGlSICTGM=
+			xfcf0E0fTKSAnn/RcDI6X2g8BHlBaIpddFUsM1vdv3U=
 			</data>
 		</dict>
 		<key>Headers/EffectiveProcessesSDK.h</key>
@@ -91,35 +124,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			IgjRR//JLEHGf3n+pT5McbO8/IoY60xxFmgFiQ5bG60=
+			ru1aoYWKzZzJzdruR9qSXBzhhe2bHKlMdgYQJqYisH0=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			H0eX3qSLlpLUQ4UqEASNVDM54Px2ftWolWWs602nl4Y=
+			feY+t8ze3TtAn2Vdb+2DUboqfqNPmN1A8Oon+ryMUV4=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			B2H+eRuliXxIjMMqOwOHBMU/UbzGgDa1n+Op1P96vZA=
+			8zB0msDWIFYV3GOO4twQbj3UBxwc/qIzTaFCYt4oiWQ=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			H0eX3qSLlpLUQ4UqEASNVDM54Px2ftWolWWs602nl4Y=
+			feY+t8ze3TtAn2Vdb+2DUboqfqNPmN1A8Oon+ryMUV4=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/RuE7Se37OGKo4RyDyqwYRkYOHh/wTw3QD7nXnRxJLI=
+			7c8hWs0XUBetnR+nmL1+6Abb7oTGK7G17gy/cHwAVBg=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

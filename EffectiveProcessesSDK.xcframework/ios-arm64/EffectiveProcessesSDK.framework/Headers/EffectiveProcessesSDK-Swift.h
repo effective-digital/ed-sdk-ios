@@ -341,6 +341,7 @@ SWIFT_CLASS("_TtC21EffectiveProcessesSDK12BaseTextView")
 @end
 
 
+
 @class UIImage;
 
 SWIFT_CLASS("_TtC21EffectiveProcessesSDK17CircularImageView")
