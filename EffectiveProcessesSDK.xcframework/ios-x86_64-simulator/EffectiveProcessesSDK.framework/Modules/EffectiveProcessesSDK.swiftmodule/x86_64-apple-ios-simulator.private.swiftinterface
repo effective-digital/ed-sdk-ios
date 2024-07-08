@@ -597,6 +597,22 @@ open class DropDownListModel : EffectiveProcessesSDK.ViewModelState {
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
+public struct TextStyle : SwiftUI.ViewModifier {
+  @_Concurrency.MainActor(unsafe) public func body(content: EffectiveProcessesSDK.TextStyle.Content) -> some SwiftUI.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK9TextStyleV4body7contentQr7SwiftUI21_ViewModifier_ContentVyACG_tF", 0) __
+}
+extension SwiftUI.View {
+  public func designTokenTextStyle(valueExist: Swift.Bool) -> some SwiftUI.View
+  
+  public func designTokenHeaderSectionTextStyle() -> some SwiftUI.View
+  
+}
+public struct SectionFormTextStyle : SwiftUI.ViewModifier {
+  @_Concurrency.MainActor(unsafe) public func body(content: EffectiveProcessesSDK.SectionFormTextStyle.Content) -> some SwiftUI.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK20SectionFormTextStyleV4body7contentQr7SwiftUI21_ViewModifier_ContentVyACG_tF", 0) __
+}
 public protocol EDStateUseCase {
   var state: ((EffectiveProcessesSDK.ApplicationState) -> Swift.Void)? { get set }
   var isLogedIn: Swift.Bool { get set }
