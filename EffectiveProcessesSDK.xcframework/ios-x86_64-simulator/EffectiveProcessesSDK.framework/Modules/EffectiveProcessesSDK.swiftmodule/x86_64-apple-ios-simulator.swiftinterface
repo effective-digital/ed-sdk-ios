@@ -530,7 +530,7 @@ extension Swift.Double {
 }
 open class DatePickerFieldModel : EffectiveProcessesSDK.ViewModelState {
   open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
-  public init(selectedDate: Foundation.Date)
+  public init(selectedDate: Foundation.Date?, minDate: Foundation.Date?, maxDate: Foundation.Date?)
   @Combine.Published @_projectedValueProperty($selectedDate) public var selectedDate: Foundation.Date {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -543,11 +543,17 @@ open class DatePickerFieldModel : EffectiveProcessesSDK.ViewModelState {
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
+  public var minDate: Foundation.Date
+  public var maxDate: Foundation.Date
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
+public struct AnonymousUserRequest : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
 public protocol DateProvider {
-  var dateView: (Swift.String, Foundation.Date) -> (EffectiveProcessesSDK.DatePickerFieldModel, UIKit.UIView) { get set }
+  var dateView: (Swift.String, Foundation.Date?, Swift.String, Swift.String) -> (EffectiveProcessesSDK.DatePickerFieldModel, UIKit.UIView) { get set }
 }
 public protocol DescriptiveProtocol : AnyObject {
   var descriptor: EffectiveProcessesSDK.CellDescriptor { get }
@@ -676,11 +682,13 @@ public class EPSdkMain {
 public protocol EPUseCase {
   func processNextStep(with body: Foundation.Data?, process processId: Swift.String, transaction transitionId: Swift.String, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
   func startOrResumeProcess(_ processId: Swift.String, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
+  func anonymousStartOrResumeProcess(_ processId: Swift.String)
   func terminateProcess(_ processId: Swift.String, callback: @escaping () -> Swift.Void)
   func uploadFile<T>(_ processId: Swift.String, transitionId: Swift.String, fileURL: Foundation.URL, fileName: Swift.String, mimeType: Swift.String, progressHandler: ((Swift.Double) -> Swift.Void)?, callback: @escaping (EffectiveProcessesSDK.Result<T>) -> Swift.Void) where T : Swift.Decodable, T : Swift.Encodable
   var processInstancePath: Swift.String { get }
 }
 public class EPUseCaseDefaultImpl : EffectiveProcessesSDK.EPUseCase {
+  public func anonymousStartOrResumeProcess(_ processId: Swift.String)
   public func terminateProcess(_ processId: Swift.String, callback: @escaping () -> Swift.Void)
   public func uploadFile<T>(_ processId: Swift.String, transitionId: Swift.String, fileURL: Foundation.URL, fileName: Swift.String, mimeType: Swift.String, progressHandler: ((Swift.Double) -> Swift.Void)?, callback: @escaping (EffectiveProcessesSDK.Result<T>) -> Swift.Void) where T : Swift.Decodable, T : Swift.Encodable
   public func processNextStep(with body: Foundation.Data?, process processId: Swift.String, transaction transitionId: Swift.String, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
@@ -1203,6 +1211,10 @@ public struct Scan {
     get
   }
 }
+public struct AnonymousUserResponse : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
 open class SingleSelectModel : EffectiveProcessesSDK.ViewModelState {
   open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
   public init(options: [EffectiveProcessesSDK.Option], multiSelection: Swift.Set<Swift.String>)
@@ -1383,7 +1395,10 @@ extension Swift.String {
   public var formatDate: Swift.String? {
     get
   }
-  public var toDate: Foundation.Date {
+  public var toDate: Foundation.Date? {
+    get
+  }
+  public var toDashDate: Foundation.Date? {
     get
   }
 }
