@@ -53,6 +53,14 @@ public struct APIConstant {
     get
   }
 }
+public struct AnonymousUserRequest : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AnonymousUserResponse : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
 extension Swift.Array {
   public mutating func groupMe<U>(by key: (Element) -> U) -> [[Element]] where U : Swift.Hashable
 }
@@ -548,10 +556,6 @@ open class DatePickerFieldModel : EffectiveProcessesSDK.ViewModelState {
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
-public struct AnonymousUserRequest : Swift.Codable {
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
 public protocol DateProvider {
   var dateView: (Swift.String, Foundation.Date?, Swift.String, Swift.String) -> (EffectiveProcessesSDK.DatePickerFieldModel, UIKit.UIView) { get set }
 }
@@ -648,6 +652,7 @@ public struct EPJourney {
 }
 public protocol EPOuterRouter {
   func onFlowFinished()
+  func onFlowAutoRedirect()
 }
 public protocol EPStepsRouter {
   func showNextStep(router: any EffectiveProcessesSDK.EPOuterRouter, processInstance: EffectiveProcessesSDK.ProcessInstance)
@@ -658,6 +663,7 @@ public protocol EPStepsRouter {
   @objc deinit
 }
 @_inheritsConvenienceInitializers final public class FlowRouter : EffectiveProcessesSDK.Router<UIKit.UIViewController>, EffectiveProcessesSDK.EPOuterRouter {
+  final public func onFlowAutoRedirect()
   final public func onFlowFinished()
   override public init(rootViewController: UIKit.UIViewController?)
   @objc deinit
@@ -864,6 +870,33 @@ public enum IndentedTextFieldType {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class JCOTPComponent : UIKit.UITextField {
+  @_Concurrency.MainActor(unsafe) public var defaultCharacter: Swift.String
+  @_Concurrency.MainActor(unsafe) public var regularExpressionPattern: Swift.String
+  @_Concurrency.MainActor(unsafe) public var componentBackgroundColor: UIKit.UIColor
+  @_Concurrency.MainActor(unsafe) public var filledBackgroundColor: UIKit.UIColor
+  @_Concurrency.MainActor(unsafe) public var cornerRadius: CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) public var defaultBorderColor: UIKit.UIColor
+  @_Concurrency.MainActor(unsafe) public var filledBorderColor: UIKit.UIColor
+  @_Concurrency.MainActor(unsafe) public var defaultBorderWidth: CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) public var filledBorderWidth: CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) public var componentTextColor: UIKit.UIColor
+  @_Concurrency.MainActor(unsafe) public var fontSize: CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) public var spacing: CoreFoundation.CGFloat
+  @_Concurrency.MainActor(unsafe) public var componentFont: UIKit.UIFont
+  @_Concurrency.MainActor(unsafe) weak public var componentDelegate: (any EffectiveProcessesSDK.JCOTPComponentDelegate)?
+  @_Concurrency.MainActor(unsafe) public func configure(with digits: Swift.Int = 6)
+  @_Concurrency.MainActor(unsafe) public func clearDigits()
+  @_Concurrency.MainActor(unsafe) public func setDigits(_ text: Swift.String)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public protocol JCOTPComponentDelegate : AnyObject {
+  func didFinishEnter(code: Swift.String, completion: (Swift.Bool) -> Swift.Void)
+  func onEnter(code: Swift.String)
+  func onBeginEnter(code: Swift.String)
+}
 @objc public class Language : ObjectiveC.NSObject, Swift.Codable, Swift.Identifiable {
   final public let id: Foundation.UUID
   final public let langCode: Swift.String, langName: Swift.String
@@ -1043,7 +1076,7 @@ public struct ProcessInstance : Swift.Codable {
   public var recordList: [EffectiveProcessesSDK.RecordList]?
   public let recordDetails: [EffectiveProcessesSDK.RecordDetail]?
   public let title: Swift.String?, status: Swift.String?, body: Swift.String?, imageURL: Swift.String?
-  public let terminated: Swift.Bool?
+  public let terminated: Swift.Bool?, redirect: Swift.Bool?
   public let transitions: [EffectiveProcessesSDK.Transition]?
   public var documents: [EffectiveProcessesSDK.Document]?
   public func encode(to encoder: any Swift.Encoder) throws
@@ -1210,10 +1243,6 @@ public struct Scan {
   public static var screen: UIKit.UIViewController {
     get
   }
-}
-public struct AnonymousUserResponse : Swift.Codable {
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
 }
 open class SingleSelectModel : EffectiveProcessesSDK.ViewModelState {
   open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
@@ -1555,6 +1584,9 @@ extension UIKit.UIEdgeInsets {
 extension UIKit.UIImageView {
   @_Concurrency.MainActor(unsafe) convenience public init(image: UIKit.UIImage?, contentMode: UIKit.UIView.ContentMode = .scaleAspectFill)
   @_Concurrency.MainActor(unsafe) public func setRounded()
+}
+extension UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public func shake()
 }
 extension UIKit.UILabel {
   @_Concurrency.MainActor(unsafe) convenience public init(text: Swift.String?, font: UIKit.UIFont? = UIFont.systemFont(ofSize: 14), textColor: UIKit.UIColor = .black, textAlignment: UIKit.NSTextAlignment = .left, numberOfLines: Swift.Int = 1)

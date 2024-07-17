@@ -374,6 +374,14 @@ SWIFT_CLASS("_TtC21EffectiveProcessesSDK17IndentedTextField")
 @end
 
 
+SWIFT_CLASS("_TtC21EffectiveProcessesSDK14JCOTPComponent")
+@interface JCOTPComponent : UITextField
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
 SWIFT_CLASS("_TtC21EffectiveProcessesSDK8Language")
 @interface Language : NSObject
 @end
@@ -459,6 +467,7 @@ SWIFT_CLASS("_TtC21EffectiveProcessesSDK10SwiftTimer")
 @interface UINavigationBar (SWIFT_EXTENSION(EffectiveProcessesSDK))
 - (void)observeValueForKeyPath:(NSString * _Nullable)_ ofObject:(id _Nullable)_ change:(NSDictionary<NSKeyValueChangeKey, id> * _Nullable)_ context:(void * _Nullable)_;
 @end
+
 
 
 
