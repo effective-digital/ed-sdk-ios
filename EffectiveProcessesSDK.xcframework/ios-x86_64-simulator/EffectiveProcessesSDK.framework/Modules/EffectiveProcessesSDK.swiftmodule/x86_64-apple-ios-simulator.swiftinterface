@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
-// swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name EffectiveProcessesSDK
+// swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -enable-bare-slash-regex -module-name EffectiveProcessesSDK
 import Combine
 import CoreLocation
 import DeveloperToolsSupport
@@ -691,13 +691,15 @@ public class EPSdkMain {
 public protocol EPUseCase {
   func processNextStep(with body: Foundation.Data?, process processId: Swift.String, transaction transitionId: Swift.String, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
   func startOrResumeProcess(_ processId: Swift.String, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
-  func anonymousStartOrResumeProcess(_ processId: Swift.String)
+  func autheticatedStartOrResumeProcess(_ processId: Swift.String, checkTokenValidity: Swift.Bool, token: Swift.String, outerRouter: any EffectiveProcessesSDK.EPOuterRouter, navigation: UIKit.UIViewController?, callback: ((any Swift.Error) -> Swift.Void)?)
+  func anonymousStartOrResumeProcess(_ processId: Swift.String, outerRouter: any EffectiveProcessesSDK.EPOuterRouter, navigation: UIKit.UIViewController?, callback: ((any Swift.Error) -> Swift.Void)?)
   func terminateProcess(_ processId: Swift.String, callback: @escaping () -> Swift.Void)
   func uploadFile<T>(_ processId: Swift.String, transitionId: Swift.String, fileURL: Foundation.URL, fileName: Swift.String, mimeType: Swift.String, progressHandler: ((Swift.Double) -> Swift.Void)?, callback: @escaping (EffectiveProcessesSDK.Result<T>) -> Swift.Void) where T : Swift.Decodable, T : Swift.Encodable
   var processInstancePath: Swift.String { get }
 }
 public class EPUseCaseDefaultImpl : EffectiveProcessesSDK.EPUseCase {
-  public func anonymousStartOrResumeProcess(_ processId: Swift.String)
+  public func autheticatedStartOrResumeProcess(_ processId: Swift.String, checkTokenValidity: Swift.Bool = false, token: Swift.String, outerRouter: any EffectiveProcessesSDK.EPOuterRouter, navigation: UIKit.UIViewController?, callback: ((any Swift.Error) -> Swift.Void)?)
+  public func anonymousStartOrResumeProcess(_ processId: Swift.String, outerRouter: any EffectiveProcessesSDK.EPOuterRouter, navigation: UIKit.UIViewController?, callback: ((any Swift.Error) -> Swift.Void)?)
   public func terminateProcess(_ processId: Swift.String, callback: @escaping () -> Swift.Void)
   public func uploadFile<T>(_ processId: Swift.String, transitionId: Swift.String, fileURL: Foundation.URL, fileName: Swift.String, mimeType: Swift.String, progressHandler: ((Swift.Double) -> Swift.Void)?, callback: @escaping (EffectiveProcessesSDK.Result<T>) -> Swift.Void) where T : Swift.Decodable, T : Swift.Encodable
   public func processNextStep(with body: Foundation.Data?, process processId: Swift.String, transaction transitionId: Swift.String, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
