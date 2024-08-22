@@ -559,15 +559,7 @@ open class DatePickerFieldModel : EffectiveProcessesSDK.ViewModelState {
 public protocol DateProvider {
   var dateView: (Swift.String, Foundation.Date?, Swift.String, Swift.String) -> (EffectiveProcessesSDK.DatePickerFieldModel, UIKit.UIView) { get set }
 }
-public protocol DescriptiveProtocol : AnyObject {
-  var descriptor: EffectiveProcessesSDK.CellDescriptor { get }
-}
-public protocol DismissableView : SwiftUI.View {
-  func dismiss(completion: @escaping () -> Swift.Void)
-}
-open class DropDownListModel : EffectiveProcessesSDK.ViewModelState {
-  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
-  public init(prompt: Swift.String, options: [EffectiveProcessesSDK.Option], selection: EffectiveProcessesSDK.Option?)
+open class DropDownListModel : Foundation.ObservableObject, EffectiveProcessesSDK.ViewModelState {
   @Combine.Published @_projectedValueProperty($prompt) public var prompt: Swift.String {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -604,8 +596,65 @@ open class DropDownListModel : EffectiveProcessesSDK.ViewModelState {
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
+  @Combine.Published @_projectedValueProperty($searchText) public var searchText: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $searchText: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($showDropdown) public var showDropdown: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $showDropdown: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($filteredOptions) public var filteredOptions: [EffectiveProcessesSDK.Option] {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $filteredOptions: Combine.Published<[EffectiveProcessesSDK.Option]>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($bestMatch) public var bestMatch: EffectiveProcessesSDK.Option? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $bestMatch: Combine.Published<EffectiveProcessesSDK.Option?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public init(prompt: Swift.String, options: [EffectiveProcessesSDK.Option], selection: EffectiveProcessesSDK.Option?)
+  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public func selectBestMatch()
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
+}
+public protocol DescriptiveProtocol : AnyObject {
+  var descriptor: EffectiveProcessesSDK.CellDescriptor { get }
+}
+public protocol DismissableView : SwiftUI.View {
+  func dismiss(completion: @escaping () -> Swift.Void)
 }
 public struct TextStyle : SwiftUI.ViewModifier {
   @_Concurrency.MainActor(unsafe) public func body(content: EffectiveProcessesSDK.TextStyle.Content) -> some SwiftUI.View
@@ -615,7 +664,7 @@ public struct TextStyle : SwiftUI.ViewModifier {
 extension SwiftUI.View {
   public func designTokenTextStyle(valueExist: Swift.Bool) -> some SwiftUI.View
   
-  public func designTokenHeaderSectionTextStyle() -> some SwiftUI.View
+  public func designTokenHeaderSectionTextStyle(opacity: Swift.Double = 1) -> some SwiftUI.View
   
 }
 public struct SectionFormTextStyle : SwiftUI.ViewModifier {
@@ -650,12 +699,16 @@ public struct EPJourney {
     get
   }
 }
+public typealias InAppResultBlock = (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void
+public typealias RequestBlock = (Swift.String, Swift.String, Foundation.Data?, @escaping EffectiveProcessesSDK.InAppResultBlock) -> Swift.Void
 public protocol EPOuterRouter {
   func onFlowFinished()
   func onFlowAutoRedirect(string: Swift.String)
+  func onAutoRedirectAndContinueFlow(payload: Swift.String, transitionId: Swift.String, procesid: Swift.String, requestBlock: @escaping EffectiveProcessesSDK.RequestBlock)
 }
 extension EffectiveProcessesSDK.EPOuterRouter {
   public func onFlowAutoRedirect(string: Swift.String)
+  public func onAutoRedirectAndContinueFlow(payload: Swift.String, transitionId: Swift.String, procesid: Swift.String, requestBlock: @escaping EffectiveProcessesSDK.RequestBlock)
 }
 public protocol EPStepsRouter {
   func showNextStep(router: any EffectiveProcessesSDK.EPOuterRouter, processInstance: EffectiveProcessesSDK.ProcessInstance)
@@ -666,6 +719,7 @@ public protocol EPStepsRouter {
   @objc deinit
 }
 @_inheritsConvenienceInitializers final public class FlowRouter : EffectiveProcessesSDK.Router<UIKit.UIViewController>, EffectiveProcessesSDK.EPOuterRouter {
+  final public func onAutoRedirectAndContinueFlow(payload: Swift.String, transitionId: Swift.String, procesid: Swift.String, requestBlock: @escaping EffectiveProcessesSDK.RequestBlock)
   final public func onFlowAutoRedirect(string: Swift.String)
   final public func onFlowFinished()
   override public init(rootViewController: UIKit.UIViewController?)
@@ -695,9 +749,15 @@ public protocol EPUseCase {
   func anonymousStartOrResumeProcess(_ processId: Swift.String, outerRouter: any EffectiveProcessesSDK.EPOuterRouter, navigation: UIKit.UIViewController?, callback: ((any Swift.Error) -> Swift.Void)?)
   func terminateProcess(_ processId: Swift.String, callback: @escaping () -> Swift.Void)
   func uploadFile<T>(_ processId: Swift.String, transitionId: Swift.String, fileURL: Foundation.URL, fileName: Swift.String, mimeType: Swift.String, progressHandler: ((Swift.Double) -> Swift.Void)?, callback: @escaping (EffectiveProcessesSDK.Result<T>) -> Swift.Void) where T : Swift.Decodable, T : Swift.Encodable
+  func openFlow(_ instance: EffectiveProcessesSDK.ProcessInstance, outerRouter: any EffectiveProcessesSDK.EPOuterRouter, navigation: UIKit.UIViewController?)
+  func getContextProcesses(for name: Swift.String, checkTokenExpired: Swift.Bool, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ContextFlows>) -> Swift.Void)
+  func startOrResumeContextProcess(name: Swift.String, data: [Swift.String : Swift.String], checkTokenExpired: Swift.Bool, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
   var processInstancePath: Swift.String { get }
 }
 public class EPUseCaseDefaultImpl : EffectiveProcessesSDK.EPUseCase {
+  public func getContextProcesses(for name: Swift.String, checkTokenExpired: Swift.Bool, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ContextFlows>) -> Swift.Void)
+  public func startOrResumeContextProcess(name: Swift.String, data: [Swift.String : Swift.String], checkTokenExpired: Swift.Bool, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
+  public func openFlow(_ instance: EffectiveProcessesSDK.ProcessInstance, outerRouter: any EffectiveProcessesSDK.EPOuterRouter, navigation: UIKit.UIViewController?)
   public func autheticatedStartOrResumeProcess(_ processId: Swift.String, checkTokenValidity: Swift.Bool = false, token: Swift.String, outerRouter: any EffectiveProcessesSDK.EPOuterRouter, navigation: UIKit.UIViewController?, callback: ((any Swift.Error) -> Swift.Void)?)
   public func anonymousStartOrResumeProcess(_ processId: Swift.String, outerRouter: any EffectiveProcessesSDK.EPOuterRouter, navigation: UIKit.UIViewController?, callback: ((any Swift.Error) -> Swift.Void)?)
   public func terminateProcess(_ processId: Swift.String, callback: @escaping () -> Swift.Void)
@@ -984,6 +1044,11 @@ public struct Logger {
   public static var minimumLogLevel: EffectiveProcessesSDK.LogLevel
   public static func log(_ message: Any..., level: EffectiveProcessesSDK.LogLevel = Self.minimumLogLevel)
 }
+extension UIKit.UIApplication {
+  @_Concurrency.MainActor(unsafe) public var topMostController: UIKit.UIViewController? {
+    get
+  }
+}
 open class MultiSelectModel : EffectiveProcessesSDK.ViewModelState {
   open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
   public init(options: [EffectiveProcessesSDK.Option], multiSelection: Swift.Set<Swift.String>)
@@ -1072,6 +1137,23 @@ public struct ScrollViewOffsetKey : SwiftUI.PreferenceKey {
 public struct ActiveProcessInstanceMock {
   public static var model: EffectiveProcessesSDK.ActiveProcessModel
 }
+public struct ContextFlow : Swift.Codable {
+  public let name: Swift.String, bpmnDiagramName: Swift.String, version: Swift.String
+  public let environment: Swift.String?
+  public let image: Swift.String, title: Swift.String, body: Swift.String, actionTitle: Swift.String
+  public let terminationEnabled: Swift.Bool
+  public let terminationConfirmationMsg: Swift.String, resumeActionTitle: Swift.String, resumeBody: Swift.String
+  public let publicAccess: Swift.Bool
+  public let additionalProps: EffectiveProcessesSDK.AdditionalProps
+  public init(name: Swift.String, bpmnDiagramName: Swift.String, version: Swift.String, environment: Swift.String?, image: Swift.String, title: Swift.String, body: Swift.String, actionTitle: Swift.String, terminationEnabled: Swift.Bool, terminationConfirmationMsg: Swift.String, resumeActionTitle: Swift.String, resumeBody: Swift.String, publicAccess: Swift.Bool, additionalProps: EffectiveProcessesSDK.AdditionalProps)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AdditionalProps : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public typealias ContextFlows = [EffectiveProcessesSDK.ContextFlow]
 public struct ProcessInstance : Swift.Codable {
   public let id: Swift.String?, action: Swift.String?, camundaStepName: Swift.String?
   public let object: Swift.String?

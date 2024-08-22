@@ -464,9 +464,11 @@ SWIFT_CLASS("_TtC21EffectiveProcessesSDK10SwiftTimer")
 
 
 
+
 @interface UINavigationBar (SWIFT_EXTENSION(EffectiveProcessesSDK))
 - (void)observeValueForKeyPath:(NSString * _Nullable)_ ofObject:(id _Nullable)_ change:(NSDictionary<NSKeyValueChangeKey, id> * _Nullable)_ context:(void * _Nullable)_;
 @end
+
 
 
 
