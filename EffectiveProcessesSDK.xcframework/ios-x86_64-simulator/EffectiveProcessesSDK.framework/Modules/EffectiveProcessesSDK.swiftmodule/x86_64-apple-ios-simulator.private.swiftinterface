@@ -750,12 +750,12 @@ public protocol EPUseCase {
   func terminateProcess(_ processId: Swift.String, callback: @escaping () -> Swift.Void)
   func uploadFile<T>(_ processId: Swift.String, transitionId: Swift.String, fileURL: Foundation.URL, fileName: Swift.String, mimeType: Swift.String, progressHandler: ((Swift.Double) -> Swift.Void)?, callback: @escaping (EffectiveProcessesSDK.Result<T>) -> Swift.Void) where T : Swift.Decodable, T : Swift.Encodable
   func openFlow(_ instance: EffectiveProcessesSDK.ProcessInstance, outerRouter: any EffectiveProcessesSDK.EPOuterRouter, navigation: UIKit.UIViewController?)
-  func getContextProcesses(for name: Swift.String, checkTokenExpired: Swift.Bool, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ContextFlows>) -> Swift.Void)
+  func getContextProcesses(for name: Swift.String, query: [Swift.String : Swift.String]?, checkTokenExpired: Swift.Bool, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ContextFlows>) -> Swift.Void)
   func startOrResumeContextProcess(name: Swift.String, data: [Swift.String : Swift.String], checkTokenExpired: Swift.Bool, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
   var processInstancePath: Swift.String { get }
 }
 public class EPUseCaseDefaultImpl : EffectiveProcessesSDK.EPUseCase {
-  public func getContextProcesses(for name: Swift.String, checkTokenExpired: Swift.Bool, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ContextFlows>) -> Swift.Void)
+  public func getContextProcesses(for name: Swift.String, query: [Swift.String : Swift.String]? = nil, checkTokenExpired: Swift.Bool, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ContextFlows>) -> Swift.Void)
   public func startOrResumeContextProcess(name: Swift.String, data: [Swift.String : Swift.String], checkTokenExpired: Swift.Bool, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
   public func openFlow(_ instance: EffectiveProcessesSDK.ProcessInstance, outerRouter: any EffectiveProcessesSDK.EPOuterRouter, navigation: UIKit.UIViewController?)
   public func autheticatedStartOrResumeProcess(_ processId: Swift.String, checkTokenValidity: Swift.Bool = false, token: Swift.String, outerRouter: any EffectiveProcessesSDK.EPOuterRouter, navigation: UIKit.UIViewController?, callback: ((any Swift.Error) -> Swift.Void)?)
