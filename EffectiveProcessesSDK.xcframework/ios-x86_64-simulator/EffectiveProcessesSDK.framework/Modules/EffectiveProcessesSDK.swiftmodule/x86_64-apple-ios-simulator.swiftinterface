@@ -82,6 +82,37 @@ public protocol BannerUsecase {
 extension SwiftUI.Binding where Value : Swift.Equatable {
   public init(_ source: SwiftUI.Binding<Value?>, replacingNilWith nilProxy: Value)
 }
+public class StandardTextFieldModel : Foundation.ObservableObject, EffectiveProcessesSDK.ViewModelState {
+  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  @Combine.Published @_projectedValueProperty($text) public var text: Swift.String? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $text: Combine.Published<Swift.String?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($validatedText) public var validatedText: Swift.String? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $validatedText: Combine.Published<Swift.String?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public init(text: Swift.String?, placeholder: Swift.String, validation: Swift.String)
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+
 public struct BottomSheetConfiguration {
   public static let `default`: EffectiveProcessesSDK.BottomSheetConfiguration
   public var dismissRatio: CoreFoundation.CGFloat
@@ -135,6 +166,7 @@ public enum FormAlignment {
     set
   }
   @_Concurrency.MainActor(unsafe) final public let formContainerStackView: UIKit.UIStackView
+  @_Concurrency.MainActor(unsafe) final public let buttonsContainerStackView: UIKit.UIStackView
   @_Concurrency.MainActor(unsafe) convenience public init(alignment: EffectiveProcessesSDK.FormAlignment = .top)
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func didMoveToSuperview()
   @_Concurrency.MainActor(unsafe) public var distanceToBottom: CoreFoundation.CGFloat {
@@ -522,7 +554,7 @@ public struct EPStyle : EffectiveProcessesSDK.ColorStyle, EffectiveProcessesSDK.
 extension Foundation.Date {
   public func dateString(ofStyle style: Foundation.DateFormatter.Style = .medium) -> Swift.String
   public func string(withFormat format: Swift.String = "dd/MM/yyyy HH:mm") -> Swift.String
-  public func toNLBDateFormat() -> Swift.String?
+  public func toDateFormat() -> Swift.String?
   public func toNLBDateFormatDash() -> Swift.String?
   public func toDateString(with format: Swift.String) -> Swift.String
   public var toIsoDateString: Swift.String {
@@ -539,14 +571,14 @@ extension Swift.Double {
 open class DatePickerFieldModel : EffectiveProcessesSDK.ViewModelState {
   open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
   public init(selectedDate: Foundation.Date?, minDate: Foundation.Date?, maxDate: Foundation.Date?)
-  @Combine.Published @_projectedValueProperty($selectedDate) public var selectedDate: Foundation.Date {
+  @Combine.Published @_projectedValueProperty($selectedDate) public var selectedDate: Foundation.Date? {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     set
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     _modify
   }
-  public var $selectedDate: Combine.Published<Foundation.Date>.Publisher {
+  public var $selectedDate: Combine.Published<Foundation.Date?>.Publisher {
     get
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
@@ -918,7 +950,7 @@ public enum IndentedTextFieldType {
   @_Concurrency.MainActor(unsafe) public var editingDidChange: (Swift.String?) -> Swift.Void
   @_Concurrency.MainActor(unsafe) public var didEndEditing: (UIKit.UITextField) -> Swift.Void
   @_Concurrency.MainActor(unsafe) public var didBeginEditing: (UIKit.UITextField) -> Swift.Void
-  @_Concurrency.MainActor(unsafe) public var onValidate: (Swift.String) -> Swift.Void
+  @_Concurrency.MainActor(unsafe) public var onValidate: (Swift.String?) -> Swift.Void
   @_Concurrency.MainActor(unsafe) public func setText(_ text: Swift.String)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -1362,6 +1394,7 @@ open class SingleSelectModel : EffectiveProcessesSDK.ViewModelState {
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
+
 open class SingleSelectListOptionsModel : EffectiveProcessesSDK.ViewModelState {
   open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
   public init(items: EffectiveProcessesSDK.CardItems, singleSelection: Swift.Set<Swift.String>)
@@ -1401,38 +1434,16 @@ public protocol SingleSelectListProvider {
   var listView: (Swift.String, EffectiveProcessesSDK.CardItems, Swift.String) -> (EffectiveProcessesSDK.SingleSelectListOptionsModel, UIKit.UIView) { get set }
 }
 public protocol SingleSelectorDropDownProvider {
-  var selectorView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.String) -> (EffectiveProcessesSDK.DropDownListModel, UIKit.UIView) { get set }
-}
-public class SingleSelectorModel : EffectiveProcessesSDK.ViewModelState {
-  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
-  public init(selectedElement: Swift.String)
-  @Combine.Published @_projectedValueProperty($selectedElement) public var selectedElement: Swift.String {
-    get
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    set
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    _modify
-  }
-  public var $selectedElement: Combine.Published<Swift.String>.Publisher {
-    get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-    set
-  }
-  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
-  @objc deinit
-}
-public struct Element : Swift.Identifiable {
-  public var id: Swift.String, value: Swift.String
-  public typealias ID = Swift.String
-}
-public protocol SingleSelectorProvider {
-  var selectorView: (Swift.String, [EffectiveProcessesSDK.Element], Swift.String) -> (EffectiveProcessesSDK.SingleSelectorModel, UIKit.UIView) { get set }
+  var selectorView: (Swift.String, Swift.String, [EffectiveProcessesSDK.Option], Swift.String) -> (EffectiveProcessesSDK.DropDownListModel, UIKit.UIView) { get set }
 }
 public protocol SingleSelectorCheckProvider {
   var selectorView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.String) -> (EffectiveProcessesSDK.SingleSelectModel, UIKit.UIView) { get set }
 }
 public protocol SliderProvider {
   var slider: (Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.SliderViewModel, UIKit.UIView) { get set }
+}
+public protocol StandardTextFieldProvider {
+  var standard: (Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.Bool, UIKit.UIKeyboardType, CoreFoundation.CGFloat, Swift.Bool, Swift.String?, Swift.String?) -> (EffectiveProcessesSDK.StandardTextFieldModel, UIKit.UIView) { get set }
 }
 open class SliderViewModel : EffectiveProcessesSDK.ViewModelState {
   open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
