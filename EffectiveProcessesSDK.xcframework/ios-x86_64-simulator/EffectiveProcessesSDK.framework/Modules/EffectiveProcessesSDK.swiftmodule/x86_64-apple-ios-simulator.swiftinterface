@@ -112,7 +112,6 @@ public class StandardTextFieldModel : Foundation.ObservableObject, EffectiveProc
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
-
 public struct BottomSheetConfiguration {
   public static let `default`: EffectiveProcessesSDK.BottomSheetConfiguration
   public var dismissRatio: CoreFoundation.CGFloat
@@ -518,7 +517,7 @@ public protocol ElementStyle {
   var headerStyle: EffectiveProcessesSDK.HeaderStyle? { get set }
   var buttonStyle: EffectiveProcessesSDK.ButtonStyle? { get set }
 }
-public struct SliderStyle : EffectiveProcessesSDK.UISubElements {
+public struct EDSliderStyle : EffectiveProcessesSDK.UISubElements {
   public var labelStyle: EffectiveProcessesSDK.LabelStyleNew?
   public var iconStyle: EffectiveProcessesSDK.IconStyleNew?
   public var height: Swift.Int?
@@ -547,7 +546,7 @@ public struct EPStyle : EffectiveProcessesSDK.ColorStyle, EffectiveProcessesSDK.
   public var headerStyle: EffectiveProcessesSDK.HeaderStyle?
   public var buttonStyle: EffectiveProcessesSDK.ButtonStyle?
   public var detailStyle: EffectiveProcessesSDK.DetailStyle?
-  public var slider: EffectiveProcessesSDK.SliderStyle?
+  public var slider: EffectiveProcessesSDK.EDSliderStyle?
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -1436,11 +1435,12 @@ public protocol SingleSelectListProvider {
 public protocol SingleSelectorDropDownProvider {
   var selectorView: (Swift.String, Swift.String, [EffectiveProcessesSDK.Option], Swift.String) -> (EffectiveProcessesSDK.DropDownListModel, UIKit.UIView) { get set }
 }
+
 public protocol SingleSelectorCheckProvider {
   var selectorView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.String) -> (EffectiveProcessesSDK.SingleSelectModel, UIKit.UIView) { get set }
 }
 public protocol SliderProvider {
-  var slider: (Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.SliderViewModel, UIKit.UIView) { get set }
+  var slider: (Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.StandardTextFieldModel, UIKit.UIView) { get set }
 }
 public protocol StandardTextFieldProvider {
   var standard: (Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.Bool, UIKit.UIKeyboardType, CoreFoundation.CGFloat, Swift.Bool, Swift.String?, Swift.String?) -> (EffectiveProcessesSDK.StandardTextFieldModel, UIKit.UIView) { get set }
