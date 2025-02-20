@@ -1146,16 +1146,17 @@ public struct ActiveProcessInstanceMock {
 public struct ContextFlow : Swift.Codable {
   public let name: Swift.String, bpmnDiagramName: Swift.String, version: Swift.String
   public let environment: Swift.String?
-  public let image: Swift.String, title: Swift.String, body: Swift.String, actionTitle: Swift.String
+  public let image: Swift.String, title: Swift.String, body: Swift.String, documentation: Swift.String, actionTitle: Swift.String
   public let terminationEnabled: Swift.Bool
   public let terminationConfirmationMsg: Swift.String, resumeActionTitle: Swift.String, resumeBody: Swift.String
-  public let publicAccess: Swift.Bool
+  public let publicAccess: Swift.Bool?
   public let additionalProps: EffectiveProcessesSDK.AdditionalProps
-  public init(name: Swift.String, bpmnDiagramName: Swift.String, version: Swift.String, environment: Swift.String?, image: Swift.String, title: Swift.String, body: Swift.String, actionTitle: Swift.String, terminationEnabled: Swift.Bool, terminationConfirmationMsg: Swift.String, resumeActionTitle: Swift.String, resumeBody: Swift.String, publicAccess: Swift.Bool, additionalProps: EffectiveProcessesSDK.AdditionalProps)
+  public init(name: Swift.String, bpmnDiagramName: Swift.String, version: Swift.String, environment: Swift.String?, image: Swift.String, title: Swift.String, body: Swift.String, documentation: Swift.String, actionTitle: Swift.String, terminationEnabled: Swift.Bool, terminationConfirmationMsg: Swift.String, resumeActionTitle: Swift.String, resumeBody: Swift.String, publicAccess: Swift.Bool?, additionalProps: EffectiveProcessesSDK.AdditionalProps)
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct AdditionalProps : Swift.Codable {
+  public init()
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
