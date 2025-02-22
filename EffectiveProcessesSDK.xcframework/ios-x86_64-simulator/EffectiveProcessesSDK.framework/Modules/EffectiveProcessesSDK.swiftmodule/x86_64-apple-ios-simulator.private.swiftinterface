@@ -3,7 +3,9 @@
 // swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -enable-bare-slash-regex -module-name EffectiveProcessesSDK
 import AVFoundation
 import Combine
+import CommonCrypto
 import CoreLocation
+import CryptoKit
 import DeveloperToolsSupport
 @_exported import EffectiveProcessesSDK
 import Foundation
@@ -17,6 +19,7 @@ import Photos
 import Resolver
 import RxCocoa
 import RxSwift
+import Security
 import Speech
 import Swift
 import SwiftUI
@@ -28,12 +31,12 @@ import _AVKit_SwiftUI
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-@objc @_inheritsConvenienceInitializers public class APIClient : ObjectiveC.NSObject, Foundation.URLSessionTaskDelegate {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class APIClient : ObjectiveC.NSObject, Foundation.URLSessionTaskDelegate {
   public static let shared: EffectiveProcessesSDK.APIClient
+  public func setSSLPinningDelegate(_ delegate: any EffectiveProcessesSDK.SSLPinningDelegate)
   public func execute<T>(_ from: EffectiveProcessesSDK.Endpoint, tokenRequired: Swift.Bool = true, checkTokenExpired: Swift.Bool = APIConstant.SHOULD_CHECK_TOKEN_EXPIRED, completion: @escaping (EffectiveProcessesSDK.Result<T>) -> ()) where T : Swift.Decodable, T : Swift.Encodable
   public func upload<T>(_ from: EffectiveProcessesSDK.Endpoint, progressHandler: ((Swift.Double) -> Swift.Void)?, completion: @escaping (EffectiveProcessesSDK.Result<T>) -> ()) where T : Swift.Decodable, T : Swift.Encodable
   @objc public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
-  @objc override dynamic public init()
   @objc deinit
 }
 public struct APIConstant {
@@ -1342,6 +1345,19 @@ public enum Result<T> {
   case success(T)
   case failure(any Swift.Error)
 }
+public protocol SSLPinningDelegate : AnyObject {
+  func didFailSSLPinning(with error: EffectiveProcessesSDK.SSLPinningError)
+}
+public enum SSLPinningError : Swift.Error {
+  case invalidCertificate
+  case publicKeyMismatch
+  case unknown
+  public static func == (a: EffectiveProcessesSDK.SSLPinningError, b: EffectiveProcessesSDK.SSLPinningError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 public struct Scan {
   public static var screen: UIKit.UIViewController {
     get
@@ -2015,3 +2031,5 @@ extension EffectiveProcessesSDK.ProcessItemNew.CodingKeys : Swift.RawRepresentab
 extension EffectiveProcessesSDK.TypeEnum : Swift.Equatable {}
 extension EffectiveProcessesSDK.TypeEnum : Swift.Hashable {}
 extension EffectiveProcessesSDK.TypeEnum : Swift.RawRepresentable {}
+extension EffectiveProcessesSDK.SSLPinningError : Swift.Equatable {}
+extension EffectiveProcessesSDK.SSLPinningError : Swift.Hashable {}

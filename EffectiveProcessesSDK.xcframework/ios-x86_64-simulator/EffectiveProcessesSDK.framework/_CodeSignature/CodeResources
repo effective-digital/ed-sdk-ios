@@ -26,7 +26,7 @@
 		</data>
 		<key>Headers/EffectiveProcessesSDK-Swift.h</key>
 		<data>
-		2pf1nMwkpKMDJOjD1CrMAcx6fh4=
+		As7XDsnf1B+LtnIkD9c5jxotKvQ=
 		</data>
 		<key>Headers/EffectiveProcessesSDK.h</key>
 		<data>
@@ -38,11 +38,11 @@
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		K6fy2FpottMbcooqt81iuW6AQtY=
+		gAAxE44dCKBsMZQX/WswY0qfJ8M=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		LvYRM3S92UpEOebvwdmJ8Q2gXuI=
+		oFHwxrmHE7fskUVs7xyXvW/x/Gs=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -50,15 +50,19 @@
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		LvYRM3S92UpEOebvwdmJ8Q2gXuI=
+		oFHwxrmHE7fskUVs7xyXvW/x/Gs=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		wlxD/IxGLOZk8XvGfwcD2wiM/38=
+		nkQdqimWOs8KrIG2/QVT5QQkCd8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		Cmsg1AMceFunekYFh7T9QQ6ABew=
+		</data>
+		<key>extract_ssl_pinning_hash.sh</key>
+		<data>
+		QgfMe1SL1OXoGfaMCQIZwJGNNo4=
 		</data>
 		<key>placeholder.png</key>
 		<data>
@@ -110,7 +114,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AzhjAyFPgIkI0iGoI5O8c1cnmyA7Dmsdo66dYyjeKcw=
+			l25c9ynjS/7oBitOnNpRGlBIGT4kRJziDdwzFvd16fI=
 			</data>
 		</dict>
 		<key>Headers/EffectiveProcessesSDK.h</key>
@@ -124,14 +128,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			xlY4amD1h/wPuL69aA4x1O2KWE21U6OeQztWtd269dA=
+			rGjB7OeHaThzJZR/zRF3u6HOknvZk34ZBtroV3C7Lis=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fHkir22h2aOhtKlnpM91uZYiBOWeQaxR+T9nz4q3Q0o=
+			Y2zKPfscbbcZxbntTRXeDaan44c7dSvr1QbAobncIW0=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -145,14 +149,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			fHkir22h2aOhtKlnpM91uZYiBOWeQaxR+T9nz4q3Q0o=
+			Y2zKPfscbbcZxbntTRXeDaan44c7dSvr1QbAobncIW0=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			pERD0rcqBsNmc7tU09ha92fSrLtTg2mQluaOD9olMO4=
+			5M4d5ViusEkk886h8SgqrIfh5HmOKPxzXYSmYs/SpfY=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -160,6 +164,13 @@
 			<key>hash2</key>
 			<data>
 			DW4eVkscxpCynKntaGmCSdqZ4ZJFyB1E38rLeixZPPw=
+			</data>
+		</dict>
+		<key>extract_ssl_pinning_hash.sh</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DnDnu7leObHfaCYzmYuXWbxlS39BJfBJYaCtyhtey68=
 			</data>
 		</dict>
 		<key>placeholder.png</key>
