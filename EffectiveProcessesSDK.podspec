@@ -2,7 +2,7 @@
   Pod::Spec.new do |s|
     s.name = 'EffectiveProcessesSDK'
     s.ios.deployment_target = '15.0'
-    s.version = '1.0.26'
+    s.version = '1.0.27'
     s.source = { :git => "git@github.com:effective-digital/ed-sdk-ios.git", :tag => s.version }
     s.author = { "Jasmin Ceco" => "jasmin.ceco@gmail.com" }
     s.license = 'Proprietary'

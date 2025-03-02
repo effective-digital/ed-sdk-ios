@@ -262,11 +262,11 @@ public struct CellDescriptor {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
 }
-public struct ClosureViewControllerProvider : EffectiveProcessesSDK.ViewControllerProvider {
+public struct ViewControllerProvidiable : EffectiveProcessesSDK.ViewControllerProvider {
   public init(closure: @escaping (EffectiveProcessesSDK.ProcessInstance) -> UIKit.UIViewController)
   public func viewController(for processInstance: EffectiveProcessesSDK.ProcessInstance) -> UIKit.UIViewController
 }
-public struct ClosureViewProvider : EffectiveProcessesSDK.ScreenProvider {
+public struct ViewProvidable : EffectiveProcessesSDK.ScreenProvider {
   public init(closure: @escaping (EffectiveProcessesSDK.ProcessInstance) -> UIKit.UIView)
   public func view(for processInstance: EffectiveProcessesSDK.ProcessInstance) -> UIKit.UIView
 }
@@ -284,6 +284,7 @@ extension Swift.Encodable {
 extension Swift.Encodable {
   public func encoded() throws -> Foundation.Data
 }
+@available(*, deprecated, message: "Use CurrencyProvider.currencyViewV2")
 public protocol CurrencyProvider {
   var currencyView: (Swift.String, Foundation.Date) -> (EffectiveProcessesSDK.DatePickerFieldModel, UIKit.UIView) { get set }
 }
@@ -569,6 +570,7 @@ open class DatePickerFieldModel : EffectiveProcessesSDK.ViewModelState {
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
+@available(*, deprecated, message: "Use DateProvider.dateViewV2")
 public protocol DateProvider {
   var dateView: (Swift.String, Foundation.Date?, Swift.String, Swift.String) -> (EffectiveProcessesSDK.DatePickerFieldModel, UIKit.UIView) { get set }
 }
@@ -1015,6 +1017,7 @@ public class LinksPreviewModel : EffectiveProcessesSDK.ViewModelState {
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
+@available(*, deprecated, message: "Use LinksListProvider.linksV2")
 public protocol LinksListProvider {
   var links: (Swift.String, EffectiveProcessesSDK.Links) -> (EffectiveProcessesSDK.LinksPreviewModel, UIKit.UIView) { get set }
 }
@@ -1082,6 +1085,7 @@ open class MultiSelectModel : EffectiveProcessesSDK.ViewModelState {
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
+@available(*, deprecated, message: "Use MultiSelectProvider.multiViewV2")
 public protocol MultiSelectProvider {
   var multiView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.Set<Swift.String>) -> (EffectiveProcessesSDK.MultiSelectModel, UIKit.UIView) { get set }
 }
@@ -1433,6 +1437,7 @@ extension EffectiveProcessesSDK.PushNotificationManager : UserNotifications.UNUs
 extension UIKit.UIApplication {
   @_Concurrency.MainActor(unsafe) public class func openAppSettings()
 }
+@available(*, deprecated, message: "Use RatingProvider.ratingV2")
 public protocol RatingProvider {
   var rating: (Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.StarRatingModel, UIKit.UIView) { get set }
 }
@@ -1455,6 +1460,7 @@ open class StarRatingModel : EffectiveProcessesSDK.ViewModelState {
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
+@available(*, deprecated, message: "Use RecordListSingleSelectionProvider.listV2")
 public protocol RecordListSingleSelectionProvider {
   var list: (Swift.String, Swift.String, EffectiveProcessesSDK.CardItems) -> (EffectiveProcessesSDK.SingleSelectListOptionsModel, UIKit.UIView) { get set }
 }
@@ -1648,15 +1654,19 @@ public struct CardItem : Swift.Identifiable {
   public typealias ID = Swift.String
 }
 public typealias CardItems = [EffectiveProcessesSDK.CardItem]
+@available(*, deprecated, message: "Use SingleSelectListProvider.listViewV2")
 public protocol SingleSelectListProvider {
   var listView: (Swift.String, EffectiveProcessesSDK.CardItems, Swift.String) -> (EffectiveProcessesSDK.SingleSelectListOptionsModel, UIKit.UIView) { get set }
 }
+@available(*, deprecated, message: "Use SingleSelectorDropDownProvider.selectorViewV2")
 public protocol SingleSelectorDropDownProvider {
   var selectorView: (Swift.String, Swift.String, [EffectiveProcessesSDK.Option], Swift.String) -> (EffectiveProcessesSDK.DropDownListModel, UIKit.UIView) { get set }
 }
+@available(*, deprecated, message: "Use SingleSelectorCheckProvider.selectorViewV2")
 public protocol SingleSelectorCheckProvider {
   var selectorView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.String) -> (EffectiveProcessesSDK.SingleSelectModel, UIKit.UIView) { get set }
 }
+@available(*, deprecated, message: "Use SliderProvider.sliderV2")
 public protocol SliderProvider {
   var slider: (Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.StandardTextFieldModel, UIKit.UIView) { get set }
 }
@@ -1794,6 +1804,7 @@ open class TextAreaModel : EffectiveProcessesSDK.ViewModelState {
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
+@available(*, deprecated, message: "Use TextAreaProvider.textAreaV2")
 public protocol TextAreaProvider {
   var textArea: (Swift.String, Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.TextAreaModel, UIKit.UIView) { get set }
 }
@@ -2131,6 +2142,7 @@ public struct VideoBackgroundView : SwiftUI.UIViewRepresentable {
 public protocol ViewControllerProvider {
   func viewController(for processInstance: EffectiveProcessesSDK.ProcessInstance) -> UIKit.UIViewController
 }
+@available(*, deprecated, message: "Use ViewDocumentProvider.fileViewV2")
 public protocol ViewDocumentProvider {
   var fileView: (Foundation.URL?, EffectiveProcessesSDK.Document?) -> (EffectiveProcessesSDK.FilePreviewModel, UIKit.UIView) { get set }
 }
