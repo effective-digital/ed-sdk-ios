@@ -320,9 +320,14 @@ SWIFT_CLASS("_TtC21EffectiveProcessesSDK10BannerView")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class UIWindow;
 
 SWIFT_CLASS("_TtC21EffectiveProcessesSDK11CTFormsView")
 @interface CTFormsView : UIView
+/// Called when the view is about to be removed from its superview
+- (void)willMoveToSuperview:(UIView * _Nullable)newSuperview;
+/// Called when the view is about to be removed from its window
+- (void)willMoveToWindow:(UIWindow * _Nullable)newWindow;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
 - (void)didMoveToSuperview;
@@ -332,13 +337,6 @@ SWIFT_CLASS("_TtC21EffectiveProcessesSDK11CTFormsView")
 SWIFT_CLASS("_TtC21EffectiveProcessesSDK10BaseScreen")
 @interface BaseScreen : CTFormsView
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC21EffectiveProcessesSDK12BaseTextView")
-@interface BaseTextView : UITextField
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -363,18 +361,6 @@ SWIFT_CLASS("_TtC21EffectiveProcessesSDK30ContentSizeObservingScrollView")
 @end
 
 
-SWIFT_CLASS("_TtC21EffectiveProcessesSDK17IndentedTextField")
-@interface IndentedTextField : BaseTextView <UITextFieldDelegate>
-- (void)didMoveToWindow;
-- (void)textFieldDidEndEditing:(UITextField * _Nonnull)textField;
-- (void)textFieldDidBeginEditing:(UITextField * _Nonnull)textField;
-- (CGRect)textRectForBounds:(CGRect)bounds SWIFT_WARN_UNUSED_RESULT;
-- (CGRect)editingRectForBounds:(CGRect)bounds SWIFT_WARN_UNUSED_RESULT;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
-@end
-
-
 SWIFT_CLASS("_TtC21EffectiveProcessesSDK14JCOTPComponent")
 @interface JCOTPComponent : UITextField
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
@@ -386,7 +372,6 @@ SWIFT_CLASS("_TtC21EffectiveProcessesSDK14JCOTPComponent")
 SWIFT_CLASS("_TtC21EffectiveProcessesSDK8Language")
 @interface Language : NSObject
 @end
-
 
 
 
@@ -466,10 +451,11 @@ SWIFT_CLASS("_TtC21EffectiveProcessesSDK10SwiftTimer")
 
 
 
+
+
 @interface UINavigationBar (SWIFT_EXTENSION(EffectiveProcessesSDK))
 - (void)observeValueForKeyPath:(NSString * _Nullable)_ ofObject:(id _Nullable)_ change:(NSDictionary<NSKeyValueChangeKey, id> * _Nullable)_ context:(void * _Nullable)_;
 @end
-
 
 
 

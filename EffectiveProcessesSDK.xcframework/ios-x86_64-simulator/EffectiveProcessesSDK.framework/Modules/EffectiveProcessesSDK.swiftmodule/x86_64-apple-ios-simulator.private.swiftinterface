@@ -31,19 +31,30 @@ import _AVKit_SwiftUI
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+import os.log
+import os
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class APIClient : ObjectiveC.NSObject, Foundation.URLSessionTaskDelegate {
   public static let shared: EffectiveProcessesSDK.APIClient
   public func setSSLPinningDelegate(_ delegate: any EffectiveProcessesSDK.SSLPinningDelegate)
-  public func execute<T>(_ from: EffectiveProcessesSDK.Endpoint, tokenRequired: Swift.Bool = true, checkTokenExpired: Swift.Bool = APIConstant.SHOULD_CHECK_TOKEN_EXPIRED, completion: @escaping (EffectiveProcessesSDK.Result<T>) -> ()) where T : Swift.Decodable, T : Swift.Encodable
-  public func upload<T>(_ from: EffectiveProcessesSDK.Endpoint, progressHandler: ((Swift.Double) -> Swift.Void)?, completion: @escaping (EffectiveProcessesSDK.Result<T>) -> ()) where T : Swift.Decodable, T : Swift.Encodable
+  public func execute<T>(_ from: EffectiveProcessesSDK.Endpoint, tokenRequired: Swift.Bool = true, checkTokenExpired: Swift.Bool = APIConstant.SHOULD_CHECK_TOKEN_EXPIRED, completion: @escaping (EffectiveProcessesSDK.Result<T>) -> Swift.Void) where T : Swift.Decodable, T : Swift.Encodable
+  public func upload<T>(_ from: EffectiveProcessesSDK.Endpoint, progressHandler: ((Swift.Double) -> Swift.Void)?, completion: @escaping (EffectiveProcessesSDK.Result<T>) -> Swift.Void) where T : Swift.Decodable, T : Swift.Encodable
   @objc public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
   @objc deinit
 }
 public struct APIConstant {
-  public static var BASE_URL: Swift.String
-  public static var API_BASE_URL: Swift.String
+  public static var BASE_URL: Swift.String {
+    get
+    set
+  }
+  public static var API_BASE_URL: Swift.String {
+    get
+    set
+  }
+  @available(*, deprecated, message: "Use EPSDK.Configuration.Builder instead")
   public static var TOKEN: Swift.String
+  @available(*, deprecated, message: "Use EPSDK.Configuration.Builder instead")
   public static var APP_UNIQUE_ID: Swift.String
+  @available(*, deprecated, message: "Use EPSDK.Configuration.Builder instead")
   public static var SHOULD_CHECK_TOKEN_EXPIRED: Swift.Bool
   @SwiftUI.AppStorage @_projectedValueProperty($LANGUAGE) public static var LANGUAGE: Swift.String {
     get
@@ -80,7 +91,9 @@ public protocol BannerUsecase {
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) open class BannerView : UIKit.UIView {
   @_Concurrency.MainActor(unsafe) public func getOffer(callback: ((Swift.Bool) -> Swift.Void)? = nil)
+  @available(*, deprecated, message: "init(builder: EPSDK.Configuration.Builder")
   @_Concurrency.MainActor(unsafe) convenience public init(targetName: Swift.String, token: Swift.String, shouldCheckExpiredToken: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) convenience public init(builder: EffectiveProcessesSDK.EPSDK.Configuration)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
@@ -107,11 +120,17 @@ extension SwiftUI.View {
 }
 public struct BottomSheetView<Content> : EffectiveProcessesSDK.DismissableView where Content : SwiftUI.View {
   public var onDismiss: () -> Swift.Void
-  public init(configuration: EffectiveProcessesSDK.BottomSheetConfiguration? = nil, onDismiss: @escaping () -> Swift.Void = {}, @SwiftUI.ViewBuilder content: () -> Content)
+  public init(configuration: EffectiveProcessesSDK.BottomSheetConfiguration? = nil, onDismiss: @escaping () -> Swift.Void = {
+            // This closure is empty by default to allow the user of the BottomSheetView
+            // to provide their own implementation for dismiss actions if needed.
+        }, @SwiftUI.ViewBuilder content: () -> Content)
   @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
     get
   }
-  public func dismiss(completion: @escaping () -> Swift.Void = {})
+  public func dismiss(completion: @escaping () -> Swift.Void = {
+        // This closure is empty by default to allow the user of the BottomSheetView
+        // to provide their own implementation for dismiss actions if needed.
+            })
   public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK15BottomSheetViewV4bodyQrvp", 0) __<Content>
 }
 extension SwiftUI.View {
@@ -139,6 +158,8 @@ public enum FormAlignment {
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) open class CTFormsView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func willMove(toSuperview newSuperview: UIKit.UIView?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func willMove(toWindow newWindow: UIKit.UIWindow?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) public var scrollView: EffectiveProcessesSDK.ContentSizeObservingScrollView {
     get
@@ -208,6 +229,8 @@ public class CTImagePicker {
   @objc deinit
 }
 @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class CTListView<T, U> : EffectiveProcessesSDK.CTListHeaderView<T, U, UIKit.UICollectionReusableView> where T : EffectiveProcessesSDK.CTListCell<U> {
+  @_Concurrency.MainActor(unsafe) public var items: [U]
+  @_Concurrency.MainActor(unsafe) public func reloadData()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
@@ -238,6 +261,14 @@ public struct CellDescriptor {
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func layoutSubviews()
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
   @objc deinit
+}
+public struct ClosureViewControllerProvider : EffectiveProcessesSDK.ViewControllerProvider {
+  public init(closure: @escaping (EffectiveProcessesSDK.ProcessInstance) -> UIKit.UIViewController)
+  public func viewController(for processInstance: EffectiveProcessesSDK.ProcessInstance) -> UIKit.UIViewController
+}
+public struct ClosureViewProvider : EffectiveProcessesSDK.ScreenProvider {
+  public init(closure: @escaping (EffectiveProcessesSDK.ProcessInstance) -> UIKit.UIView)
+  public func view(for processInstance: EffectiveProcessesSDK.ProcessInstance) -> UIKit.UIView
 }
 extension Swift.Encodable {
   public var json: [Swift.String : Any]? {
@@ -497,6 +528,7 @@ public struct EPStyle : EffectiveProcessesSDK.ColorStyle, EffectiveProcessesSDK.
   public var buttonStyle: EffectiveProcessesSDK.ButtonStyle?
   public var detailStyle: EffectiveProcessesSDK.DetailStyle?
   public var slider: EffectiveProcessesSDK.EDSliderStyle?
+  public var components: EffectiveProcessesSDK.Components?
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -542,6 +574,46 @@ public protocol DateProvider {
 }
 public protocol DescriptiveProtocol : AnyObject {
   var descriptor: EffectiveProcessesSDK.CellDescriptor { get }
+}
+public struct Components : Swift.Codable {
+  public let form: EffectiveProcessesSDK.Form
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Form : Swift.Codable {
+  public let header: EffectiveProcessesSDK.Header
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Header : Swift.Codable {
+  public let backgroundColor: EffectiveProcessesSDK.PlatformAppearance
+  public let text: EffectiveProcessesSDK.TextProperties
+  public let terminateButton: EffectiveProcessesSDK.ButtonProperties
+  public let margin: EffectiveProcessesSDK.Margins
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct TextProperties : Swift.Codable {
+  public let size: EffectiveProcessesSDK.PlatformValues
+  public let alignment: EffectiveProcessesSDK.PlatformValues
+  public let lineLimit: EffectiveProcessesSDK.PlatformValues
+  public let color: EffectiveProcessesSDK.PlatformAppearance
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ButtonProperties : Swift.Codable {
+  public let color: EffectiveProcessesSDK.PlatformAppearance
+  public let width: EffectiveProcessesSDK.PlatformValues
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Margins : Swift.Codable {
+  public let top: EffectiveProcessesSDK.PlatformValues
+  public let bottom: EffectiveProcessesSDK.PlatformValues
+  public let left: EffectiveProcessesSDK.PlatformValues
+  public let right: EffectiveProcessesSDK.PlatformValues
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 public protocol DismissableView : SwiftUI.View {
   func dismiss(completion: @escaping () -> Swift.Void)
@@ -640,9 +712,27 @@ public struct Constants {
 }
 public class EPSdkMain {
   @discardableResult
+  required public init(builder: EffectiveProcessesSDK.EPSDK.Configuration, overrideState: Swift.Bool? = true, callback: (() -> Swift.Void)? = nil)
+  @available(*, deprecated, message: "init(builder: EPSDK.Configuration.Builder,callback: (() -> Void)? = nil, _ overrideState: Bool?)")
+  @discardableResult
   required public init(uniqeID: Swift.String, token: Swift.String, shouldCheckExpiredToken: Swift.Bool, overrideState: Swift.Bool? = true, callback: (() -> Swift.Void)? = nil)
   public static func registerDependancy()
   @objc deinit
+}
+public struct EPSDK {
+  public struct Configuration {
+    public class Builder {
+      public init()
+      public func setBaseURL(_ baseURL: Swift.String) -> EffectiveProcessesSDK.EPSDK.Configuration.Builder
+      public func setUniqueID(_ id: Swift.String) -> EffectiveProcessesSDK.EPSDK.Configuration.Builder
+      public func setToken(_ token: Swift.String) -> EffectiveProcessesSDK.EPSDK.Configuration.Builder
+      public func setShouldCheckTokenExpired(_ shouldCheck: Swift.Bool) -> EffectiveProcessesSDK.EPSDK.Configuration.Builder
+      public func setUseCase(_ useCase: any EffectiveProcessesSDK.EPUseCase) -> EffectiveProcessesSDK.EPSDK.Configuration.Builder
+      public func setPinnedPublicKeyHashes(_ hash: Swift.String) -> EffectiveProcessesSDK.EPSDK.Configuration.Builder
+      public func build() -> EffectiveProcessesSDK.EPSDK.Configuration
+      @objc deinit
+    }
+  }
 }
 public protocol EPUseCase {
   func processNextStep(with body: Foundation.Data?, process processId: Swift.String, transaction transitionId: Swift.String, baseBackColor: UIKit.UIColor?, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
@@ -751,9 +841,6 @@ public class FilePreviewModel : EffectiveProcessesSDK.ViewModelState {
   @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, willDisplay cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
   @objc deinit
 }
-@_hasMissingDesignatedInitializers public class BundleMe {
-  @objc deinit
-}
 public var bundle: Foundation.Bundle? {
   get
 }
@@ -815,37 +902,6 @@ public enum HTTPNetworkRoute : Swift.String {
   }
 }
 public struct HTTPNetworkResponse {
-}
-public enum IndentedTextFieldType {
-  case name
-  case address
-  case city
-  public static func == (a: EffectiveProcessesSDK.IndentedTextFieldType, b: EffectiveProcessesSDK.IndentedTextFieldType) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
-}
-@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class BaseTextView : UIKit.UITextField {
-  @_Concurrency.MainActor(unsafe) public var editingDidChange: (Swift.String?) -> Swift.Void
-  @_Concurrency.MainActor(unsafe) public var didEndEditing: (UIKit.UITextField) -> Swift.Void
-  @_Concurrency.MainActor(unsafe) public var didBeginEditing: (UIKit.UITextField) -> Swift.Void
-  @_Concurrency.MainActor(unsafe) public var onValidate: (Swift.String?) -> Swift.Void
-  @_Concurrency.MainActor(unsafe) public func setText(_ text: Swift.String)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
-}
-@objc @_Concurrency.MainActor(unsafe) public class IndentedTextField : EffectiveProcessesSDK.BaseTextView, UIKit.UITextFieldDelegate {
-  @_Concurrency.MainActor(unsafe) public init(placeholder: Swift.String? = nil, padding: CoreFoundation.CGFloat, cornerRadius: CoreFoundation.CGFloat, keyboardType: UIKit.UIKeyboardType = .default, backgroundColor: UIKit.UIColor = .clear, isSecureTextEntry: Swift.Bool = false, TFType: EffectiveProcessesSDK.IndentedTextFieldType = .name, pattern: Swift.String)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func didMoveToWindow()
-  @_Concurrency.MainActor(unsafe) override public func setText(_ text: Swift.String)
-  @_Concurrency.MainActor(unsafe) @objc public func textFieldDidEndEditing(_ textField: UIKit.UITextField)
-  @_Concurrency.MainActor(unsafe) @objc public func textFieldDidBeginEditing(_ textField: UIKit.UITextField)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open func textRect(forBounds bounds: CoreFoundation.CGRect) -> CoreFoundation.CGRect
-  @_Concurrency.MainActor(unsafe) @objc override dynamic open func editingRect(forBounds bounds: CoreFoundation.CGRect) -> CoreFoundation.CGRect
-  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
-  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class JCOTPComponent : UIKit.UITextField {
   @_Concurrency.MainActor(unsafe) public var defaultCharacter: Swift.String
@@ -976,7 +1032,7 @@ public enum LogLevel : Swift.String {
 }
 public struct Logger {
   public static var minimumLogLevel: EffectiveProcessesSDK.LogLevel
-  public static func log(_ message: Any..., level: EffectiveProcessesSDK.LogLevel = Self.minimumLogLevel)
+  public static func log(_ message: Any..., level: EffectiveProcessesSDK.LogLevel = Self.minimumLogLevel, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
 }
 @_Concurrency.MainActor(unsafe) public struct MessagesView : SwiftUI.View, EffectiveProcessesSDK.ModelBindable {
   @SwiftUI.StateObject @_projectedValueProperty($model) @_Concurrency.MainActor(unsafe) public var model: EffectiveProcessesSDK.MessagesViewModel {
@@ -1104,6 +1160,32 @@ public struct CountryCode : Swift.Codable {
 public protocol PhoneNumberFieldProvider {
   var phoneNumber: (Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.Bool, [EffectiveProcessesSDK.CountryCode]) -> (EffectiveProcessesSDK.PhoneNumberFieldModel, UIKit.UIView) { get set }
 }
+public struct PlatformAppearance : Swift.Codable {
+  public let web: EffectiveProcessesSDK.AppearanceValues
+  public let android: EffectiveProcessesSDK.AppearanceValues
+  public let ios: EffectiveProcessesSDK.AppearanceValues
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct AppearanceValues : Swift.Codable {
+  public let lightAppearance: Swift.String?
+  public let darkAppearance: Swift.String?
+  public var color: SwiftUI.Color {
+    get
+  }
+  public var uiColor: UIKit.UIColor {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct PlatformValues : Swift.Codable {
+  public let web: Swift.String
+  public let android: Swift.String
+  public let ios: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
 public struct SectionDataModel<T> {
 }
 @_hasMissingDesignatedInitializers public class ActiveProcessModel : Foundation.ObservableObject {
@@ -1147,11 +1229,19 @@ public struct ActiveProcessInstanceMock {
   public static var model: EffectiveProcessesSDK.ActiveProcessModel
 }
 public struct ContextFlow : Swift.Codable {
-  public let name: Swift.String, bpmnDiagramName: Swift.String, version: Swift.String
+  public let name: Swift.String
+  public let bpmnDiagramName: Swift.String
+  public let version: Swift.String
   public let environment: Swift.String?
-  public let image: Swift.String, title: Swift.String, body: Swift.String, documentation: Swift.String, actionTitle: Swift.String
+  public let image: Swift.String
+  public let title: Swift.String
+  public let body: Swift.String
+  public let documentation: Swift.String
+  public let actionTitle: Swift.String
   public let terminationEnabled: Swift.Bool
-  public let terminationConfirmationMsg: Swift.String, resumeActionTitle: Swift.String, resumeBody: Swift.String
+  public let terminationConfirmationMsg: Swift.String
+  public let resumeActionTitle: Swift.String
+  public let resumeBody: Swift.String
   public let publicAccess: Swift.Bool?
   public let additionalProps: EffectiveProcessesSDK.AdditionalProps
   public init(name: Swift.String, bpmnDiagramName: Swift.String, version: Swift.String, environment: Swift.String?, image: Swift.String, title: Swift.String, body: Swift.String, documentation: Swift.String, actionTitle: Swift.String, terminationEnabled: Swift.Bool, terminationConfirmationMsg: Swift.String, resumeActionTitle: Swift.String, resumeBody: Swift.String, publicAccess: Swift.Bool?, additionalProps: EffectiveProcessesSDK.AdditionalProps)
@@ -1165,15 +1255,22 @@ public struct AdditionalProps : Swift.Codable {
 }
 public typealias ContextFlows = [EffectiveProcessesSDK.ContextFlow]
 public struct ProcessInstance : Swift.Codable {
-  public let id: Swift.String?, action: Swift.String?, camundaStepName: Swift.String?
+  public let id: Swift.String?
+  public let action: Swift.String?
+  public let camundaStepName: Swift.String?
   public let object: Swift.String?
   public let fields: [EffectiveProcessesSDK.Field]?
   public let record: EffectiveProcessesSDK.Record?
   public let urlItems: [EffectiveProcessesSDK.URLItem]?
   public var recordList: [EffectiveProcessesSDK.RecordList]?
   public let recordDetails: [EffectiveProcessesSDK.RecordDetail]?
-  public let title: Swift.String?, status: Swift.String?, body: Swift.String?, imageURL: Swift.String?
-  public let terminated: Swift.Bool?, redirect: Swift.Bool?, validationEnabled: Swift.Bool?
+  public let title: Swift.String?
+  public let status: Swift.String?
+  public let body: Swift.String?
+  public let imageURL: Swift.String?
+  public let terminated: Swift.Bool?
+  public let redirect: Swift.Bool?
+  public let validationEnabled: Swift.Bool?
   public let redirectPayload: Swift.String?
   public let transitions: [EffectiveProcessesSDK.Transition]?
   public var documents: [EffectiveProcessesSDK.Document]?
@@ -1181,13 +1278,18 @@ public struct ProcessInstance : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct URLItem : Swift.Codable, Swift.Identifiable {
-  public let id: Swift.String, title: Swift.String, type: Swift.String
+  public let id: Swift.String
+  public let title: Swift.String
+  public let type: Swift.String
   public typealias ID = Swift.String
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
 public struct RecordList : Swift.Codable, Swift.Identifiable {
-  public let upperLeft: Swift.String?, upperRight: Swift.String?, id: Swift.String?, lowerRight: Swift.String?
+  public let upperLeft: Swift.String?
+  public let upperRight: Swift.String?
+  public let id: Swift.String?
+  public let lowerRight: Swift.String?
   public let lowerLeft: Swift.String?
   public typealias ID = Swift.String?
   public func encode(to encoder: any Swift.Encoder) throws
@@ -1242,17 +1344,32 @@ public enum ButtonType : Swift.String {
     get
   }
 }
+public struct SchemaSelector : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
 public struct ProcessItemNew : Swift.Codable, Swift.Identifiable, Swift.Hashable {
   public var id: Foundation.UUID
-  public let type: Swift.String, instanceID: Swift.String, name: Swift.String, image: Swift.String
-  public let title: Swift.String, body: Swift.String, actionTitle: Swift.String
+  public let type: Swift.String
+  public let instanceID: Swift.String
+  public let name: Swift.String
+  public let image: Swift.String
+  public let title: Swift.String
+  public let body: Swift.String
+  public let actionTitle: Swift.String
   public let terminationEnabled: Swift.Bool?
   public let terminationConfirmationMsg: Swift.String?
   public init(id: Foundation.UUID, type: Swift.String, instanceID: Swift.String, name: Swift.String, image: Swift.String, title: Swift.String, body: Swift.String, actionTitle: Swift.String, terminationEnabled: Swift.Bool?, terminationConfirmationMsg: Swift.String?)
   public enum CodingKeys : Swift.String, Swift.CodingKey {
     case type
     case instanceID
-    case name, image, title, body, actionTitle, terminationEnabled, terminationConfirmationMsg
+    case name
+    case image
+    case title
+    case body
+    case actionTitle
+    case terminationEnabled
+    case terminationConfirmationMsg
     public init?(rawValue: Swift.String)
     public init?(stringValue: Swift.String)
     public init?(intValue: Swift.Int)
@@ -1371,6 +1488,9 @@ public enum Value : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
+public protocol ScreenProvider {
+  func view(for processInstance: EffectiveProcessesSDK.ProcessInstance) -> UIKit.UIView
+}
 open class DropDownListModel : Foundation.ObservableObject, EffectiveProcessesSDK.ViewModelState {
   @Combine.Published @_projectedValueProperty($prompt) public var prompt: Swift.String {
     get
@@ -1464,7 +1584,7 @@ open class DropDownListModel : Foundation.ObservableObject, EffectiveProcessesSD
 }
 open class SingleSelectModel : EffectiveProcessesSDK.ViewModelState {
   open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
-  public init(options: [EffectiveProcessesSDK.Option], multiSelection: Swift.Set<Swift.String>)
+  public init(options: [EffectiveProcessesSDK.Option], singleSelection: Swift.Set<Swift.String>)
   @Combine.Published @_projectedValueProperty($options) public var options: [EffectiveProcessesSDK.Option] {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -1606,7 +1726,7 @@ public class StandardTextFieldModel : Foundation.ObservableObject, EffectiveProc
   @objc deinit
 }
 public protocol StandardTextFieldProvider {
-  var standard: (Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.Bool, UIKit.UIKeyboardType, CoreFoundation.CGFloat, Swift.Bool, Swift.String?, Swift.String?, Swift.Bool?) -> (EffectiveProcessesSDK.StandardTextFieldModel, UIKit.UIView) { get set }
+  var standard: (Swift.String, Swift.String, Swift.String, Swift.String, Swift.String, Swift.Bool, UIKit.UIKeyboardType, CoreFoundation.CGFloat, Swift.Bool, Swift.String?, Swift.String?, Swift.Bool?, Swift.String?, Swift.Int?) -> (EffectiveProcessesSDK.StandardTextFieldModel, UIKit.UIView) { get set }
 }
 public enum EPState : Swift.Equatable {
   public static func == (lhs: EffectiveProcessesSDK.EPState, rhs: EffectiveProcessesSDK.EPState) -> Swift.Bool
@@ -1620,6 +1740,9 @@ extension Swift.String {
     get
   }
   public var toDashDate: Foundation.Date? {
+    get
+  }
+  public var toIsoDate: Foundation.Date? {
     get
   }
 }
@@ -1727,34 +1850,34 @@ extension UIKit.UIScrollView {
 }
 extension UIKit.UIView {
   @available(iOS 9, *)
-  @_Concurrency.MainActor(unsafe) public func EPFillToSuperview(left: CoreFoundation.CGFloat = 0, right: CoreFoundation.CGFloat = 0, top: CoreFoundation.CGFloat = 0, bottom: CoreFoundation.CGFloat = 0)
+  @_Concurrency.MainActor(unsafe) public func fillToSuperview(left: CoreFoundation.CGFloat = 0, right: CoreFoundation.CGFloat = 0, top: CoreFoundation.CGFloat = 0, bottom: CoreFoundation.CGFloat = 0)
   @discardableResult
-  @_Concurrency.MainActor(unsafe) open func EPAnchor(top: UIKit.NSLayoutYAxisAnchor?, leading: UIKit.NSLayoutXAxisAnchor?, bottom: UIKit.NSLayoutYAxisAnchor?, trailing: UIKit.NSLayoutXAxisAnchor?, padding: UIKit.UIEdgeInsets = .zero, size: CoreFoundation.CGSize = .zero) -> EffectiveProcessesSDK.AnchoredConstraints
+  @_Concurrency.MainActor(unsafe) public func anchor(top: UIKit.NSLayoutYAxisAnchor?, leading: UIKit.NSLayoutXAxisAnchor?, bottom: UIKit.NSLayoutYAxisAnchor?, trailing: UIKit.NSLayoutXAxisAnchor?, padding: UIKit.UIEdgeInsets = .zero, size: CoreFoundation.CGSize = .zero) -> EffectiveProcessesSDK.AnchoredConstraints
   @discardableResult
-  @_Concurrency.MainActor(unsafe) open func EPFillSuperview(padding: UIKit.UIEdgeInsets = .zero) -> EffectiveProcessesSDK.AnchoredConstraints
+  @_Concurrency.MainActor(unsafe) public func fillSuperview(padding: UIKit.UIEdgeInsets = .zero) -> EffectiveProcessesSDK.AnchoredConstraints
   @discardableResult
-  @_Concurrency.MainActor(unsafe) open func EPFillSuperviewSafeAreaLayoutGuide(padding: UIKit.UIEdgeInsets = .zero) -> EffectiveProcessesSDK.AnchoredConstraints
-  @_Concurrency.MainActor(unsafe) open func EPCenterInSuperview(size: CoreFoundation.CGSize = .zero)
-  @_Concurrency.MainActor(unsafe) open func EPCenterXToSuperview()
-  @_Concurrency.MainActor(unsafe) open func EPCenterYToSuperview()
+  @_Concurrency.MainActor(unsafe) public func fillSuperviewSafeAreaLayoutGuide(padding: UIKit.UIEdgeInsets = .zero) -> EffectiveProcessesSDK.AnchoredConstraints
+  @_Concurrency.MainActor(unsafe) public func centerInSuperview(size: CoreFoundation.CGSize = .zero)
+  @_Concurrency.MainActor(unsafe) public func centerXToSuperview()
+  @_Concurrency.MainActor(unsafe) public func centerYToSuperview()
   @discardableResult
-  @_Concurrency.MainActor(unsafe) open func EPConstrainHeight(_ constant: CoreFoundation.CGFloat) -> EffectiveProcessesSDK.AnchoredConstraints
+  @_Concurrency.MainActor(unsafe) public func constrainHeight(_ constant: CoreFoundation.CGFloat) -> EffectiveProcessesSDK.AnchoredConstraints
   @discardableResult
-  @_Concurrency.MainActor(unsafe) open func EPConstrainWidth(_ constant: CoreFoundation.CGFloat) -> EffectiveProcessesSDK.AnchoredConstraints
-  @_Concurrency.MainActor(unsafe) open func EPSetupShadow(opacity: Swift.Float = 0, radius: CoreFoundation.CGFloat = 0, offset: CoreFoundation.CGSize = .zero, color: UIKit.UIColor = .black)
+  @_Concurrency.MainActor(unsafe) public func constrainWidth(_ constant: CoreFoundation.CGFloat) -> EffectiveProcessesSDK.AnchoredConstraints
+  @_Concurrency.MainActor(unsafe) public func setupShadow(opacity: Swift.Float = 0, radius: CoreFoundation.CGFloat = 0, offset: CoreFoundation.CGSize = .zero, color: UIKit.UIColor = .black)
   @_Concurrency.MainActor(unsafe) convenience public init(backgroundColor: UIKit.UIColor = .clear)
 }
 extension UIKit.UIStackView {
-  @_Concurrency.MainActor(unsafe) public func EPAddBackground(color: UIKit.UIColor)
-  @_Concurrency.MainActor(unsafe) public func EPCustomize(backgroundColor: UIKit.UIColor = .clear, radiusSize: CoreFoundation.CGFloat = 0)
+  @_Concurrency.MainActor(unsafe) public func addBackground(color: UIKit.UIColor)
+  @_Concurrency.MainActor(unsafe) public func customize(backgroundColor: UIKit.UIColor = .clear, radiusSize: CoreFoundation.CGFloat = 0)
 }
 extension UIKit.UIStackView {
-  @_Concurrency.MainActor(unsafe) public func EPCustomizeShadowCard(backgroundColor: UIKit.UIColor = .clear, radiusSize: CoreFoundation.CGFloat = 0, showShadowForCard: Swift.Bool = true) -> Self
+  @_Concurrency.MainActor(unsafe) public func customizeShadowCard(backgroundColor: UIKit.UIColor = .clear, radiusSize: CoreFoundation.CGFloat = 0, showShadowForCard: Swift.Bool = true) -> Self
   @_Concurrency.MainActor(unsafe) public func addSubviewsNew(_ views: UIKit.UIView...)
   @_Concurrency.MainActor(unsafe) public func addSubviews(_ views: [UIKit.UIView])
 }
 extension UIKit.UIStackView {
-  @_Concurrency.MainActor(unsafe) public func EPCustomizeBackgroundColor(backgroundColor: UIKit.UIColor = .clear) -> Self
+  @_Concurrency.MainActor(unsafe) public func customizeBackgroundColor(backgroundColor: UIKit.UIColor = .clear) -> Self
 }
 extension UIKit.UIView {
   @_Concurrency.MainActor(unsafe) public var parentViewController: UIKit.UIViewController? {
@@ -1762,7 +1885,12 @@ extension UIKit.UIView {
   }
 }
 public struct AnchoredConstraints {
-  public var top: UIKit.NSLayoutConstraint?, leading: UIKit.NSLayoutConstraint?, bottom: UIKit.NSLayoutConstraint?, trailing: UIKit.NSLayoutConstraint?, width: UIKit.NSLayoutConstraint?, height: UIKit.NSLayoutConstraint?
+  public var top: UIKit.NSLayoutConstraint?
+  public var leading: UIKit.NSLayoutConstraint?
+  public var bottom: UIKit.NSLayoutConstraint?
+  public var trailing: UIKit.NSLayoutConstraint?
+  public var width: UIKit.NSLayoutConstraint?
+  public var height: UIKit.NSLayoutConstraint?
 }
 extension UIKit.UIView {
   @discardableResult
@@ -1818,7 +1946,7 @@ extension UIKit.UIStackView {
   @discardableResult
   @_Concurrency.MainActor(unsafe) public func addSpacer() -> UIKit.UIStackView
   @discardableResult
-  @_Concurrency.MainActor(unsafe) public func customize(backgroundColor: UIKit.UIColor = .clear, radiusSize: CoreFoundation.CGFloat = 0) -> UIKit.UIStackView
+  @_Concurrency.MainActor(unsafe) public func customizeNew(backgroundColor: UIKit.UIColor = .clear, radiusSize: CoreFoundation.CGFloat = 0) -> UIKit.UIStackView
   @discardableResult
   @_Concurrency.MainActor(unsafe) public func padRight(_ right: CoreFoundation.CGFloat) -> UIKit.UIStackView
 }
@@ -2000,6 +2128,9 @@ public struct VideoBackgroundView : SwiftUI.UIViewRepresentable {
   public typealias Coordinator = Swift.Void
   public typealias UIViewType = UIKit.UIView
 }
+public protocol ViewControllerProvider {
+  func viewController(for processInstance: EffectiveProcessesSDK.ProcessInstance) -> UIKit.UIViewController
+}
 public protocol ViewDocumentProvider {
   var fileView: (Foundation.URL?, EffectiveProcessesSDK.Document?) -> (EffectiveProcessesSDK.FilePreviewModel, UIKit.UIView) { get set }
 }
@@ -2017,8 +2148,6 @@ extension EffectiveProcessesSDK.HTTPNetworkError : Swift.RawRepresentable {}
 extension EffectiveProcessesSDK.HTTPNetworkRoute : Swift.Equatable {}
 extension EffectiveProcessesSDK.HTTPNetworkRoute : Swift.Hashable {}
 extension EffectiveProcessesSDK.HTTPNetworkRoute : Swift.RawRepresentable {}
-extension EffectiveProcessesSDK.IndentedTextFieldType : Swift.Equatable {}
-extension EffectiveProcessesSDK.IndentedTextFieldType : Swift.Hashable {}
 extension EffectiveProcessesSDK.LogLevel : Swift.Equatable {}
 extension EffectiveProcessesSDK.LogLevel : Swift.Hashable {}
 extension EffectiveProcessesSDK.LogLevel : Swift.RawRepresentable {}
