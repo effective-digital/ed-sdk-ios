@@ -51,10 +51,6 @@ public struct APIConstant {
     get
     set
   }
-  public static var API_BASE_URL: Swift.String {
-    get
-    set
-  }
   @available(*, deprecated, message: "Use EPSDK.Configuration.Builder instead")
   public static var TOKEN: Swift.String
   @available(*, deprecated, message: "Use EPSDK.Configuration.Builder instead")
@@ -1925,7 +1921,7 @@ public class EPSdkMain {
   @available(*, deprecated, message: "init(builder: EPSDK.Configuration.Builder,callback: (() -> Void)? = nil, _ overrideState: Bool?)")
   @discardableResult
   required public init(uniqeID: Swift.String, token: Swift.String, shouldCheckExpiredToken: Swift.Bool, overrideState: Swift.Bool? = false, callback: (() -> Swift.Void)? = nil)
-  public static func registerDependancy()
+  public static func registerDependancy(setBaseURL: Swift.String, setPinnedPublicKeyHashes: Swift.String? = nil)
   @objc deinit
 }
 public struct EPSDK {
