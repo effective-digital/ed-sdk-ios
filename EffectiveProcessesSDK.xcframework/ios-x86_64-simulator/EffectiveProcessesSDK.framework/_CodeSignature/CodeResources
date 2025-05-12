@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		rrmckwPExbRqKRVjuU1+3IzHpVU=
+		jTb/bR8bJEV3QDeyQ0zE9PrhifM=
 		</data>
 		<key>Config.plist</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		IYHYErwooYKIxlxgegd/UXArCfI=
+		JCwCps5vUgWjymH7RvaIcF3/y4E=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -79,7 +79,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			SZdX6iNY2E9xRFTB1ZN65mweYJwh9aneg2bxXNOt95k=
+			eQfDkIvrCjoXV+KWdirwPqOJlFC2tHFRNV6Nq/C9vZk=
 			</data>
 		</dict>
 		<key>Config.plist</key>
@@ -135,7 +135,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6OM5tCMlUpaiSFUrRcMa7ojJ5eeWqMFDAOkhrFiq3tw=
+			3UytvNUYw1VJNz6LiIQBqMxWKnUR0G0H/AzXbdLXGHI=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
