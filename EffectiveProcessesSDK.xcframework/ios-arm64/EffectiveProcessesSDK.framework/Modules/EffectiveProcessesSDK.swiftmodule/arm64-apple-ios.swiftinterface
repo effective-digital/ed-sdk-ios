@@ -104,7 +104,7 @@ public struct BannerComponentConfiguration<Item> where Item : Swift.Identifiable
   public var cardHeight: CoreFoundation.CGFloat
   public init(items: [Item] = [], getData: ((@escaping ([Item]) -> Swift.Void) -> Swift.Void)? = nil, onSelect: @escaping (Item) -> Swift.Void, onTerminate: ((_ processId: Swift.String, _ completion: @escaping () -> Swift.Void) -> Swift.Void)? = nil, titleProvider: @escaping (Item) -> Swift.String, descriptionProvider: @escaping (Item) -> Swift.String, imageProvider: @escaping (Item) -> Foundation.URL?, showCloseButton: @escaping (Item) -> Swift.Bool, alertMessageProvider: @escaping (Item) -> Swift.String, alertMessageId: @escaping (Item) -> Swift.String, cardHeight: CoreFoundation.CGFloat = 210)
 }
-public class BannerComponentModel<Item> : Foundation.ObservableObject where Item : Swift.Identifiable {
+public class BannerComponentModel<Item> : Combine.ObservableObject where Item : Swift.Identifiable {
   @Combine.Published @_projectedValueProperty($selectedPage) public var selectedPage: Swift.Int {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -160,16 +160,18 @@ public class BannerComponentModel<Item> : Foundation.ObservableObject where Item
   public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK19BannerComponentViewV4bodyQrvp", 0) __<Item>
 }
 public struct BannerComponentFactoryV2 {
-  public static func PresentOffersBanner(for builder: EffectiveProcessesSDK.EPSDK.Configuration, cardHeight: CoreFoundation.CGFloat) -> some SwiftUICore.View
+  public typealias EmptyCallback = () -> Swift.Void
+  public typealias ErrorCallback = (any Swift.Error) -> Swift.Void
+  public static func PresentOffersBanner(for builder: EffectiveProcessesSDK.EPSDK.Configuration, cardHeight: CoreFoundation.CGFloat, onEmpty: EffectiveProcessesSDK.BannerComponentFactoryV2.EmptyCallback? = nil, onError: EffectiveProcessesSDK.BannerComponentFactoryV2.ErrorCallback? = nil) -> some SwiftUICore.View
   
-  public static func PresentUnautherisedOffersBanner(cardHeight: CoreFoundation.CGFloat) -> some SwiftUICore.View
+  public static func PresentUnautherisedOffersBanner(cardHeight: CoreFoundation.CGFloat, onEmpty: EffectiveProcessesSDK.BannerComponentFactoryV2.EmptyCallback? = nil, onError: EffectiveProcessesSDK.BannerComponentFactoryV2.ErrorCallback? = nil) -> some SwiftUICore.View
   
-  public static func PresentOffersBannerView(for builder: EffectiveProcessesSDK.EPSDK.Configuration, cardHeight: CoreFoundation.CGFloat) -> UIKit.UIView
-  public static func PresentOffersBannerViewController(for builder: EffectiveProcessesSDK.EPSDK.Configuration, cardHeight: CoreFoundation.CGFloat) -> UIKit.UIViewController
-  public static func PresentUnautherisedOffersBannerView(cardHeight: CoreFoundation.CGFloat) -> UIKit.UIView
-  public static func PresentUnautherisedOffersBannerViewController(cardHeight: CoreFoundation.CGFloat) -> UIKit.UIViewController
+  public static func PresentOffersBannerView(for builder: EffectiveProcessesSDK.EPSDK.Configuration, cardHeight: CoreFoundation.CGFloat, onEmpty: EffectiveProcessesSDK.BannerComponentFactoryV2.EmptyCallback? = nil, onError: EffectiveProcessesSDK.BannerComponentFactoryV2.ErrorCallback? = nil) -> UIKit.UIView
+  public static func PresentOffersBannerViewController(for builder: EffectiveProcessesSDK.EPSDK.Configuration, cardHeight: CoreFoundation.CGFloat, onEmpty: EffectiveProcessesSDK.BannerComponentFactoryV2.EmptyCallback? = nil, onError: EffectiveProcessesSDK.BannerComponentFactoryV2.ErrorCallback? = nil) -> UIKit.UIViewController
+  public static func PresentUnautherisedOffersBannerView(cardHeight: CoreFoundation.CGFloat, onEmpty: EffectiveProcessesSDK.BannerComponentFactoryV2.EmptyCallback? = nil, onError: EffectiveProcessesSDK.BannerComponentFactoryV2.ErrorCallback? = nil) -> UIKit.UIView
+  public static func PresentUnautherisedOffersBannerViewController(cardHeight: CoreFoundation.CGFloat, onEmpty: EffectiveProcessesSDK.BannerComponentFactoryV2.EmptyCallback? = nil, onError: EffectiveProcessesSDK.BannerComponentFactoryV2.ErrorCallback? = nil) -> UIKit.UIViewController
 }
-public class OffersLoaderViewModel : Foundation.ObservableObject {
+public class OffersLoaderViewModel : Combine.ObservableObject {
   @Combine.Published @_projectedValueProperty($hasOffers) public var hasOffers: Swift.Bool {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -194,8 +196,56 @@ public class OffersLoaderViewModel : Foundation.ObservableObject {
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
+  @Combine.Published @_projectedValueProperty($isLoading) public var isLoading: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $isLoading: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($hasError) public var hasError: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $hasError: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($isEmpty) public var isEmpty: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $isEmpty: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($sdkError) public var sdkError: (any Swift.Error)? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $sdkError: Combine.Published<(any Swift.Error)?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
   public init()
-  public func loadOffers()
+  public func loadOffers(onEmpty: EffectiveProcessesSDK.BannerComponentFactoryV2.EmptyCallback? = nil, onError: EffectiveProcessesSDK.BannerComponentFactoryV2.ErrorCallback? = nil)
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
@@ -2283,6 +2333,9 @@ public class LinksPreviewModel : EffectiveProcessesSDK.ViewModelState {
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
+  public var checkedItems: Swift.String {
+    get
+  }
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
@@ -2552,6 +2605,7 @@ public struct URLItem : Swift.Codable, Swift.Identifiable {
   public let id: Swift.String
   public let title: Swift.String
   public let type: Swift.String
+  public let mandatory: Swift.Bool
   public typealias ID = Swift.String
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
