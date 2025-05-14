@@ -47,6 +47,7 @@ extension EffectiveProcessesSDK.APIClient {
   public func executeRawJSON(_ from: EffectiveProcessesSDK.Endpoint, tokenRequired: Swift.Bool = true, checkTokenExpired: Swift.Bool = APIConstant.SHOULD_CHECK_TOKEN_EXPIRED, completion: @escaping (EffectiveProcessesSDK.Result<Swift.String>) -> Swift.Void)
 }
 public struct APIConstant {
+  @available(*, deprecated, message: "Use EPSDK.Configuration.Builder instead")
   public static var BASE_URL: Swift.String {
     get
     set
@@ -1955,6 +1956,8 @@ public protocol EPUseCase {
   func autheticateAnonymousUser(path: Swift.String, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.AnonymousLoginResponse>) -> Swift.Void)
   var processInstancePath: Swift.String { get }
   func aiAssistent(message: EffectiveProcessesSDK.ProcessInstanceAIChat, checkTokenExpired: Swift.Bool, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstanceAIChat>) -> Swift.Void)
+  func isProcessInstancePresented(_ instanceId: Swift.String) -> Swift.Bool
+  func dismissProcessInstance(completion: (() -> Swift.Void)?)
 }
 public class EPUseCaseDefaultImpl : EffectiveProcessesSDK.EPUseCase {
   public func startOrResumeProcessV2(_ processId: Swift.String, showSpinner: Swift.Bool, callback: @escaping (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void)
@@ -1974,6 +1977,8 @@ public class EPUseCaseDefaultImpl : EffectiveProcessesSDK.EPUseCase {
     get
   }
   public init(serverUrl: Foundation.URL)
+  public func isProcessInstancePresented(_ instanceId: Swift.String) -> Swift.Bool
+  public func dismissProcessInstance(completion: (() -> Swift.Void)? = nil)
   @objc deinit
 }
 @_Concurrency.MainActor @preconcurrency public struct EdNgCardFrameModifier : SwiftUICore.ViewModifier {
