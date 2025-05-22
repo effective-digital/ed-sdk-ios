@@ -1151,7 +1151,7 @@ public struct FormImage : Swift.Codable {
 }
 public struct ButtonProperties : Swift.Codable {
   public let color: EffectiveProcessesSDK.PlatformAppearance
-  public let width: EffectiveProcessesSDK.PlatformValues
+  public let width: EffectiveProcessesSDK.PlatformValues?
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -1819,6 +1819,79 @@ public struct SizeValues : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+public class EPStyleDatePicker : Swift.Codable {
+  final public let components: EffectiveProcessesSDK.DatePickerComponentsInput?
+  public init(components: EffectiveProcessesSDK.DatePickerComponentsInput?)
+  public static var empty: EffectiveProcessesSDK.EPStyleDatePicker {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class DatePickerComponentsInput : Swift.Codable {
+  final public let uiComponents: EffectiveProcessesSDK.DatePickerUIComponentsInput?
+  public init(uiComponents: EffectiveProcessesSDK.DatePickerUIComponentsInput?)
+  public static var empty: EffectiveProcessesSDK.DatePickerComponentsInput {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class DatePickerUIComponentsInput : Swift.Codable {
+  public var datePicker: EffectiveProcessesSDK.DatePickerComponent?
+  public init(datePicker: EffectiveProcessesSDK.DatePickerComponent?)
+  public static var empty: EffectiveProcessesSDK.DatePickerUIComponentsInput {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public struct DatePickerComponent : Swift.Codable {
+  public let label: EffectiveProcessesSDK.InputLabelStates?
+  public let tooltipIcon: EffectiveProcessesSDK.TooltipIcon?
+  public let calendarIcon: EffectiveProcessesSDK.CalendarIconStates?
+  public let inputBox: EffectiveProcessesSDK.InputBoxStates?
+  public let feedbackArea: EffectiveProcessesSDK.InputFeedbackArea?
+  public let calendarOverlay: EffectiveProcessesSDK.CalendarOverlay?
+  public static var empty: EffectiveProcessesSDK.DatePickerComponent {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CalendarIconStates : Swift.Codable {
+  public let defaultState: EffectiveProcessesSDK.CalendarIconState?
+  public let errorState: EffectiveProcessesSDK.CalendarIconState?
+  public let disabledState: EffectiveProcessesSDK.CalendarIconState?
+  public static var empty: EffectiveProcessesSDK.CalendarIconStates {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CalendarIconState : Swift.Codable {
+  public let color: EffectiveProcessesSDK.PlatformAppearance?
+  public let size: EffectiveProcessesSDK.SizeValues?
+  public let margin: EffectiveProcessesSDK.Margins?
+  public static var empty: EffectiveProcessesSDK.CalendarIconState {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CalendarOverlay : Swift.Codable {
+  public let backgroundColor: EffectiveProcessesSDK.PlatformAppearance?
+  public let terminateButton: EffectiveProcessesSDK.ButtonProperties?
+  public let accentColor: EffectiveProcessesSDK.PlatformAppearance?
+  public static var empty: EffectiveProcessesSDK.CalendarOverlay {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
 @_Concurrency.MainActor @preconcurrency public struct DesignTokenToggleStyle : SwiftUI.ToggleStyle {
   @_Concurrency.MainActor @preconcurrency public func makeBody(configuration: EffectiveProcessesSDK.DesignTokenToggleStyle.Configuration) -> some SwiftUICore.View
   
@@ -2026,6 +2099,21 @@ extension UIKit.UIView {
   
   public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK22EdNgAssistiveTextStyleV4body7contentQr7SwiftUI21_ViewModifier_ContentVyACG_tF", 0) __
 }
+@_Concurrency.MainActor @preconcurrency public struct EdNgDirectTextInputLabelStyleModifier : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgDirectTextInputLabelStyleModifier.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK37EdNgDirectTextInputLabelStyleModifierV4body7contentQr7SwiftUI05_ViewK8_ContentVyACG_tF", 0) __
+}
+@_Concurrency.MainActor @preconcurrency public struct EdNgCalendarIconStyleModifier : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgCalendarIconStyleModifier.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK29EdNgCalendarIconStyleModifierV4body7contentQr7SwiftUI05_ViewI8_ContentVyACG_tF", 0) __
+}
+@_Concurrency.MainActor @preconcurrency public struct EdNgTerminateButtonIconStyleModifier : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgTerminateButtonIconStyleModifier.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK36EdNgTerminateButtonIconStyleModifierV4body7contentQr7SwiftUI05_ViewJ8_ContentVyACG_tF", 0) __
+}
 extension SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public func edNgInputLabelStyle(labelStates: EffectiveProcessesSDK.InputLabelStates?, platform: Swift.String = "ios", isFocused: Swift.Bool, isValid: Swift.Bool, isDisabled: Swift.Bool = false, margins: EffectiveProcessesSDK.Margins? = nil) -> some SwiftUICore.View
   
@@ -2036,6 +2124,12 @@ extension SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public func edNgAssistiveTextStyle(assistiveTextStates: EffectiveProcessesSDK.InputAssistiveText?, platform: Swift.String = "ios", isFocused: Swift.Bool, isValid: Swift.Bool) -> some SwiftUICore.View
   
   @_Concurrency.MainActor @preconcurrency public func edNgFeedbackInputCardFrame(state: EffectiveProcessesSDK.InputFeedbackState, platform: Swift.String? = nil) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func edNgDirectTextInputLabelStyle(textStyles: EffectiveProcessesSDK.TextStyles?, platform: Swift.String = "ios", isFocused: Swift.Bool, isValid: Swift.Bool, margins: EffectiveProcessesSDK.Margins? = nil) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func edNgCalendarIconStyle(iconStyles: EffectiveProcessesSDK.CalendarIconStates?, platform: Swift.String = "ios", isFocused: Swift.Bool, isValid: Swift.Bool) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func edNgTerminateButtonIconStyle(iconStyles: EffectiveProcessesSDK.ButtonProperties?, platform: Swift.String = "ios") -> some SwiftUICore.View
   
 }
 public struct EdNgCornerShape : SwiftUICore.Shape {
@@ -2424,6 +2518,55 @@ public protocol MultiSelectProvider {
   @_Concurrency.MainActor @preconcurrency public func updateUIViewController(_ uiViewController: UIKit.UIViewController, context: EffectiveProcessesSDK.NonAnimatedUIKitModal<Presented>.Context)
   public typealias Body = Swift.Never
   public typealias UIViewControllerType = UIKit.UIViewController
+}
+public protocol NumericProvider {
+  var stepper: (Swift.String, Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.NumericStepperFieldModel, UIKit.UIView) { get set }
+}
+@_Concurrency.MainActor @preconcurrency public struct NumericStepperField : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
+  public typealias Model = EffectiveProcessesSDK.NumericStepperFieldModel
+  @SwiftUICore.ObservedObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.NumericStepperFieldModel {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  @_Concurrency.MainActor @preconcurrency public var $model: SwiftUICore.ObservedObject<EffectiveProcessesSDK.NumericStepperFieldModel>.Wrapper {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public init(label: Swift.String, model: EffectiveProcessesSDK.NumericStepperFieldModel, buttonShape: EffectiveProcessesSDK.StepperButtonShape = .circle)
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK19NumericStepperFieldV4bodyQrvp", 0) __
+}
+public enum StepperButtonShape {
+  case circle, rectangle
+  public static func == (a: EffectiveProcessesSDK.StepperButtonShape, b: EffectiveProcessesSDK.StepperButtonShape) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public class NumericStepperFieldModel : Foundation.ObservableObject, EffectiveProcessesSDK.ViewModelState {
+  @Combine.Published @_projectedValueProperty($value) public var value: Swift.Int {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $value: Combine.Published<Swift.Int>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public init(value: Swift.Int?, min: Swift.Int, max: Swift.Int, isMandatory: Swift.Bool)
+  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public func increment()
+  public func decrement()
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
 }
 public class PhoneNumberFieldModel : Foundation.ObservableObject, EffectiveProcessesSDK.ViewModelState {
   public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
@@ -3637,6 +3780,9 @@ extension EffectiveProcessesSDK.EdNgInputLabelStyleModifier : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgInputFieldBoxStyle : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgInputFeedbackStyle : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgAssistiveTextStyle : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgDirectTextInputLabelStyleModifier : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgCalendarIconStyleModifier : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgTerminateButtonIconStyleModifier : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgBorderView : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgSliderTrackStyle : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgSliderProgressStyle : Swift.Sendable {}
@@ -3659,6 +3805,9 @@ extension EffectiveProcessesSDK.LogLevel : Swift.Hashable {}
 extension EffectiveProcessesSDK.LogLevel : Swift.RawRepresentable {}
 extension EffectiveProcessesSDK.MessagesView : Swift.Sendable {}
 extension EffectiveProcessesSDK.NonAnimatedUIKitModal : Swift.Sendable {}
+extension EffectiveProcessesSDK.NumericStepperField : Swift.Sendable {}
+extension EffectiveProcessesSDK.StepperButtonShape : Swift.Equatable {}
+extension EffectiveProcessesSDK.StepperButtonShape : Swift.Hashable {}
 extension EffectiveProcessesSDK.EDLayout : Swift.Equatable {}
 extension EffectiveProcessesSDK.EDLayout : Swift.Hashable {}
 extension EffectiveProcessesSDK.EDLayout : Swift.RawRepresentable {}
