@@ -1074,8 +1074,9 @@ public class ValueDisplay : Swift.Codable {
 }
 public class TooltipIcon : Swift.Codable {
   final public let color: EffectiveProcessesSDK.PlatformAppearance?
+  final public let size: EffectiveProcessesSDK.SizeValues?
   final public let margin: EffectiveProcessesSDK.Margins?
-  public init(color: EffectiveProcessesSDK.PlatformAppearance?, margin: EffectiveProcessesSDK.Margins?)
+  public init(color: EffectiveProcessesSDK.PlatformAppearance?, size: EffectiveProcessesSDK.SizeValues?, margin: EffectiveProcessesSDK.Margins?)
   public static var empty: EffectiveProcessesSDK.TooltipIcon {
     get
   }
@@ -1892,6 +1893,93 @@ public struct CalendarOverlay : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+public class EPStyleNumericStepper : Swift.Codable {
+  final public let components: EffectiveProcessesSDK.NumericStepperComponentsInput?
+  public init(components: EffectiveProcessesSDK.NumericStepperComponentsInput?)
+  public static var empty: EffectiveProcessesSDK.EPStyleNumericStepper {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class NumericStepperComponentsInput : Swift.Codable {
+  final public let uiComponents: EffectiveProcessesSDK.NumericStepperUIComponentsInput?
+  public init(uiComponents: EffectiveProcessesSDK.NumericStepperUIComponentsInput?)
+  public static var empty: EffectiveProcessesSDK.NumericStepperComponentsInput {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class NumericStepperUIComponentsInput : Swift.Codable {
+  public var numericStepper: EffectiveProcessesSDK.NumericStepperComponent?
+  public init(numericStepper: EffectiveProcessesSDK.NumericStepperComponent?)
+  public static var empty: EffectiveProcessesSDK.NumericStepperUIComponentsInput {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public struct NumericStepperComponent : Swift.Codable {
+  public let label: EffectiveProcessesSDK.InputLabelStates?
+  public let tooltipIcon: EffectiveProcessesSDK.TooltipIcon?
+  public let valueDisplay: EffectiveProcessesSDK.ValueDisplayStates?
+  public let incrementButton: EffectiveProcessesSDK.StepperButtonStates?
+  public let decrementButton: EffectiveProcessesSDK.StepperButtonStates?
+  public static var empty: EffectiveProcessesSDK.NumericStepperComponent {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ValueDisplayStates : Swift.Codable {
+  public let defaultState: EffectiveProcessesSDK.ValueDisplayState?
+  public let disabledState: EffectiveProcessesSDK.ValueDisplayState?
+  public static var empty: EffectiveProcessesSDK.ValueDisplayStates {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ValueDisplayState : Swift.Codable {
+  public let text: EffectiveProcessesSDK.TextStyles?
+  public let backgroundColor: EffectiveProcessesSDK.PlatformAppearance?
+  public let border: EffectiveProcessesSDK.Border?
+  public let cornerRadius: EffectiveProcessesSDK.CornerRadius?
+  public let padding: EffectiveProcessesSDK.Margins?
+  public let margin: EffectiveProcessesSDK.Margins?
+  public static var empty: EffectiveProcessesSDK.ValueDisplayState {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct StepperButtonStates : Swift.Codable {
+  public let defaultState: EffectiveProcessesSDK.StepperButtonState?
+  public let limitReachedState: EffectiveProcessesSDK.StepperButtonState?
+  public let disabledState: EffectiveProcessesSDK.StepperButtonState?
+  public static var empty: EffectiveProcessesSDK.StepperButtonStates {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct StepperButtonState : Swift.Codable {
+  public let text: EffectiveProcessesSDK.TextStyles?
+  public let backgroundColor: EffectiveProcessesSDK.PlatformAppearance?
+  public let border: EffectiveProcessesSDK.Border?
+  public let cornerRadius: EffectiveProcessesSDK.CornerRadius?
+  public let padding: EffectiveProcessesSDK.Margins?
+  public let margin: EffectiveProcessesSDK.Margins?
+  public static var empty: EffectiveProcessesSDK.StepperButtonState {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
 @_Concurrency.MainActor @preconcurrency public struct DesignTokenToggleStyle : SwiftUI.ToggleStyle {
   @_Concurrency.MainActor @preconcurrency public func makeBody(configuration: EffectiveProcessesSDK.DesignTokenToggleStyle.Configuration) -> some SwiftUICore.View
   
@@ -1955,6 +2043,14 @@ public struct EPJourney {
   public static var screen: (EffectiveProcessesSDK.ProcessInstance) -> ((any EffectiveProcessesSDK.EPOuterRouter)?) -> EffectiveProcessesSDK.Screen {
     get
   }
+}
+@_hasMissingDesignatedInitializers public class EPLocalization {
+  public static let shared: EffectiveProcessesSDK.EPLocalization
+  public func terminateCloseTitle() -> Swift.String
+  public func terminateCloseMessage() -> Swift.String
+  public func terminateActionTitle() -> Swift.String
+  public func closeActionTitle() -> Swift.String
+  @objc deinit
 }
 public typealias InAppResultBlock = (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void
 public typealias RequestBlock = (Swift.String, Swift.String, Foundation.Data?, @escaping EffectiveProcessesSDK.InAppResultBlock) -> Swift.Void
@@ -2130,6 +2226,32 @@ extension SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public func edNgCalendarIconStyle(iconStyles: EffectiveProcessesSDK.CalendarIconStates?, platform: Swift.String = "ios", isFocused: Swift.Bool, isValid: Swift.Bool) -> some SwiftUICore.View
   
   @_Concurrency.MainActor @preconcurrency public func edNgTerminateButtonIconStyle(iconStyles: EffectiveProcessesSDK.ButtonProperties?, platform: Swift.String = "ios") -> some SwiftUICore.View
+  
+}
+@_Concurrency.MainActor @preconcurrency public struct EdNgNumericStepperLabelStyle : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public init(labelStates: EffectiveProcessesSDK.InputLabelStates?, platform: Swift.String, isFocused: Swift.Bool, isValid: Swift.Bool, isDisabled: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgNumericStepperLabelStyle.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK28EdNgNumericStepperLabelStyleV4body7contentQr7SwiftUI21_ViewModifier_ContentVyACG_tF", 0) __
+}
+@_Concurrency.MainActor @preconcurrency public struct EdNgNumericStepperValueDisplayStyle : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public init(states: EffectiveProcessesSDK.ValueDisplayStates?, platform: Swift.String, isDisabled: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgNumericStepperValueDisplayStyle.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK35EdNgNumericStepperValueDisplayStyleV4body7contentQr7SwiftUI21_ViewModifier_ContentVyACG_tF", 0) __
+}
+@_Concurrency.MainActor @preconcurrency public struct EdNgNumericStepperButtonStyle : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public init(states: EffectiveProcessesSDK.StepperButtonStates?, platform: Swift.String, isDisabled: Swift.Bool, isLimitReached: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgNumericStepperButtonStyle.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK29EdNgNumericStepperButtonStyleV4body7contentQr7SwiftUI21_ViewModifier_ContentVyACG_tF", 0) __
+}
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func edNgNumericStepperLabelStyle(labelStates: EffectiveProcessesSDK.InputLabelStates?, platform: Swift.String = "ios", isFocused: Swift.Bool = false, isValid: Swift.Bool = true, isDisabled: Swift.Bool = false) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func edNgNumericStepperValueDisplayStyle(states: EffectiveProcessesSDK.ValueDisplayStates?, platform: Swift.String = "ios", isDisabled: Swift.Bool = false) -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func edNgNumericStepperButtonStyle(states: EffectiveProcessesSDK.StepperButtonStates?, platform: Swift.String = "ios", isDisabled: Swift.Bool = false, isLimitReached: Swift.Bool = false) -> some SwiftUICore.View
   
 }
 public struct EdNgCornerShape : SwiftUICore.Shape {
@@ -2557,6 +2679,18 @@ public class NumericStepperFieldModel : Foundation.ObservableObject, EffectivePr
     _modify
   }
   public var $value: Combine.Published<Swift.Int>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($isDisabled) public var isDisabled: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $isDisabled: Combine.Published<Swift.Bool>.Publisher {
     get
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
@@ -3783,6 +3917,9 @@ extension EffectiveProcessesSDK.EdNgAssistiveTextStyle : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgDirectTextInputLabelStyleModifier : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgCalendarIconStyleModifier : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgTerminateButtonIconStyleModifier : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgNumericStepperLabelStyle : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgNumericStepperValueDisplayStyle : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgNumericStepperButtonStyle : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgBorderView : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgSliderTrackStyle : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgSliderProgressStyle : Swift.Sendable {}

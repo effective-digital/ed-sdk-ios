@@ -38,15 +38,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		M4CemXH//pQzV7s2WYZWoXsIBLA=
+		E8B+lfI9GgZQmUbDbAuS95bkP80=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		kwzlTo4+nTuYHnCsS0JWRgtJ9Cs=
+		0ilZ4bFNvog0wuqtQqSsG3/A0gk=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		u1b8xnVQFMnuHuYtZ1PFO3NF2D0=
+		YK0VhTZbIUpvZLWMkrFUZfFrB/g=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -54,16 +54,52 @@
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		u1b8xnVQFMnuHuYtZ1PFO3NF2D0=
+		YK0VhTZbIUpvZLWMkrFUZfFrB/g=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		0w+LVCp/C60r3Ok1xECQIql+vk4=
+		9naFDaxIPjrZCAjupCgI4bVTER4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		Cmsg1AMceFunekYFh7T9QQ6ABew=
 		</data>
+		<key>bs-BA.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Kza/9up8lNYsmQlv8/dQ0ClJdkU=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>de-DE.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			dMt7TFmrAH+9svKNctUtVLTLPI4=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>en-US.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZMXHCbRLfeHShzF1Cw+JbICv+Fk=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>hr-HR.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			8TNkr5ioWUbDxzwRQcXB05FYz+Y=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 		<key>placeholder.png</key>
 		<data>
 		Fss7qDolpeIz6E73VPSyNDcVIH4=
@@ -72,6 +108,33 @@
 		<data>
 		majM564seBqWZ9Dg6dLyXE2USBI=
 		</data>
+		<key>sl-SI.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			EK++2pgi0BOuzHszBdY89RqncWQ=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>sr-Cyrl-RS.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			z4j2zQfVt6s6jhtJxjotw8ByWuc=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>sr-Latn-RS.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			iDs9lJNYxCRoDRfnNZ57/TzetqA=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
 	</dict>
 	<key>files2</key>
 	<dict>
@@ -135,14 +198,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bkRCVrDZB7/rDBXEhVsYKZqDPVNBEyeEpBPPth2+VEI=
+			VBi2yf6rouXn35xU6kWp9G3MIxI+ax3riVFHC0z9mSA=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bN6LVCf0h/SwlsSf4xn33wOBCZPvquQGr+q9ATYXIFQ=
+			Jk5WpqT18NL0ZtbpIQ3Ucn88bICBIX0lGO88YTB3Pcs=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -156,14 +219,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bN6LVCf0h/SwlsSf4xn33wOBCZPvquQGr+q9ATYXIFQ=
+			Jk5WpqT18NL0ZtbpIQ3Ucn88bICBIX0lGO88YTB3Pcs=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			rmwU+uDjuFhEhOcQpKhTVivgPhbSxm3/ySBNZvt1POo=
+			c/LmDyyAM+DpqUfXn4Z7SHHM8YZe14IZRY793K41gj8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -172,6 +235,42 @@
 			<data>
 			DW4eVkscxpCynKntaGmCSdqZ4ZJFyB1E38rLeixZPPw=
 			</data>
+		</dict>
+		<key>bs-BA.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			v0qOPdKTwMJu5vrgOr3rx5MgD5N96MZT8Qo8NzksR0k=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>de-DE.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			AI0DCmUUzHQLOFc6mo0LssWyeUMMSVAFiZIvzLY/52Y=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>en-US.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			f/ia0n5vuUHWxHzmXlETtBcT4ASKja6aOMGUHuyW/zI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>hr-HR.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			3oAbhsmOZJsOF1WQ2feIgROju7jawF7+0dSk0GYy0RM=
+			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
 		<key>placeholder.png</key>
 		<dict>
@@ -186,6 +285,33 @@
 			<data>
 			jdyPuzm82zKDMKqWtZdlU+k+HzydU4J3YK1C3ml3tiM=
 			</data>
+		</dict>
+		<key>sl-SI.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rDq05WJAEcwtHSJeYVZrR7GlROx61C7v6s9ts0w0+uI=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>sr-Cyrl-RS.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DL01KKWY/xMm1PvqSGankZMNMEBt9DeYcFYTcI1m8hE=
+			</data>
+			<key>optional</key>
+			<true/>
+		</dict>
+		<key>sr-Latn-RS.lproj/Localizable.strings</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			gRiWoQvOixe2E7caiGxTMPZpdqasTD5JCjaHfVRFYlA=
+			</data>
+			<key>optional</key>
+			<true/>
 		</dict>
 	</dict>
 	<key>rules</key>
