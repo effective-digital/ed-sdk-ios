@@ -3543,6 +3543,7 @@ extension UIKit.UIApplication {
   @_Concurrency.MainActor @preconcurrency public var topMostController: UIKit.UIViewController? {
     get
   }
+  @_Concurrency.MainActor @preconcurrency public func topMostControllerWhenActive() async -> UIKit.UIViewController?
 }
 extension UIKit.UICollectionView {
   @_Concurrency.MainActor @preconcurrency public func configureForSneakPeekingDelegate(scrollDirection: UIKit.UICollectionView.ScrollDirection = .horizontal)

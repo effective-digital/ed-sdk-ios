@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		jTb/bR8bJEV3QDeyQ0zE9PrhifM=
+		rrmckwPExbRqKRVjuU1+3IzHpVU=
 		</data>
 		<key>Config.plist</key>
 		<data>
@@ -42,11 +42,11 @@
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		0ilZ4bFNvog0wuqtQqSsG3/A0gk=
+		vxBcn/N71MaubqFv/TMTMmbGVOU=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		YK0VhTZbIUpvZLWMkrFUZfFrB/g=
+		Suhyy8ENwCobZehZY6BYnZ30E5Q=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -54,11 +54,11 @@
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		YK0VhTZbIUpvZLWMkrFUZfFrB/g=
+		Suhyy8ENwCobZehZY6BYnZ30E5Q=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		9naFDaxIPjrZCAjupCgI4bVTER4=
+		kzlPBpHNM3rGFv9y0wGUs2YLdYI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -142,7 +142,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eQfDkIvrCjoXV+KWdirwPqOJlFC2tHFRNV6Nq/C9vZk=
+			SZdX6iNY2E9xRFTB1ZN65mweYJwh9aneg2bxXNOt95k=
 			</data>
 		</dict>
 		<key>Config.plist</key>
@@ -198,14 +198,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VBi2yf6rouXn35xU6kWp9G3MIxI+ax3riVFHC0z9mSA=
+			6vN6dJ1ubojKNnfMo7boQ7Z9uUtCAW0CwF8igr3AgDo=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Jk5WpqT18NL0ZtbpIQ3Ucn88bICBIX0lGO88YTB3Pcs=
+			Ag8W40mf5eDbHKkAlUciQZrW+WgwsAWFDB9LwtVmosA=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -219,14 +219,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Jk5WpqT18NL0ZtbpIQ3Ucn88bICBIX0lGO88YTB3Pcs=
+			Ag8W40mf5eDbHKkAlUciQZrW+WgwsAWFDB9LwtVmosA=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			c/LmDyyAM+DpqUfXn4Z7SHHM8YZe14IZRY793K41gj8=
+			azgKA+D7DaVLFaa3FNdYM/ti+zwgBBltStwna4WEKZM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
