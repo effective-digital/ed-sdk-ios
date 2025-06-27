@@ -315,6 +315,88 @@ extension SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public func bottomSheetConfiguration(_ configuration: EffectiveProcessesSDK.BottomSheetConfiguration) -> some SwiftUICore.View
   
 }
+public protocol BottomSheetDropdownProvider {
+  var bottomSheetDropdownView: (Swift.String, Swift.String, [EffectiveProcessesSDK.Option], Swift.String, Swift.Bool, Swift.String?) -> (EffectiveProcessesSDK.BottomSheetDropdownModel, UIKit.UIView) { get set }
+}
+open class BottomSheetDropdownModel : EffectiveProcessesSDK.DropDownListModel {
+  @Combine.Published @_projectedValueProperty($validationMessage) public var validationMessage: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $validationMessage: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($isError) public var isError: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $isError: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($isDisabled) public var isDisabled: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $isDisabled: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($isMandatory) public var isMandatory: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $isMandatory: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($tooltipText) public var tooltipText: Swift.String? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $tooltipText: Combine.Published<Swift.String?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public var errorMessage: Swift.String
+  public init(prompt: Swift.String, options: [EffectiveProcessesSDK.Option], selection: EffectiveProcessesSDK.Option?, isMandatory: Swift.Bool = false, tooltipText: Swift.String? = nil, errorMessage: Swift.String = "")
+  public func validateSelection()
+  public func setDisabled(_ disabled: Swift.Bool)
+  public func setError(_ error: Swift.Bool, message: Swift.String = "")
+  public func clearValidation()
+  public func reset()
+  @objc deinit
+}
+extension EffectiveProcessesSDK.BottomSheetDropdownModel {
+  public func setErrorState(message: Swift.String)
+  public func setSuccessState(message: Swift.String)
+  public func setDisabledState()
+  public func setEnabledState()
+  public func updateOptions(_ newOptions: [EffectiveProcessesSDK.Option])
+  public func addOption(_ option: EffectiveProcessesSDK.Option)
+  public func removeOption(_ option: EffectiveProcessesSDK.Option)
+}
 @_Concurrency.MainActor @preconcurrency public struct BottomSheetView<Content> : EffectiveProcessesSDK.DismissableView where Content : SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public var onDismiss: () -> Swift.Void
   @_Concurrency.MainActor @preconcurrency public init(configuration: EffectiveProcessesSDK.BottomSheetConfiguration? = nil, onDismiss: @escaping () -> Swift.Void = {
@@ -1300,6 +1382,7 @@ public struct UIComponents : Swift.Codable {
   public var radioButtonFk: EffectiveProcessesSDK.RadioButtonFk?
   public var multiSelectCheckbox: EffectiveProcessesSDK.MultiSelectCheckbox?
   public var consentCheckbox: EffectiveProcessesSDK.ConsentCheckbox?
+  public var bottomSheetDropdown: EffectiveProcessesSDK.BottomSheetDropdownComponent?
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -1489,6 +1572,76 @@ public struct MultiSelectIndicatorProperties : Swift.Codable {
   public var margin: EffectiveProcessesSDK.Margins?
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+extension EffectiveProcessesSDK.RadioButtonFk {
+  public static var empty: EffectiveProcessesSDK.RadioButtonFk {
+    get
+  }
+}
+extension EffectiveProcessesSDK.RadioButtonLabelState {
+  public static var empty: EffectiveProcessesSDK.RadioButtonLabelState {
+    get
+  }
+}
+extension EffectiveProcessesSDK.RadioOptionsCard {
+  public static var empty: EffectiveProcessesSDK.RadioOptionsCard {
+    get
+  }
+}
+extension EffectiveProcessesSDK.RadioOption {
+  public static var empty: EffectiveProcessesSDK.RadioOption {
+    get
+  }
+}
+extension EffectiveProcessesSDK.RadioOptionLabelState {
+  public static var empty: EffectiveProcessesSDK.RadioOptionLabelState {
+    get
+  }
+}
+extension EffectiveProcessesSDK.RadioOptionIndicatorState {
+  public static var empty: EffectiveProcessesSDK.RadioOptionIndicatorState {
+    get
+  }
+}
+extension EffectiveProcessesSDK.RadioIndicatorState {
+  public static var empty: EffectiveProcessesSDK.RadioIndicatorState {
+    get
+  }
+}
+extension EffectiveProcessesSDK.MultiSelectCheckbox {
+  public static var empty: EffectiveProcessesSDK.MultiSelectCheckbox {
+    get
+  }
+}
+extension EffectiveProcessesSDK.MultiSelectCheckboxLabelState {
+  public static var empty: EffectiveProcessesSDK.MultiSelectCheckboxLabelState {
+    get
+  }
+}
+extension EffectiveProcessesSDK.MultiSelectOptionsCard {
+  public static var empty: EffectiveProcessesSDK.MultiSelectOptionsCard {
+    get
+  }
+}
+extension EffectiveProcessesSDK.MultiSelectOption {
+  public static var empty: EffectiveProcessesSDK.MultiSelectOption {
+    get
+  }
+}
+extension EffectiveProcessesSDK.MultiSelectLabelState {
+  public static var empty: EffectiveProcessesSDK.MultiSelectLabelState {
+    get
+  }
+}
+extension EffectiveProcessesSDK.MultiSelectIndicatorState {
+  public static var empty: EffectiveProcessesSDK.MultiSelectIndicatorState {
+    get
+  }
+}
+extension EffectiveProcessesSDK.MultiSelectIndicatorProperties {
+  public static var empty: EffectiveProcessesSDK.MultiSelectIndicatorProperties {
+    get
+  }
 }
 public struct ConsentCheckbox : Swift.Codable {
   public var consentOptionsCard: EffectiveProcessesSDK.ConsentOptionsCard?
@@ -2008,7 +2161,8 @@ public class EPStyleComponent : Swift.Codable {
   final public let productCard: EffectiveProcessesSDK.EPStyleProductCard?
   final public let datePicker: EffectiveProcessesSDK.EPStyleDatePicker?
   final public let numericStepper: EffectiveProcessesSDK.EPStyleNumericStepper?
-  public init(input: EffectiveProcessesSDK.EPStyleInput? = nil, slider: EffectiveProcessesSDK.EPStyleSlider? = nil, checkboxBoolean: EffectiveProcessesSDK.EPStyleCheckboxBoolean? = nil, productCard: EffectiveProcessesSDK.EPStyleProductCard? = nil, datePicker: EffectiveProcessesSDK.EPStyleDatePicker? = nil, numericStepper: EffectiveProcessesSDK.EPStyleNumericStepper? = nil)
+  final public let bottomSheetDropdown: EffectiveProcessesSDK.EPStyleBottomSheetDropdown?
+  public init(input: EffectiveProcessesSDK.EPStyleInput? = nil, slider: EffectiveProcessesSDK.EPStyleSlider? = nil, checkboxBoolean: EffectiveProcessesSDK.EPStyleCheckboxBoolean? = nil, productCard: EffectiveProcessesSDK.EPStyleProductCard? = nil, datePicker: EffectiveProcessesSDK.EPStyleDatePicker? = nil, numericStepper: EffectiveProcessesSDK.EPStyleNumericStepper? = nil, bottomSheetDropdown: EffectiveProcessesSDK.EPStyleBottomSheetDropdown? = nil)
   public static var empty: EffectiveProcessesSDK.EPStyleComponent {
     get
   }
@@ -2035,6 +2189,204 @@ extension EffectiveProcessesSDK.EPStyleComponent {
   public var safeNumericStepper: EffectiveProcessesSDK.EPStyleNumericStepper {
     get
   }
+  public var safeBottomSheetDropdown: EffectiveProcessesSDK.EPStyleBottomSheetDropdown {
+    get
+  }
+}
+public class EPStyleBottomSheetDropdown : Swift.Codable {
+  final public let components: EffectiveProcessesSDK.BottomSheetDropdownComponentsInput?
+  public init(components: EffectiveProcessesSDK.BottomSheetDropdownComponentsInput?)
+  public static var empty: EffectiveProcessesSDK.EPStyleBottomSheetDropdown {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetDropdownComponentsInput : Swift.Codable {
+  final public let uiComponents: EffectiveProcessesSDK.BottomSheetDropdownUIComponentsInput?
+  public init(uiComponents: EffectiveProcessesSDK.BottomSheetDropdownUIComponentsInput?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetDropdownComponentsInput {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetDropdownUIComponentsInput : Swift.Codable {
+  public var bottomSheetDropdown: EffectiveProcessesSDK.BottomSheetDropdownComponent?
+  public init(bottomSheetDropdown: EffectiveProcessesSDK.BottomSheetDropdownComponent?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetDropdownUIComponentsInput {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetDropdownComponent : Swift.Codable {
+  final public let label: EffectiveProcessesSDK.BottomSheetDropdownLabelStates?
+  final public let tooltipIcon: EffectiveProcessesSDK.TooltipIcon?
+  final public let fieldIcon: EffectiveProcessesSDK.BottomSheetDropdownFieldIconStates?
+  final public let inputBox: EffectiveProcessesSDK.InputBoxStates?
+  final public let feedbackArea: EffectiveProcessesSDK.InputFeedbackArea?
+  final public let bottomSheetOverlay: EffectiveProcessesSDK.BottomSheetOverlay?
+  public init(label: EffectiveProcessesSDK.BottomSheetDropdownLabelStates?, tooltipIcon: EffectiveProcessesSDK.TooltipIcon?, fieldIcon: EffectiveProcessesSDK.BottomSheetDropdownFieldIconStates?, inputBox: EffectiveProcessesSDK.InputBoxStates?, feedbackArea: EffectiveProcessesSDK.InputFeedbackArea?, bottomSheetOverlay: EffectiveProcessesSDK.BottomSheetOverlay?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetDropdownComponent {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetDropdownLabelStates : Swift.Codable {
+  final public let defaultState: EffectiveProcessesSDK.TextBlock?
+  final public let errorState: EffectiveProcessesSDK.TextBlock?
+  final public let disabledState: EffectiveProcessesSDK.TextBlock?
+  public init(defaultState: EffectiveProcessesSDK.TextBlock?, errorState: EffectiveProcessesSDK.TextBlock?, disabledState: EffectiveProcessesSDK.TextBlock?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetDropdownLabelStates {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetDropdownFieldIconStates : Swift.Codable {
+  final public let defaultState: EffectiveProcessesSDK.BottomSheetDropdownFieldIconState?
+  final public let errorState: EffectiveProcessesSDK.BottomSheetDropdownFieldIconState?
+  final public let disabledState: EffectiveProcessesSDK.BottomSheetDropdownFieldIconState?
+  public init(defaultState: EffectiveProcessesSDK.BottomSheetDropdownFieldIconState?, errorState: EffectiveProcessesSDK.BottomSheetDropdownFieldIconState?, disabledState: EffectiveProcessesSDK.BottomSheetDropdownFieldIconState?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetDropdownFieldIconStates {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetDropdownFieldIconState : Swift.Codable {
+  final public let color: EffectiveProcessesSDK.PlatformAppearance?
+  final public let size: EffectiveProcessesSDK.SizeValues?
+  final public let margin: EffectiveProcessesSDK.Margins?
+  public init(color: EffectiveProcessesSDK.PlatformAppearance?, size: EffectiveProcessesSDK.SizeValues?, margin: EffectiveProcessesSDK.Margins?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetDropdownFieldIconState {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetOverlay : Swift.Codable {
+  final public let backgroundColor: EffectiveProcessesSDK.PlatformAppearance?
+  final public let header: EffectiveProcessesSDK.BottomSheetOverlayHeader?
+  final public let body: EffectiveProcessesSDK.BottomSheetOverlayBody?
+  public init(backgroundColor: EffectiveProcessesSDK.PlatformAppearance?, header: EffectiveProcessesSDK.BottomSheetOverlayHeader?, body: EffectiveProcessesSDK.BottomSheetOverlayBody?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetOverlay {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetOverlayHeader : Swift.Codable {
+  final public let text: EffectiveProcessesSDK.TextStyles?
+  final public let margin: EffectiveProcessesSDK.Margins?
+  public init(text: EffectiveProcessesSDK.TextStyles?, margin: EffectiveProcessesSDK.Margins?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetOverlayHeader {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetOverlayBody : Swift.Codable {
+  final public let bottomSheetOptionsCard: EffectiveProcessesSDK.BottomSheetOptionsCard?
+  public init(bottomSheetOptionsCard: EffectiveProcessesSDK.BottomSheetOptionsCard?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetOverlayBody {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetOptionsCard : Swift.Codable {
+  final public let backgroundColor: EffectiveProcessesSDK.PlatformAppearance?
+  final public let border: EffectiveProcessesSDK.Border?
+  final public let cornerRadius: EffectiveProcessesSDK.CornerRadius?
+  final public let padding: EffectiveProcessesSDK.Margins?
+  final public let margin: EffectiveProcessesSDK.Margins?
+  final public let divider: EffectiveProcessesSDK.BorderProperties?
+  final public let bottomSheetOption: EffectiveProcessesSDK.BottomSheetOption?
+  public init(backgroundColor: EffectiveProcessesSDK.PlatformAppearance?, border: EffectiveProcessesSDK.Border?, cornerRadius: EffectiveProcessesSDK.CornerRadius?, padding: EffectiveProcessesSDK.Margins?, margin: EffectiveProcessesSDK.Margins?, divider: EffectiveProcessesSDK.BorderProperties?, bottomSheetOption: EffectiveProcessesSDK.BottomSheetOption?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetOptionsCard {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetOption : Swift.Codable {
+  final public let label: EffectiveProcessesSDK.BottomSheetOptionLabelStates?
+  final public let activeIndicator: EffectiveProcessesSDK.BottomSheetActiveIndicator?
+  public init(label: EffectiveProcessesSDK.BottomSheetOptionLabelStates?, activeIndicator: EffectiveProcessesSDK.BottomSheetActiveIndicator?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetOption {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetOptionLabelStates : Swift.Codable {
+  final public let defaultState: EffectiveProcessesSDK.TextBlock?
+  final public let activeState: EffectiveProcessesSDK.TextBlock?
+  public init(defaultState: EffectiveProcessesSDK.TextBlock?, activeState: EffectiveProcessesSDK.TextBlock?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetOptionLabelStates {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class BottomSheetActiveIndicator : Swift.Codable {
+  final public let size: EffectiveProcessesSDK.SizeValues?
+  final public let color: EffectiveProcessesSDK.PlatformAppearance?
+  final public let margin: EffectiveProcessesSDK.Margins?
+  public init(size: EffectiveProcessesSDK.SizeValues?, color: EffectiveProcessesSDK.PlatformAppearance?, margin: EffectiveProcessesSDK.Margins?)
+  public static var empty: EffectiveProcessesSDK.BottomSheetActiveIndicator {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class DesignTokenLoader {
+  public static func loadDesignTokens<T>(for resourceName: Swift.String, as type: T.Type) -> T? where T : Swift.Decodable, T : Swift.Encodable
+  @objc deinit
+}
+extension EffectiveProcessesSDK.DesignTokenLoader {
+  @discardableResult
+  public static func registerDesignTokens<T>(for resourceName: Swift.String, as type: T.Type, emptyToken: T) -> Swift.Bool where T : Swift.Decodable, T : Swift.Encodable
+  public static func loadBottomSheetDropdownDesignTokens() -> EffectiveProcessesSDK.EPStyleBottomSheetDropdown?
+  public static func loadInputDesignTokens() -> EffectiveProcessesSDK.EPStyleInput?
+  public static func loadSliderDesignTokens() -> EffectiveProcessesSDK.EPStyleSlider?
+  public static func loadCheckboxDesignTokens() -> EffectiveProcessesSDK.EPStyleCheckboxBoolean?
+  public static func loadProductCardDesignTokens() -> EffectiveProcessesSDK.EPStyleProductCard?
+  public static func loadDatePickerDesignTokens() -> EffectiveProcessesSDK.EPStyleDatePicker?
+  public static func loadNumericStepperDesignTokens() -> EffectiveProcessesSDK.EPStyleNumericStepper?
+}
+extension EffectiveProcessesSDK.DesignTokenLoader {
+  @discardableResult
+  public static func registerBottomSheetDropdownDesignTokens() -> Swift.Bool
+  @discardableResult
+  public static func registerInputDesignTokens() -> Swift.Bool
+  @discardableResult
+  public static func registerSliderDesignTokens() -> Swift.Bool
+  @discardableResult
+  public static func registerCheckboxDesignTokens() -> Swift.Bool
+  @discardableResult
+  public static func registerProductCardDesignTokens() -> Swift.Bool
+  @discardableResult
+  public static func registerDatePickerDesignTokens() -> Swift.Bool
+  @discardableResult
+  public static func registerNumericStepperDesignTokens() -> Swift.Bool
 }
 @_Concurrency.MainActor @preconcurrency public struct DesignTokenToggleStyle : SwiftUI.ToggleStyle {
   @_Concurrency.MainActor @preconcurrency public func makeBody(configuration: EffectiveProcessesSDK.DesignTokenToggleStyle.Configuration) -> some SwiftUICore.View
@@ -2207,6 +2559,64 @@ public class EPUseCaseDefaultImpl : EffectiveProcessesSDK.EPUseCase {
   public func dismissProcessInstance(completion: (() -> Swift.Void)? = nil)
   @objc deinit
 }
+@_Concurrency.MainActor @preconcurrency public struct EdNgMarginStyleModifier : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public init(margins: EffectiveProcessesSDK.Margins?, platform: Swift.String = "ios")
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgMarginStyleModifier.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK23EdNgMarginStyleModifierV4body7contentQr7SwiftUI05_ViewH8_ContentVyACG_tF", 0) __
+}
+@_Concurrency.MainActor @preconcurrency public struct EdNgPaddingStyleModifier : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public init(padding: EffectiveProcessesSDK.Margins?, platform: Swift.String = "ios")
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgPaddingStyleModifier.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK24EdNgPaddingStyleModifierV4body7contentQr7SwiftUI05_ViewH8_ContentVyACG_tF", 0) __
+}
+@_Concurrency.MainActor @preconcurrency public struct EdNgCornerRadiusStyleModifier : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public init(cornerRadius: EffectiveProcessesSDK.CornerRadius?, platform: Swift.String = "ios")
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgCornerRadiusStyleModifier.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK29EdNgCornerRadiusStyleModifierV4body7contentQr7SwiftUI05_ViewI8_ContentVyACG_tF", 0) __
+}
+@_Concurrency.MainActor @preconcurrency public struct EdNgDividerStyleModifier : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public init(dividerStyle: EffectiveProcessesSDK.BorderProperties?, platform: Swift.String = "ios")
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgDividerStyleModifier.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK24EdNgDividerStyleModifierV4body7contentQr7SwiftUI05_ViewH8_ContentVyACG_tF", 0) __
+}
+@_Concurrency.MainActor @preconcurrency public struct EdNgFieldIconStyleModifier : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public init(iconStyles: EffectiveProcessesSDK.BottomSheetDropdownFieldIconState?, platform: Swift.String = "ios")
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgFieldIconStyleModifier.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK26EdNgFieldIconStyleModifierV4body7contentQr7SwiftUI05_ViewI8_ContentVyACG_tF", 0) __
+}
+@_Concurrency.MainActor @preconcurrency public struct EdNgTooltipIconStyleModifier : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public init(iconStyles: EffectiveProcessesSDK.TooltipIcon?, platform: Swift.String = "ios")
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgTooltipIconStyleModifier.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK28EdNgTooltipIconStyleModifierV4body7contentQr7SwiftUI05_ViewI8_ContentVyACG_tF", 0) __
+}
+@_Concurrency.MainActor @preconcurrency public struct EdNgActiveIndicatorStyleModifier : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public init(indicatorStyles: EffectiveProcessesSDK.BottomSheetActiveIndicator?, platform: Swift.String = "ios")
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgActiveIndicatorStyleModifier.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK32EdNgActiveIndicatorStyleModifierV4body7contentQr7SwiftUI05_ViewI8_ContentVyACG_tF", 0) __
+}
+extension SwiftUICore.View {
+  @_Concurrency.MainActor @preconcurrency public func edNgMarginStyle(margins: EffectiveProcessesSDK.Margins?, platform: Swift.String = "ios") -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func edNgPaddingStyle(padding: EffectiveProcessesSDK.Margins?, platform: Swift.String = "ios") -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func edNgCornerRadiusStyle(cornerRadius: EffectiveProcessesSDK.CornerRadius?, platform: Swift.String = "ios") -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func edNgDividerStyle(dividerStyle: EffectiveProcessesSDK.BorderProperties?, platform: Swift.String = "ios") -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func edNgFieldIconStyle(iconStyles: EffectiveProcessesSDK.BottomSheetDropdownFieldIconState?, platform: Swift.String = "ios") -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func edNgTooltipIconStyle(iconStyles: EffectiveProcessesSDK.TooltipIcon?, platform: Swift.String = "ios") -> some SwiftUICore.View
+  
+  @_Concurrency.MainActor @preconcurrency public func edNgActiveIndicatorStyle(indicatorStyles: EffectiveProcessesSDK.BottomSheetActiveIndicator?, platform: Swift.String = "ios") -> some SwiftUICore.View
+  
+}
 @_Concurrency.MainActor @preconcurrency public struct EdNgCardFrameModifier : SwiftUICore.ViewModifier {
   @_Concurrency.MainActor @preconcurrency public init(border: EffectiveProcessesSDK.Border, cornerRadius: EffectiveProcessesSDK.CornerRadius, platform: Swift.String? = nil, margins: EffectiveProcessesSDK.Margins? = nil)
   @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgCardFrameModifier.Content) -> some SwiftUICore.View
@@ -2233,6 +2643,7 @@ extension UIKit.UIView {
   @_Concurrency.MainActor @preconcurrency public func applyDesignTokens(border: EffectiveProcessesSDK.Border, cornerRadius: EffectiveProcessesSDK.CornerRadius, platform: Swift.String = "ios")
 }
 @_Concurrency.MainActor @preconcurrency public struct EdNgInputLabelStyleModifier : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public init(labelStates: EffectiveProcessesSDK.InputLabelStates?, platform: Swift.String, isFocused: Swift.Bool, isValid: Swift.Bool, isDisabled: Swift.Bool, margins: EffectiveProcessesSDK.Margins?)
   @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgInputLabelStyleModifier.Content) -> some SwiftUICore.View
   
   public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK27EdNgInputLabelStyleModifierV4body7contentQr7SwiftUI05_ViewI8_ContentVyACG_tF", 0) __
@@ -2699,7 +3110,7 @@ public protocol MultiSelectProvider {
   public typealias UIViewControllerType = UIKit.UIViewController
 }
 public protocol NumericProvider {
-  var stepper: (Swift.String, Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.NumericStepperFieldModel, UIKit.UIView) { get set }
+  var stepper: (Swift.String, Swift.String, Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.NumericStepperFieldModel, UIKit.UIView) { get set }
 }
 @_Concurrency.MainActor @preconcurrency public struct NumericStepperField : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
   public typealias Model = EffectiveProcessesSDK.NumericStepperFieldModel
@@ -2713,19 +3124,11 @@ public protocol NumericProvider {
   @_Concurrency.MainActor @preconcurrency public var $model: SwiftUICore.ObservedObject<EffectiveProcessesSDK.NumericStepperFieldModel>.Wrapper {
     get
   }
-  @_Concurrency.MainActor @preconcurrency public init(label: Swift.String, model: EffectiveProcessesSDK.NumericStepperFieldModel, buttonShape: EffectiveProcessesSDK.StepperButtonShape = .circle)
+  @_Concurrency.MainActor @preconcurrency public init(label: Swift.String, model: EffectiveProcessesSDK.NumericStepperFieldModel)
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
   public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK19NumericStepperFieldV4bodyQrvp", 0) __
-}
-public enum StepperButtonShape {
-  case circle, rectangle
-  public static func == (a: EffectiveProcessesSDK.StepperButtonShape, b: EffectiveProcessesSDK.StepperButtonShape) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
 }
 public class NumericStepperFieldModel : Foundation.ObservableObject, EffectiveProcessesSDK.ViewModelState {
   @Combine.Published @_projectedValueProperty($value) public var value: Swift.Int {
@@ -2752,10 +3155,50 @@ public class NumericStepperFieldModel : Foundation.ObservableObject, EffectivePr
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
-  public init(value: Swift.Int?, min: Swift.Int, max: Swift.Int, isMandatory: Swift.Bool)
+  @Combine.Published @_projectedValueProperty($isError) public var isError: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $isError: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($errorMessage) public var errorMessage: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $errorMessage: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($tooltipText) public var tooltipText: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $tooltipText: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public init(value: Swift.Int?, min: Swift.Int, max: Swift.Int, isMandatory: Swift.Bool, tooltipText: Swift.String = "")
   public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
   public func increment()
   public func decrement()
+  public func setErrorState(message: Swift.String)
+  public func clearValidation()
+  public func setDisabledState()
+  public func setEnabledState()
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
@@ -3966,6 +4409,13 @@ extension EffectiveProcessesSDK.IndicatorPosition : Swift.RawRepresentable {}
 extension EffectiveProcessesSDK.DesignTokenToggleStyle : Swift.Sendable {}
 extension EffectiveProcessesSDK.TextStyle : Swift.Sendable {}
 extension EffectiveProcessesSDK.SectionFormTextStyle : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgMarginStyleModifier : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgPaddingStyleModifier : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgCornerRadiusStyleModifier : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgDividerStyleModifier : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgFieldIconStyleModifier : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgTooltipIconStyleModifier : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgActiveIndicatorStyleModifier : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgCardFrameModifier : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgDesign : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgCornerRadiusModifier : Swift.Sendable {}
@@ -4002,8 +4452,6 @@ extension EffectiveProcessesSDK.LogLevel : Swift.RawRepresentable {}
 extension EffectiveProcessesSDK.MessagesView : Swift.Sendable {}
 extension EffectiveProcessesSDK.NonAnimatedUIKitModal : Swift.Sendable {}
 extension EffectiveProcessesSDK.NumericStepperField : Swift.Sendable {}
-extension EffectiveProcessesSDK.StepperButtonShape : Swift.Equatable {}
-extension EffectiveProcessesSDK.StepperButtonShape : Swift.Hashable {}
 extension EffectiveProcessesSDK.EDLayout : Swift.Equatable {}
 extension EffectiveProcessesSDK.EDLayout : Swift.Hashable {}
 extension EffectiveProcessesSDK.EDLayout : Swift.RawRepresentable {}
