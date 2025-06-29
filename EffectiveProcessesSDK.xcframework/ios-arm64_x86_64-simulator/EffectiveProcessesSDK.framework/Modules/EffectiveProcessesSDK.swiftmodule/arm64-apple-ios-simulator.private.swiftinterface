@@ -3117,16 +3117,19 @@ public struct LoggerConfiguration {
   public static var isRemoteLoggingEnabled: Swift.Bool
   public static var batchSize: Swift.Int
   public static var endpointPath: Swift.String
+  public static var maxRetries: Swift.Int
+  public static var retryDelaySeconds: Swift.Double
+  public static var maxBackoffSeconds: Swift.Double
+  public static var jitterFactor: Swift.Double
 }
 public struct Logger {
   public static var minimumLogLevel: EffectiveProcessesSDK.LogLevel
   public static func log(_ message: Any..., level: EffectiveProcessesSDK.LogLevel = Self.minimumLogLevel, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line, isSensitive: Swift.Bool = false)
   public static func initializeLoggingSupport()
+  public static func resetRetryState()
+  public static func getRetryStatus() -> (retryCount: Swift.Int, isUploading: Swift.Bool, timeSinceLastRetry: Foundation.TimeInterval)
+  public static func getRetryStatistics() -> (retryCount: Swift.Int, isUploading: Swift.Bool, timeSinceLastRetry: Foundation.TimeInterval, nextRetryDelay: Foundation.TimeInterval?, bufferSize: Swift.Int, maxRetries: Swift.Int, isRemoteLoggingEnabled: Swift.Bool)
   public static func configureFromResponseHeaders(_ headers: [Swift.AnyHashable : Any])
-}
-public struct AnonymousUploadResponse : Swift.Codable {
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
 }
 @_Concurrency.MainActor @preconcurrency public struct MessagesView : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
   @SwiftUICore.StateObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.MessagesViewModel {
