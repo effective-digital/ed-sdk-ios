@@ -33,7 +33,6 @@ import _AVKit_SwiftUI
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-import os.log
 import os
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class APIClient : ObjectiveC.NSObject, Foundation.URLSessionTaskDelegate {
   public static let shared: EffectiveProcessesSDK.APIClient
@@ -617,8 +616,20 @@ extension Swift.Double {
   }
 }
 open class DatePickerFieldModel : EffectiveProcessesSDK.ViewModelState {
+  @Combine.Published @_projectedValueProperty($tooltipText) public var tooltipText: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $tooltipText: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
   open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
-  public init(selectedDate: Foundation.Date?, minDate: Foundation.Date?, maxDate: Foundation.Date?, defaultValue: Swift.String)
+  public init(selectedDate: Foundation.Date?, minDate: Foundation.Date?, maxDate: Foundation.Date?, defaultValue: Swift.String, tooltipText: Swift.String = "")
   @Combine.Published @_projectedValueProperty($selectedDate) public var selectedDate: Foundation.Date? {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -631,18 +642,74 @@ open class DatePickerFieldModel : EffectiveProcessesSDK.ViewModelState {
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
+  @Combine.Published @_projectedValueProperty($isError) public var isError: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $isError: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($errorMessage) public var errorMessage: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $errorMessage: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($isDisabled) public var isDisabled: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $isDisabled: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($validationMessage) public var validationMessage: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $validationMessage: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
   public var defaultValue: Swift.String
   public var minDate: Foundation.Date
   public var maxDate: Foundation.Date
   public var showPlaceholder: Swift.Bool {
     get
   }
+  public func setErrorState(message: Swift.String)
+  public func setSuccessState(message: Swift.String)
+  public func clearValidation()
+  public func setDisabledState()
+  public func setEnabledState()
+  public func reset()
+  public func validateSelection()
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
 @available(*, deprecated, message: "Use DateProvider.dateViewV2")
 public protocol DateProvider {
   var dateView: (Swift.String, Swift.String, Swift.String, Foundation.Date?, Swift.String, Swift.String) -> (EffectiveProcessesSDK.DatePickerFieldModel, UIKit.UIView) { get set }
+  var dateViewWithTooltip: (Swift.String, Swift.String, Swift.String, Foundation.Date?, Swift.String, Swift.String, Swift.String?) -> (EffectiveProcessesSDK.DatePickerFieldModel, UIKit.UIView) { get set }
 }
 public protocol DescriptiveProtocol : AnyObject {
   var descriptor: EffectiveProcessesSDK.CellDescriptor { get }
@@ -2388,6 +2455,11 @@ extension EffectiveProcessesSDK.DesignTokenLoader {
   @discardableResult
   public static func registerNumericStepperDesignTokens() -> Swift.Bool
 }
+@_hasMissingDesignatedInitializers public class DesignTokenManager {
+  public static let shared: EffectiveProcessesSDK.DesignTokenManager
+  public func ensureDesignTokenRegistered(completion: @escaping (Swift.Bool) -> Swift.Void)
+  @objc deinit
+}
 @_Concurrency.MainActor @preconcurrency public struct DesignTokenToggleStyle : SwiftUI.ToggleStyle {
   @_Concurrency.MainActor @preconcurrency public func makeBody(configuration: EffectiveProcessesSDK.DesignTokenToggleStyle.Configuration) -> some SwiftUICore.View
   
@@ -2500,6 +2572,7 @@ public class EPSdkMain {
   @available(*, deprecated, message: "init(builder: EPSDK.Configuration.Builder,callback: (() -> Void)? = nil, _ overrideState: Bool?)")
   @discardableResult
   required public init(uniqeID: Swift.String, token: Swift.String, shouldCheckExpiredToken: Swift.Bool, overrideState: Swift.Bool? = false, callback: (() -> Swift.Void)? = nil)
+  public func parseAndRegisterStyles(rawJSON: Swift.String, completion: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
   public static func registerDependancy(setBaseURL: Swift.String, setPinnedPublicKeyHashes: Swift.String? = nil)
   @objc deinit
 }
@@ -3040,9 +3113,20 @@ public enum LogLevel : Swift.String {
     get
   }
 }
+public struct LoggerConfiguration {
+  public static var isRemoteLoggingEnabled: Swift.Bool
+  public static var batchSize: Swift.Int
+  public static var endpointPath: Swift.String
+}
 public struct Logger {
   public static var minimumLogLevel: EffectiveProcessesSDK.LogLevel
-  public static func log(_ message: Any..., level: EffectiveProcessesSDK.LogLevel = Self.minimumLogLevel, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line)
+  public static func log(_ message: Any..., level: EffectiveProcessesSDK.LogLevel = Self.minimumLogLevel, file: Swift.String = #file, function: Swift.String = #function, line: Swift.Int = #line, isSensitive: Swift.Bool = false)
+  public static func initializeLoggingSupport()
+  public static func configureFromResponseHeaders(_ headers: [Swift.AnyHashable : Any])
+}
+public struct AnonymousUploadResponse : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
 @_Concurrency.MainActor @preconcurrency public struct MessagesView : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
   @SwiftUICore.StateObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.MessagesViewModel {
@@ -3376,8 +3460,9 @@ public struct ProcessInstance : Swift.Codable {
   public let transitions: [EffectiveProcessesSDK.Transition]?
   public var documents: [EffectiveProcessesSDK.Document]?
   public let products: [EffectiveProcessesSDK.Product]?
-  public func encode(to encoder: any Swift.Encoder) throws
+  public var designHash: Swift.String?
   public init(from decoder: any Swift.Decoder) throws
+  public func encode(to encoder: any Swift.Encoder) throws
 }
 public struct URLItem : Swift.Codable, Swift.Identifiable {
   public let id: Swift.String
@@ -3463,8 +3548,14 @@ public struct ProcessItemNew : Swift.Codable, Swift.Identifiable, Swift.Hashable
   public let terminationEnabled: Swift.Bool?
   public let terminationConfirmationMsg: Swift.String?
   public let cardStyle: Swift.String?
-  public init(id: Foundation.UUID, type: Swift.String, instanceID: Swift.String, name: Swift.String, image: Swift.String, title: Swift.String, body: Swift.String, actionTitle: Swift.String, terminationEnabled: Swift.Bool?, terminationConfirmationMsg: Swift.String?, cardStyle: Swift.String? = nil)
+  public var designHash: Swift.String? {
+    get
+    set
+  }
+  public init(id: Foundation.UUID, type: Swift.String, instanceID: Swift.String, name: Swift.String, image: Swift.String, title: Swift.String, body: Swift.String, actionTitle: Swift.String, terminationEnabled: Swift.Bool?, terminationConfirmationMsg: Swift.String?, cardStyle: Swift.String? = nil, designHash: Swift.String? = nil)
+  public init(from decoder: any Swift.Decoder) throws
   public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case id
     case type
     case instanceID
     case name
@@ -3475,6 +3566,7 @@ public struct ProcessItemNew : Swift.Codable, Swift.Identifiable, Swift.Hashable
     case terminationEnabled
     case terminationConfirmationMsg
     case cardStyle
+    case designHash
     public init?(rawValue: Swift.String)
     public init?(stringValue: Swift.String)
     public init?(intValue: Swift.Int)
@@ -3496,7 +3588,6 @@ public struct ProcessItemNew : Swift.Codable, Swift.Identifiable, Swift.Hashable
   public var hashValue: Swift.Int {
     get
   }
-  public init(from decoder: any Swift.Decoder) throws
 }
 public enum TypeEnum : Swift.String, Swift.Codable {
   case existingInstance
