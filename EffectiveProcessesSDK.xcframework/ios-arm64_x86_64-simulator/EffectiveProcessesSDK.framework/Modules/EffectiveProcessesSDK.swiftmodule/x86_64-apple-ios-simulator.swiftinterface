@@ -2710,7 +2710,7 @@ public class EPSdkMain {
   @discardableResult
   required public init(uniqeID: Swift.String, token: Swift.String, shouldCheckExpiredToken: Swift.Bool, overrideState: Swift.Bool? = false, callback: (() -> Swift.Void)? = nil)
   public func parseAndRegisterStyles(rawJSON: Swift.String, completion: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
-  public static func registerDependancy(setBaseURL: Swift.String, setPinnedPublicKeyHashes: Swift.String? = nil)
+  public static func registerDependancy(setBaseURL: Swift.String, setPinnedPublicKeyHashes: Swift.String)
   @objc deinit
 }
 public struct EPSDK {
