@@ -1070,6 +1070,9 @@ public class EPStyle : EffectiveProcessesSDK.ColorStyle, EffectiveProcessesSDK.E
   public var detailStyle: EffectiveProcessesSDK.DetailStyle?
   public var slider: EffectiveProcessesSDK.EDSliderStyle?
   public init(labelStyle: EffectiveProcessesSDK.LabelTheStyle?, tertiaryColor: EffectiveProcessesSDK.EPColor?, primaryColor: EffectiveProcessesSDK.EPColor?, secondaryColor: EffectiveProcessesSDK.EPColor?, primaryFont: Swift.String?, secondaryFont: Swift.String?, inputStyle: EffectiveProcessesSDK.InputStyle? = nil, cardStyle: EffectiveProcessesSDK.CardStyleNew?, headerStyle: EffectiveProcessesSDK.HeaderStyle?, buttonStyle: EffectiveProcessesSDK.ButtonStyle?, detailStyle: EffectiveProcessesSDK.DetailStyle?, slider: EffectiveProcessesSDK.EDSliderStyle?)
+  public static var empty: EffectiveProcessesSDK.EPStyle {
+    get
+  }
   @objc deinit
   public func encode(to encoder: any Swift.Encoder) throws
   required public init(from decoder: any Swift.Decoder) throws
@@ -2575,6 +2578,8 @@ extension EffectiveProcessesSDK.DesignTokenLoader {
 extension EffectiveProcessesSDK.DesignTokenLoader {
   @discardableResult
   public static func registerBottomSheetDropdownDesignTokens() -> Swift.Bool
+  @discardableResult
+  public static func registerV1() -> Swift.Bool
   @discardableResult
   public static func registerV2() -> Swift.Bool
   @discardableResult
