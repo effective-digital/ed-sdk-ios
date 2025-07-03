@@ -299,7 +299,7 @@ extension SwiftUICore.Binding where Value == Swift.String {
 }
 public protocol BoolFieldProvider {
   var boolView: (Swift.String, Swift.String, Swift.String?) -> (EffectiveProcessesSDK.ToggleSwitchFieldModel, UIKit.UIView) { get set }
-  var checkboxView: (Swift.String, Swift.String, Swift.String?) -> (EffectiveProcessesSDK.CheckboxFieldModel, UIKit.UIView) { get set }
+  var checkboxView: (Swift.String, Swift.String, Swift.String?) -> (EffectiveProcessesSDK.CheckboxBooleanModel, UIKit.UIView) { get set }
 }
 public struct BottomSheetConfiguration {
   public static let `default`: EffectiveProcessesSDK.BottomSheetConfiguration
@@ -536,28 +536,29 @@ public struct CellDescriptor {
   public init<T>(sectionBGColor: UIKit.UIColor, sectionName: Swift.String, configure: @escaping (T) -> Swift.Void) where T : UIKit.UITableViewCell
 }
 @available(iOS 15.0, *)
-@_Concurrency.MainActor @preconcurrency public struct CheckboxField : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
+@_Concurrency.MainActor @preconcurrency public struct CheckboxBooleanField : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
   @_Concurrency.MainActor @preconcurrency public var label: Swift.String
-  @SwiftUICore.ObservedObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.CheckboxFieldModel {
+  @SwiftUICore.ObservedObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.CheckboxBooleanModel {
     get
     @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     set
     @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     _modify
   }
-  @_Concurrency.MainActor @preconcurrency public var $model: SwiftUICore.ObservedObject<EffectiveProcessesSDK.CheckboxFieldModel>.Wrapper {
+  @_Concurrency.MainActor @preconcurrency public var $model: SwiftUICore.ObservedObject<EffectiveProcessesSDK.CheckboxBooleanModel>.Wrapper {
     get
   }
-  @_Concurrency.MainActor @preconcurrency public init(label: Swift.String, model: EffectiveProcessesSDK.CheckboxFieldModel)
+  @_Concurrency.MainActor @preconcurrency public var tooltipText: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public init(label: Swift.String, model: EffectiveProcessesSDK.CheckboxBooleanModel, tooltipText: Swift.String? = nil)
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
   @available(iOS 15.0, *)
-  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK13CheckboxFieldV4bodyQrvp", 0) __
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK20CheckboxBooleanFieldV4bodyQrvp", 0) __
   @available(iOS 15.0, *)
-  public typealias Model = EffectiveProcessesSDK.CheckboxFieldModel
+  public typealias Model = EffectiveProcessesSDK.CheckboxBooleanModel
 }
-open class CheckboxFieldModel : EffectiveProcessesSDK.ViewModelState {
+open class CheckboxBooleanModel : EffectiveProcessesSDK.ViewModelState {
   @Combine.Published @_projectedValueProperty($isChecked) public var isChecked: Swift.Bool {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -573,6 +574,32 @@ open class CheckboxFieldModel : EffectiveProcessesSDK.ViewModelState {
   open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
+}
+public protocol CheckboxBooleanProvider {
+  var checkboxBooleanView: (Swift.String, Swift.String, Swift.String?) -> (EffectiveProcessesSDK.CheckboxBooleanModel, UIKit.UIView) { get set }
+}
+@available(iOS 15.0, *)
+@_Concurrency.MainActor @preconcurrency public struct CheckboxBooleanView : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
+  @_Concurrency.MainActor @preconcurrency public var label: Swift.String
+  @SwiftUICore.ObservedObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.CheckboxBooleanModel {
+    get
+    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  @_Concurrency.MainActor @preconcurrency public var $model: SwiftUICore.ObservedObject<EffectiveProcessesSDK.CheckboxBooleanModel>.Wrapper {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var tooltipText: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public init(label: Swift.String, model: EffectiveProcessesSDK.CheckboxBooleanModel, tooltipText: Swift.String? = nil)
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    get
+  }
+  @available(iOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK19CheckboxBooleanViewV4bodyQrvp", 0) __
+  @available(iOS 15.0, *)
+  public typealias Model = EffectiveProcessesSDK.CheckboxBooleanModel
 }
 @objc @_Concurrency.MainActor @preconcurrency open class CircularImageView : UIKit.UIImageView {
   @_Concurrency.MainActor @preconcurrency public init(width: CoreFoundation.CGFloat, image: UIKit.UIImage? = nil)
@@ -593,6 +620,107 @@ extension Swift.Encodable {
 }
 extension Swift.Encodable {
   public func encoded() throws -> Foundation.Data
+}
+@available(iOS 15.0, *)
+@_Concurrency.MainActor @preconcurrency public struct ConsentCheckboxField : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
+  @_Concurrency.MainActor @preconcurrency public var label: Swift.String
+  @SwiftUICore.ObservedObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.ConsentCheckboxModel {
+    get
+    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  @_Concurrency.MainActor @preconcurrency public var $model: SwiftUICore.ObservedObject<EffectiveProcessesSDK.ConsentCheckboxModel>.Wrapper {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var tooltipText: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public init(label: Swift.String, model: EffectiveProcessesSDK.ConsentCheckboxModel, tooltipText: Swift.String? = nil)
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    get
+  }
+  @available(iOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK20ConsentCheckboxFieldV4bodyQrvp", 0) __
+  @available(iOS 15.0, *)
+  public typealias Model = EffectiveProcessesSDK.ConsentCheckboxModel
+}
+public struct ConsentOptionItem : Swift.Identifiable {
+  public let id: Swift.String
+  public typealias ID = Swift.String
+}
+public typealias ConsentOptions = [EffectiveProcessesSDK.ConsentOptionItem]
+public class ConsentOptionModel : EffectiveProcessesSDK.ViewModelState {
+  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(option: EffectiveProcessesSDK.ConsentOptionItem, multiSelection: SwiftUICore.Binding<Swift.Set<Swift.String>>)
+  @Combine.Published @_projectedValueProperty($option) public var option: EffectiveProcessesSDK.ConsentOptionItem {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $option: Combine.Published<EffectiveProcessesSDK.ConsentOptionItem>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @SwiftUICore.Binding @_projectedValueProperty($multiSelection) public var multiSelection: Swift.Set<Swift.String> {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $multiSelection: SwiftUICore.Binding<Swift.Set<Swift.String>> {
+    get
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+public class ConsentCheckboxModel : EffectiveProcessesSDK.ViewModelState {
+  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public init(options: EffectiveProcessesSDK.ConsentOptions, body: Swift.String)
+  @Combine.Published @_projectedValueProperty($options) public var options: EffectiveProcessesSDK.ConsentOptions {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $options: Combine.Published<EffectiveProcessesSDK.ConsentOptions>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($body) public var body: Swift.String {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $body: Combine.Published<Swift.String>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($multiSelection) public var multiSelection: Swift.Set<Swift.String> {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $multiSelection: Combine.Published<Swift.Set<Swift.String>>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public var checkedItems: Swift.String {
+    get
+  }
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
 }
 @available(*, deprecated, message: "Use CurrencyProvider.currencyViewV2")
 public protocol CurrencyProvider {
@@ -1536,6 +1664,7 @@ public struct ToggleThumb : Swift.Codable {
 }
 public struct RadioButtonFk : Swift.Codable {
   public var label: EffectiveProcessesSDK.RadioButtonLabelState?
+  public var tooltipIcon: EffectiveProcessesSDK.TooltipIcon?
   public var radioOptionsCard: EffectiveProcessesSDK.RadioOptionsCard?
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
@@ -1594,6 +1723,7 @@ public struct RadioIndicatorState : Swift.Codable {
 public struct MultiSelectCheckbox : Swift.Codable {
   public var label: EffectiveProcessesSDK.MultiSelectCheckboxLabelState?
   public var multiSelectOptionsCard: EffectiveProcessesSDK.MultiSelectOptionsCard?
+  public var tooltipIcon: EffectiveProcessesSDK.TooltipIcon?
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -1712,6 +1842,7 @@ extension EffectiveProcessesSDK.MultiSelectIndicatorProperties {
 }
 public struct ConsentCheckbox : Swift.Codable {
   public var consentOptionsCard: EffectiveProcessesSDK.ConsentOptionsCard?
+  public var tooltipIcon: EffectiveProcessesSDK.TooltipIcon?
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
@@ -1882,6 +2013,7 @@ public class CheckboxBooleanUIComponentsInput : Swift.Codable {
 public struct CheckboxBoolean : Swift.Codable {
   public let label: EffectiveProcessesSDK.CheckboxLabelStates?
   public let indicator: EffectiveProcessesSDK.CheckboxIndicator?
+  public let tooltipIcon: EffectiveProcessesSDK.TooltipIcon?
   public let backgroundColor: EffectiveProcessesSDK.PlatformAppearance?
   public let border: EffectiveProcessesSDK.Border?
   public let cornerRadius: EffectiveProcessesSDK.CornerRadius?
@@ -2438,10 +2570,13 @@ extension EffectiveProcessesSDK.DesignTokenLoader {
   public static func loadProductCardDesignTokens() -> EffectiveProcessesSDK.EPStyleProductCard?
   public static func loadDatePickerDesignTokens() -> EffectiveProcessesSDK.EPStyleDatePicker?
   public static func loadNumericStepperDesignTokens() -> EffectiveProcessesSDK.EPStyleNumericStepper?
+  public static func loadV2() -> EffectiveProcessesSDK.EPStyleV2?
 }
 extension EffectiveProcessesSDK.DesignTokenLoader {
   @discardableResult
   public static func registerBottomSheetDropdownDesignTokens() -> Swift.Bool
+  @discardableResult
+  public static func registerV2() -> Swift.Bool
   @discardableResult
   public static func registerInputDesignTokens() -> Swift.Bool
   @discardableResult
@@ -2454,6 +2589,8 @@ extension EffectiveProcessesSDK.DesignTokenLoader {
   public static func registerDatePickerDesignTokens() -> Swift.Bool
   @discardableResult
   public static func registerNumericStepperDesignTokens() -> Swift.Bool
+  @discardableResult
+  public static func registerRadioButtonDesignTokens() -> Swift.Bool
 }
 @_hasMissingDesignatedInitializers public class DesignTokenManager {
   public static let shared: EffectiveProcessesSDK.DesignTokenManager
@@ -3019,88 +3156,6 @@ public protocol JCOTPComponentDelegate : AnyObject {
   required public init(from decoder: any Swift.Decoder) throws
 }
 public typealias Languages = [EffectiveProcessesSDK.Language]
-public struct LinkModel : Swift.Identifiable {
-  public let id: Swift.String
-  public typealias ID = Swift.String
-}
-public typealias Links = [EffectiveProcessesSDK.LinkModel]
-public class LinkPreviewModel : EffectiveProcessesSDK.ViewModelState {
-  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
-  public init(link: EffectiveProcessesSDK.LinkModel, multiSelection: SwiftUICore.Binding<Swift.Set<Swift.String>>)
-  @Combine.Published @_projectedValueProperty($link) public var link: EffectiveProcessesSDK.LinkModel {
-    get
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    set
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    _modify
-  }
-  public var $link: Combine.Published<EffectiveProcessesSDK.LinkModel>.Publisher {
-    get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-    set
-  }
-  @SwiftUICore.Binding @_projectedValueProperty($multiSelection) public var multiSelection: Swift.Set<Swift.String> {
-    get
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    set
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    _modify
-  }
-  public var $multiSelection: SwiftUICore.Binding<Swift.Set<Swift.String>> {
-    get
-  }
-  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
-  @objc deinit
-}
-public class LinksPreviewModel : EffectiveProcessesSDK.ViewModelState {
-  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
-  public init(links: EffectiveProcessesSDK.Links, body: Swift.String)
-  @Combine.Published @_projectedValueProperty($links) public var links: EffectiveProcessesSDK.Links {
-    get
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    set
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    _modify
-  }
-  public var $links: Combine.Published<EffectiveProcessesSDK.Links>.Publisher {
-    get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-    set
-  }
-  @Combine.Published @_projectedValueProperty($body) public var body: Swift.String {
-    get
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    set
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    _modify
-  }
-  public var $body: Combine.Published<Swift.String>.Publisher {
-    get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-    set
-  }
-  @Combine.Published @_projectedValueProperty($multiSelection) public var multiSelection: Swift.Set<Swift.String> {
-    get
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    set
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    _modify
-  }
-  public var $multiSelection: Combine.Published<Swift.Set<Swift.String>>.Publisher {
-    get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-    set
-  }
-  public var checkedItems: Swift.String {
-    get
-  }
-  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
-  @objc deinit
-}
-@available(*, deprecated, message: "Use LinksListProvider.linksV2")
-public protocol LinksListProvider {
-  var links: (Swift.String, EffectiveProcessesSDK.Links) -> (EffectiveProcessesSDK.LinksPreviewModel, UIKit.UIView) { get set }
-}
 public enum LogLevel : Swift.String {
   case info
   case warning
@@ -3149,9 +3204,7 @@ public struct Logger {
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
-open class MultiSelectModel : EffectiveProcessesSDK.ViewModelState {
-  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
-  public init(options: [EffectiveProcessesSDK.Option], multiSelection: Swift.Set<Swift.String>)
+open class MultiSelectCheckboxModel : EffectiveProcessesSDK.ViewModelState {
   @Combine.Published @_projectedValueProperty($options) public var options: [EffectiveProcessesSDK.Option] {
     get
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
@@ -3176,12 +3229,36 @@ open class MultiSelectModel : EffectiveProcessesSDK.ViewModelState {
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     set
   }
+  public init(options: [EffectiveProcessesSDK.Option], multiSelection: Swift.Set<Swift.String>)
+  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
-@available(*, deprecated, message: "Use MultiSelectProvider.multiViewV2")
-public protocol MultiSelectProvider {
-  var multiView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.Set<Swift.String>) -> (EffectiveProcessesSDK.MultiSelectModel, UIKit.UIView) { get set }
+public protocol MultiSelectCheckboxProvider {
+  var multiSelectCheckboxView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.Set<Swift.String>, Swift.String?) -> (EffectiveProcessesSDK.MultiSelectCheckboxModel, UIKit.UIView) { get set }
+}
+@available(iOS 15.0, *)
+@_Concurrency.MainActor @preconcurrency public struct MultiSelectCheckboxView : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
+  @_Concurrency.MainActor @preconcurrency public var label: Swift.String
+  @SwiftUICore.ObservedObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.MultiSelectCheckboxModel {
+    get
+    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  @_Concurrency.MainActor @preconcurrency public var $model: SwiftUICore.ObservedObject<EffectiveProcessesSDK.MultiSelectCheckboxModel>.Wrapper {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var tooltipText: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public init(label: Swift.String, model: EffectiveProcessesSDK.MultiSelectCheckboxModel, tooltipText: Swift.String? = nil)
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    get
+  }
+  @available(iOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK23MultiSelectCheckboxViewV4bodyQrvp", 0) __
+  @available(iOS 15.0, *)
+  public typealias Model = EffectiveProcessesSDK.MultiSelectCheckboxModel
 }
 @_Concurrency.MainActor @preconcurrency public struct NonAnimatedUIKitModal<Presented> : SwiftUI.UIViewControllerRepresentable where Presented : EffectiveProcessesSDK.DismissableView {
   @_Concurrency.MainActor @preconcurrency public let isPresented: SwiftUICore.Binding<Swift.Bool>
@@ -3723,6 +3800,59 @@ extension EffectiveProcessesSDK.PushNotificationManager : UserNotifications.UNUs
 extension UIKit.UIApplication {
   @_Concurrency.MainActor @preconcurrency public class func openAppSettings()
 }
+@available(iOS 15.0, *)
+@_Concurrency.MainActor @preconcurrency public struct RadioButtonFkField : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
+  @_Concurrency.MainActor @preconcurrency public var label: Swift.String
+  @SwiftUICore.ObservedObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.RadioButtonFkModel {
+    get
+    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  @_Concurrency.MainActor @preconcurrency public var $model: SwiftUICore.ObservedObject<EffectiveProcessesSDK.RadioButtonFkModel>.Wrapper {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var tooltipText: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public init(label: Swift.String, model: EffectiveProcessesSDK.RadioButtonFkModel, tooltipText: Swift.String? = nil)
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    get
+  }
+  @available(iOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK18RadioButtonFkFieldV4bodyQrvp", 0) __
+  @available(iOS 15.0, *)
+  public typealias Model = EffectiveProcessesSDK.RadioButtonFkModel
+}
+open class RadioButtonFkModel : EffectiveProcessesSDK.ViewModelState {
+  @Combine.Published @_projectedValueProperty($options) public var options: [EffectiveProcessesSDK.Option] {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $options: Combine.Published<[EffectiveProcessesSDK.Option]>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($singleSelection) public var singleSelection: Swift.Set<Swift.String> {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $singleSelection: Combine.Published<Swift.Set<Swift.String>>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public init(options: [EffectiveProcessesSDK.Option], singleSelection: Swift.Set<Swift.String>)
+  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
 @available(*, deprecated, message: "Use RatingProvider.ratingV2")
 public protocol RatingProvider {
   var rating: (Swift.String, Swift.String, Swift.String) -> (EffectiveProcessesSDK.StarRatingModel, UIKit.UIView) { get set }
@@ -3874,37 +4004,6 @@ open class DropDownListModel : Foundation.ObservableObject, EffectiveProcessesSD
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
-open class SingleSelectModel : EffectiveProcessesSDK.ViewModelState {
-  open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
-  public init(options: [EffectiveProcessesSDK.Option], singleSelection: Swift.Set<Swift.String>)
-  @Combine.Published @_projectedValueProperty($options) public var options: [EffectiveProcessesSDK.Option] {
-    get
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    set
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    _modify
-  }
-  public var $options: Combine.Published<[EffectiveProcessesSDK.Option]>.Publisher {
-    get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-    set
-  }
-  @Combine.Published @_projectedValueProperty($singleSelection) public var singleSelection: Swift.Set<Swift.String> {
-    get
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    set
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    _modify
-  }
-  public var $singleSelection: Combine.Published<Swift.Set<Swift.String>>.Publisher {
-    get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-    set
-  }
-  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
-  @objc deinit
-}
-
 open class SingleSelectListOptionsModel : EffectiveProcessesSDK.ViewModelState {
   open func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
   public init(items: EffectiveProcessesSDK.CardItems, singleSelection: Swift.Set<Swift.String>)
@@ -3950,7 +4049,7 @@ public protocol SingleSelectorDropDownProvider {
 }
 @available(*, deprecated, message: "Use SingleSelectorCheckProvider.selectorViewV2")
 public protocol SingleSelectorCheckProvider {
-  var selectorView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.String) -> (EffectiveProcessesSDK.SingleSelectModel, UIKit.UIView) { get set }
+  var selectorView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.String, Swift.String) -> (EffectiveProcessesSDK.RadioButtonFkModel, UIKit.UIView) { get set }
 }
 @available(*, deprecated, message: "Use SliderProvider.sliderV2")
 public protocol SliderProvider {
@@ -4496,7 +4595,11 @@ extension EffectiveProcessesSDK.FormAlignment : Swift.Hashable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension EffectiveProcessesSDK.CachedAsyncImage : Swift.Sendable {}
 @available(iOS 15.0, *)
-extension EffectiveProcessesSDK.CheckboxField : Swift.Sendable {}
+extension EffectiveProcessesSDK.CheckboxBooleanField : Swift.Sendable {}
+@available(iOS 15.0, *)
+extension EffectiveProcessesSDK.CheckboxBooleanView : Swift.Sendable {}
+@available(iOS 15.0, *)
+extension EffectiveProcessesSDK.ConsentCheckboxField : Swift.Sendable {}
 extension EffectiveProcessesSDK.IndicatorPosition : Swift.Equatable {}
 extension EffectiveProcessesSDK.IndicatorPosition : Swift.Hashable {}
 extension EffectiveProcessesSDK.IndicatorPosition : Swift.RawRepresentable {}
@@ -4544,6 +4647,8 @@ extension EffectiveProcessesSDK.LogLevel : Swift.Equatable {}
 extension EffectiveProcessesSDK.LogLevel : Swift.Hashable {}
 extension EffectiveProcessesSDK.LogLevel : Swift.RawRepresentable {}
 extension EffectiveProcessesSDK.MessagesView : Swift.Sendable {}
+@available(iOS 15.0, *)
+extension EffectiveProcessesSDK.MultiSelectCheckboxView : Swift.Sendable {}
 extension EffectiveProcessesSDK.NonAnimatedUIKitModal : Swift.Sendable {}
 extension EffectiveProcessesSDK.NumericStepperField : Swift.Sendable {}
 extension EffectiveProcessesSDK.EDLayout : Swift.Equatable {}
@@ -4561,6 +4666,8 @@ extension EffectiveProcessesSDK.TypeEnum : Swift.Hashable {}
 extension EffectiveProcessesSDK.TypeEnum : Swift.RawRepresentable {}
 extension EffectiveProcessesSDK.ProductCardView : Swift.Sendable {}
 extension EffectiveProcessesSDK.ProductSelectionListView : Swift.Sendable {}
+@available(iOS 15.0, *)
+extension EffectiveProcessesSDK.RadioButtonFkField : Swift.Sendable {}
 extension EffectiveProcessesSDK.SSLPinningError : Swift.Equatable {}
 extension EffectiveProcessesSDK.SSLPinningError : Swift.Hashable {}
 @available(iOS 15.0, *)
