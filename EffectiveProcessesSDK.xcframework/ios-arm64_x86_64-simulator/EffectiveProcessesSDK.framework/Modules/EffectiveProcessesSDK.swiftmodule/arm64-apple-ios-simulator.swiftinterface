@@ -57,6 +57,7 @@ public struct APIConstant {
   public static var APP_UNIQUE_ID: Swift.String
   @available(*, deprecated, message: "Use EPSDK.Configuration.Builder instead")
   public static var SHOULD_CHECK_TOKEN_EXPIRED: Swift.Bool
+  public static var pinnedPublicKeyHashes: Swift.Set<Swift.String>
   @SwiftUI.AppStorage @_projectedValueProperty($LANGUAGE) public static var LANGUAGE: Swift.String {
     get
     @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
