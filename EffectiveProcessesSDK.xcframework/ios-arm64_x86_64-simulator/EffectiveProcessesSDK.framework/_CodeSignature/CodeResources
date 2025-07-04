@@ -10,7 +10,7 @@
 		</data>
 		<key>Config.plist</key>
 		<data>
-		zhI/BKRmaY5d6w230eBSz6z1hw0=
+		WaFRwWA47/jXHki8OvKMHSea8Vc=
 		</data>
 		<key>GeoLocationError.json</key>
 		<data>
@@ -42,11 +42,11 @@
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		ozQuriXzOr/ZsextwH+3jMf6c2M=
+		6CItTt8okB+8LTh8EIxIJacn144=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		s2gALIOgVYmfdcejk7od2PdP+34=
+		ftr3NHSJua1/YzAO0MfvoM4Z6XE=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -54,19 +54,19 @@
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		s2gALIOgVYmfdcejk7od2PdP+34=
+		ftr3NHSJua1/YzAO0MfvoM4Z6XE=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		46g5vnygjh6BMSQDZGN4VXsEPuo=
+		5+TaApu5V2+d7dYXC3CSmyi+l+o=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		ozQuriXzOr/ZsextwH+3jMf6c2M=
+		6CItTt8okB+8LTh8EIxIJacn144=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		KUx5siNRrKFI2XlLViHRIxql74s=
+		29wSDnSMPEx9sE85s89M+j+oHV8=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -74,11 +74,11 @@
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		KUx5siNRrKFI2XlLViHRIxql74s=
+		29wSDnSMPEx9sE85s89M+j+oHV8=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		sIWfoPl6OavzeMPnZyjLqr9fkBM=
+		rrRTSwIINQR9Rii0b1snETn4eUQ=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -169,7 +169,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qknMtE0osKfoIEEQbiG4Oo5ik+I5FAn6D46iptRdeuo=
+			oIjenC056FcxICKJfhL7sQQ0vRQtVRsJ9m5zmTZabjg=
 			</data>
 		</dict>
 		<key>GeoLocationError.json</key>
@@ -218,14 +218,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			mkXK3C/8iZ5Q7DZ40HO86F34gZt+6S1qE1GEz1IVup4=
+			U5lWGnd+954jNHbzjZgQR5sxYrT3P7KoyFRF6H6B+50=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9erVauc3e3hrczxuZLRZZmVk21DCEbBCOLT5QcYQ53A=
+			sDzeidCWFC1jzi8pbcKVAGJWVVaj+O+ngUhH1MEt8r4=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -239,28 +239,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			9erVauc3e3hrczxuZLRZZmVk21DCEbBCOLT5QcYQ53A=
+			sDzeidCWFC1jzi8pbcKVAGJWVVaj+O+ngUhH1MEt8r4=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Xy6BRZRNWcRTeEAUFLhcumkGBRKspXgw0AWqfNx8oo0=
+			Pn7qRN6Vwr8JyabLHjxTurDS0ZMhYP2BTJzMC3w3dnw=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mkXK3C/8iZ5Q7DZ40HO86F34gZt+6S1qE1GEz1IVup4=
+			U5lWGnd+954jNHbzjZgQR5sxYrT3P7KoyFRF6H6B+50=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			DaZHrDbOCnJErFagbzfHnQB5+RinutBF8LUmRoJkEG8=
+			5Z0Sz73BH8OPeBYnljvvfF61cpEXgjmAch83jVd+5So=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -274,14 +274,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DaZHrDbOCnJErFagbzfHnQB5+RinutBF8LUmRoJkEG8=
+			5Z0Sz73BH8OPeBYnljvvfF61cpEXgjmAch83jVd+5So=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3Khi9d5hpDQXsIQzO/ERbnrlAvt72ZGvY/4qfTsBTqw=
+			oOnonE/Sl/8O5ONOSO3VhAVGXjGrlfKl75pFTze9bz0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

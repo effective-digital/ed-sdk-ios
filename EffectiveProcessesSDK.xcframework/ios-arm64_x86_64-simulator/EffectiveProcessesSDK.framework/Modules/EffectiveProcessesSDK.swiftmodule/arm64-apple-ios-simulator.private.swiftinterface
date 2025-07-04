@@ -2715,7 +2715,7 @@ public class EPSdkMain {
   @available(*, deprecated, message: "init(builder: EPSDK.Configuration.Builder,callback: (() -> Void)? = nil, _ overrideState: Bool?)")
   @discardableResult
   required public init(uniqeID: Swift.String, token: Swift.String, shouldCheckExpiredToken: Swift.Bool, overrideState: Swift.Bool? = false, callback: (() -> Swift.Void)? = nil)
-  public func parseAndRegisterStyles(rawJSON: Swift.String, completion: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
+  public static func parseAndRegisterStyles(rawJSON: Swift.String, completion: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
   public static func registerDependancy(setBaseURL: Swift.String, setPinnedPublicKeyHashes: Swift.String)
   @objc deinit
 }
