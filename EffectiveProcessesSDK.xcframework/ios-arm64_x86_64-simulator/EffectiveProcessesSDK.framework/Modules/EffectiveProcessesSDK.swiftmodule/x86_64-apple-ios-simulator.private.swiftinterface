@@ -4054,7 +4054,7 @@ public protocol SingleSelectorDropDownProvider {
 }
 @available(*, deprecated, message: "Use SingleSelectorCheckProvider.selectorViewV2")
 public protocol SingleSelectorCheckProvider {
-  var selectorView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.String, Swift.String) -> (EffectiveProcessesSDK.RadioButtonFkModel, UIKit.UIView) { get set }
+  var selectorView: (Swift.String, [EffectiveProcessesSDK.Option], Swift.String, Swift.String?) -> (EffectiveProcessesSDK.RadioButtonFkModel, UIKit.UIView) { get set }
 }
 @available(*, deprecated, message: "Use SliderProvider.sliderV2")
 public protocol SliderProvider {
