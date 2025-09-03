@@ -255,7 +255,7 @@ public class OffersLoaderViewModel : Combine.ObservableObject {
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
-public class BannerOneComponentModel : Foundation.ObservableObject {
+public class BannerOneComponentModel : Combine.ObservableObject {
   public init(items: [EffectiveProcessesSDK.ProcessItemNew] = [])
   public func getData()
   public func onTerminate(id: Swift.String)
@@ -834,6 +834,51 @@ open class DatePickerFieldModel : EffectiveProcessesSDK.ViewModelState {
   public func validateSelection()
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
+}
+@_Concurrency.MainActor @preconcurrency public struct DatePickerInline : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
+  @_Concurrency.MainActor @preconcurrency public var placeholder: Swift.String
+  @_Concurrency.MainActor @preconcurrency public var title: Swift.String
+  @SwiftUICore.ObservedObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.DatePickerFieldModel {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  @_Concurrency.MainActor @preconcurrency public var $model: SwiftUICore.ObservedObject<EffectiveProcessesSDK.DatePickerFieldModel>.Wrapper {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var displayedComponents: SwiftUI.DatePickerComponents
+  @_Concurrency.MainActor @preconcurrency public init(placeholder: Swift.String, title: Swift.String, model: EffectiveProcessesSDK.DatePickerFieldModel, displayedComponents: SwiftUI.DatePickerComponents = [.date])
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK16DatePickerInlineV4bodyQrvp", 0) __
+  public typealias Model = EffectiveProcessesSDK.DatePickerFieldModel
+}
+@available(iOS 16.4, *)
+@_Concurrency.MainActor @preconcurrency public struct DatePickerField : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
+  @_Concurrency.MainActor @preconcurrency public var placeholder: Swift.String
+  @_Concurrency.MainActor @preconcurrency public var title: Swift.String
+  @SwiftUICore.ObservedObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.DatePickerFieldModel {
+    get
+    @available(iOS 16.4, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 16.4, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  @_Concurrency.MainActor @preconcurrency public var $model: SwiftUICore.ObservedObject<EffectiveProcessesSDK.DatePickerFieldModel>.Wrapper {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var displayedComponents: SwiftUI.DatePickerComponents
+  @_Concurrency.MainActor @preconcurrency public init(placeholder: Swift.String, title: Swift.String, model: EffectiveProcessesSDK.DatePickerFieldModel, displayedComponents: SwiftUI.DatePickerComponents = [.date])
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    get
+  }
+  @available(iOS 16.4, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK15DatePickerFieldV4bodyQrvp", 0) __
+  @available(iOS 16.4, *)
+  public typealias Model = EffectiveProcessesSDK.DatePickerFieldModel
 }
 @available(*, deprecated, message: "Use DateProvider.dateViewV2")
 public protocol DateProvider {
@@ -2658,6 +2703,37 @@ public protocol EPControllerProtocol {
   @_Concurrency.MainActor @preconcurrency @objc override dynamic open func loadView()
   @objc deinit
 }
+public struct EPFontConfiguration {
+  public let familyName: Swift.String
+  public let weights: EffectiveProcessesSDK.EPFontConfiguration.FontWeights
+  public let textStyleMappings: EffectiveProcessesSDK.EPFontConfiguration.TextStyleMappings
+  public let dynamicTypeSettings: EffectiveProcessesSDK.EPFontConfiguration.DynamicTypeSettings
+  public struct FontWeights {
+    public let regular: Swift.String
+    public let medium: Swift.String?
+    public let semibold: Swift.String?
+    public let bold: Swift.String?
+    public let italic: Swift.String?
+    public init(regular: Swift.String, medium: Swift.String? = nil, semibold: Swift.String? = nil, bold: Swift.String? = nil, italic: Swift.String? = nil)
+  }
+  public struct TextStyleMappings {
+    public let mappings: [UIKit.UIFont.TextStyle : UIKit.UIFont.Weight]
+    public init(customMappings: [UIKit.UIFont.TextStyle : UIKit.UIFont.Weight] = [:])
+    public static let defaultMappings: [UIKit.UIFont.TextStyle : UIKit.UIFont.Weight]
+  }
+  public struct DynamicTypeSettings {
+    public let scaleExplicitSizes: Swift.Bool
+    public let referenceTextStyle: UIKit.UIFont.TextStyle
+    public init(scaleExplicitSizes: Swift.Bool = false, referenceTextStyle: UIKit.UIFont.TextStyle = .body)
+  }
+  public init(familyName: Swift.String, weights: EffectiveProcessesSDK.EPFontConfiguration.FontWeights, textStyleMappings: EffectiveProcessesSDK.EPFontConfiguration.TextStyleMappings = TextStyleMappings(), dynamicTypeSettings: EffectiveProcessesSDK.EPFontConfiguration.DynamicTypeSettings = DynamicTypeSettings())
+  public init(familyName: Swift.String, regular: Swift.String, medium: Swift.String? = nil, semibold: Swift.String? = nil, bold: Swift.String? = nil, italic: Swift.String? = nil, customTextStyleMappings: [UIKit.UIFont.TextStyle : UIKit.UIFont.Weight] = [:], scaleExplicitSizes: Swift.Bool = false)
+}
+public enum EPFonts {
+  public static func enable(with configuration: EffectiveProcessesSDK.EPFontConfiguration)
+  public static func disable()
+  public static func validateFonts(in configuration: EffectiveProcessesSDK.EPFontConfiguration) -> [Swift.String]
+}
 public protocol ViewModelState : Combine.ObservableObject {
   func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
 }
@@ -2674,6 +2750,11 @@ public struct EPJourney {
   public func terminateActionTitle() -> Swift.String
   public func closeActionTitle() -> Swift.String
   @objc deinit
+}
+extension Swift.String {
+  public var localized: Swift.String {
+    get
+  }
 }
 public typealias InAppResultBlock = (EffectiveProcessesSDK.Result<EffectiveProcessesSDK.ProcessInstance>) -> Swift.Void
 public typealias RequestBlock = (Swift.String, Swift.String, Foundation.Data?, @escaping EffectiveProcessesSDK.InAppResultBlock) -> Swift.Void
@@ -2717,6 +2798,7 @@ public class EPSdkMain {
   required public init(uniqeID: Swift.String, token: Swift.String, shouldCheckExpiredToken: Swift.Bool, overrideState: Swift.Bool? = false, callback: (() -> Swift.Void)? = nil)
   public static func parseAndRegisterStyles(rawJSON: Swift.String, completion: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
   public static func registerDependancy(setBaseURL: Swift.String, setPinnedPublicKeyHashes: Swift.String)
+  public static func registerDependancyInternal(completion: (() -> Swift.Void)? = nil)
   @objc deinit
 }
 public struct EPSDK {
@@ -2911,6 +2993,13 @@ extension SwiftUICore.View {
   
   @_Concurrency.MainActor @preconcurrency public func edNgTerminateButtonIconStyle(iconStyles: EffectiveProcessesSDK.ButtonProperties?, platform: Swift.String = "ios") -> some SwiftUICore.View
   
+  @_Concurrency.MainActor @preconcurrency public func edNgDoneButtonStyle(iconStyles: EffectiveProcessesSDK.ButtonProperties?, platform: Swift.String = "ios") -> some SwiftUICore.View
+  
+}
+@_Concurrency.MainActor @preconcurrency public struct EdNgDoneButtonStyleModifier : SwiftUICore.ViewModifier {
+  @_Concurrency.MainActor @preconcurrency public func body(content: EffectiveProcessesSDK.EdNgDoneButtonStyleModifier.Content) -> some SwiftUICore.View
+  
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK27EdNgDoneButtonStyleModifierV4body7contentQr7SwiftUI05_ViewI8_ContentVyACG_tF", 0) __
 }
 @_Concurrency.MainActor @preconcurrency public struct EdNgNumericStepperLabelStyle : SwiftUICore.ViewModifier {
   @_Concurrency.MainActor @preconcurrency public init(labelStates: EffectiveProcessesSDK.InputLabelStates?, platform: Swift.String, isFocused: Swift.Bool, isValid: Swift.Bool, isDisabled: Swift.Bool)
@@ -4606,6 +4695,9 @@ extension EffectiveProcessesSDK.CheckboxBooleanField : Swift.Sendable {}
 extension EffectiveProcessesSDK.CheckboxBooleanView : Swift.Sendable {}
 @available(iOS 15.0, *)
 extension EffectiveProcessesSDK.ConsentCheckboxField : Swift.Sendable {}
+extension EffectiveProcessesSDK.DatePickerInline : Swift.Sendable {}
+@available(iOS 16.4, *)
+extension EffectiveProcessesSDK.DatePickerField : Swift.Sendable {}
 extension EffectiveProcessesSDK.IndicatorPosition : Swift.Equatable {}
 extension EffectiveProcessesSDK.IndicatorPosition : Swift.Hashable {}
 extension EffectiveProcessesSDK.IndicatorPosition : Swift.RawRepresentable {}
@@ -4629,6 +4721,7 @@ extension EffectiveProcessesSDK.EdNgAssistiveTextStyle : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgDirectTextInputLabelStyleModifier : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgCalendarIconStyleModifier : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgTerminateButtonIconStyleModifier : Swift.Sendable {}
+extension EffectiveProcessesSDK.EdNgDoneButtonStyleModifier : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgNumericStepperLabelStyle : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgNumericStepperValueDisplayStyle : Swift.Sendable {}
 extension EffectiveProcessesSDK.EdNgNumericStepperButtonStyle : Swift.Sendable {}
