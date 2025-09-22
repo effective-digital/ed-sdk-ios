@@ -2410,7 +2410,8 @@ public class EPStyleComponent : Swift.Codable {
   final public let datePicker: EffectiveProcessesSDK.EPStyleDatePicker?
   final public let numericStepper: EffectiveProcessesSDK.EPStyleNumericStepper?
   final public let bottomSheetDropdown: EffectiveProcessesSDK.EPStyleBottomSheetDropdown?
-  public init(input: EffectiveProcessesSDK.EPStyleInput? = nil, slider: EffectiveProcessesSDK.EPStyleSlider? = nil, checkboxBoolean: EffectiveProcessesSDK.EPStyleCheckboxBoolean? = nil, productCard: EffectiveProcessesSDK.EPStyleProductCard? = nil, datePicker: EffectiveProcessesSDK.EPStyleDatePicker? = nil, numericStepper: EffectiveProcessesSDK.EPStyleNumericStepper? = nil, bottomSheetDropdown: EffectiveProcessesSDK.EPStyleBottomSheetDropdown? = nil)
+  final public let reviewDocuments: EffectiveProcessesSDK.EPStyleReviewDocuments?
+  public init(input: EffectiveProcessesSDK.EPStyleInput? = nil, slider: EffectiveProcessesSDK.EPStyleSlider? = nil, checkboxBoolean: EffectiveProcessesSDK.EPStyleCheckboxBoolean? = nil, productCard: EffectiveProcessesSDK.EPStyleProductCard? = nil, datePicker: EffectiveProcessesSDK.EPStyleDatePicker? = nil, numericStepper: EffectiveProcessesSDK.EPStyleNumericStepper? = nil, bottomSheetDropdown: EffectiveProcessesSDK.EPStyleBottomSheetDropdown? = nil, reviewDocuments: EffectiveProcessesSDK.EPStyleReviewDocuments? = nil)
   public static var empty: EffectiveProcessesSDK.EPStyleComponent {
     get
   }
@@ -2438,6 +2439,9 @@ extension EffectiveProcessesSDK.EPStyleComponent {
     get
   }
   public var safeBottomSheetDropdown: EffectiveProcessesSDK.EPStyleBottomSheetDropdown {
+    get
+  }
+  public var safeReviewDocuments: EffectiveProcessesSDK.EPStyleReviewDocuments {
     get
   }
 }
@@ -2605,6 +2609,109 @@ public class BottomSheetActiveIndicator : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   required public init(from decoder: any Swift.Decoder) throws
 }
+public class EPStyleReviewDocuments : Swift.Codable {
+  final public let components: EffectiveProcessesSDK.ReviewDocumentsComponentsInput?
+  public init(components: EffectiveProcessesSDK.ReviewDocumentsComponentsInput?)
+  public static var empty: EffectiveProcessesSDK.EPStyleReviewDocuments {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class ReviewDocumentsComponentsInput : Swift.Codable {
+  final public let uiComponents: EffectiveProcessesSDK.ReviewDocumentsUIComponentsInput?
+  public init(uiComponents: EffectiveProcessesSDK.ReviewDocumentsUIComponentsInput?)
+  public static var empty: EffectiveProcessesSDK.ReviewDocumentsComponentsInput {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public class ReviewDocumentsUIComponentsInput : Swift.Codable {
+  public var reviewDocuments: EffectiveProcessesSDK.ReviewDocumentsToken?
+  public init(reviewDocuments: EffectiveProcessesSDK.ReviewDocumentsToken?)
+  public static var empty: EffectiveProcessesSDK.ReviewDocumentsUIComponentsInput {
+    get
+  }
+  @objc deinit
+  public func encode(to encoder: any Swift.Encoder) throws
+  required public init(from decoder: any Swift.Decoder) throws
+}
+public struct ReviewDocumentsToken : Swift.Codable {
+  public let documentName: EffectiveProcessesSDK.DocumentNameStyle?
+  public let checkmark: EffectiveProcessesSDK.CheckmarkStyle?
+  public let illustrationContainer: EffectiveProcessesSDK.IllustrationContainerStates?
+  public let backgroundColor: EffectiveProcessesSDK.PlatformAppearance?
+  public let border: EffectiveProcessesSDK.Border?
+  public let cornerRadius: EffectiveProcessesSDK.CornerRadius?
+  public let padding: EffectiveProcessesSDK.Margins?
+  public let margin: EffectiveProcessesSDK.Margins?
+  public init(documentName: EffectiveProcessesSDK.DocumentNameStyle?, checkmark: EffectiveProcessesSDK.CheckmarkStyle?, illustrationContainer: EffectiveProcessesSDK.IllustrationContainerStates?, backgroundColor: EffectiveProcessesSDK.PlatformAppearance?, border: EffectiveProcessesSDK.Border?, cornerRadius: EffectiveProcessesSDK.CornerRadius?, padding: EffectiveProcessesSDK.Margins?, margin: EffectiveProcessesSDK.Margins?)
+  public static var empty: EffectiveProcessesSDK.ReviewDocumentsToken {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct DocumentNameStyle : Swift.Codable {
+  public let text: EffectiveProcessesSDK.TextStyles?
+  public let margin: EffectiveProcessesSDK.Margins?
+  public init(text: EffectiveProcessesSDK.TextStyles?, margin: EffectiveProcessesSDK.Margins?)
+  public static var empty: EffectiveProcessesSDK.DocumentNameStyle {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CheckmarkStyle : Swift.Codable {
+  public let color: EffectiveProcessesSDK.PlatformAppearance?
+  public let size: EffectiveProcessesSDK.SizeValues?
+  public let margin: EffectiveProcessesSDK.Margins?
+  public init(color: EffectiveProcessesSDK.PlatformAppearance?, size: EffectiveProcessesSDK.SizeValues?, margin: EffectiveProcessesSDK.Margins?)
+  public static var empty: EffectiveProcessesSDK.CheckmarkStyle {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct IllustrationContainerStates : Swift.Codable {
+  public let defaultState: EffectiveProcessesSDK.IllustrationContainerState?
+  public let reviewNeeded: EffectiveProcessesSDK.IllustrationContainerState?
+  public init(defaultState: EffectiveProcessesSDK.IllustrationContainerState?, reviewNeeded: EffectiveProcessesSDK.IllustrationContainerState?)
+  public static var empty: EffectiveProcessesSDK.IllustrationContainerStates {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct IllustrationContainerState : Swift.Codable {
+  public let backgroundColor: EffectiveProcessesSDK.PlatformAppearance?
+  public let border: EffectiveProcessesSDK.Border?
+  public let cornerRadius: EffectiveProcessesSDK.CornerRadius?
+  public let padding: EffectiveProcessesSDK.Margins?
+  public let margin: EffectiveProcessesSDK.Margins?
+  public let size: EffectiveProcessesSDK.SizeValues?
+  public let image: EffectiveProcessesSDK.ImageStyle?
+  public init(backgroundColor: EffectiveProcessesSDK.PlatformAppearance?, border: EffectiveProcessesSDK.Border?, cornerRadius: EffectiveProcessesSDK.CornerRadius?, padding: EffectiveProcessesSDK.Margins?, margin: EffectiveProcessesSDK.Margins?, size: EffectiveProcessesSDK.SizeValues?, image: EffectiveProcessesSDK.ImageStyle?)
+  public static var empty: EffectiveProcessesSDK.IllustrationContainerState {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ImageStyle : Swift.Codable {
+  public let color: EffectiveProcessesSDK.PlatformAppearance?
+  public let size: EffectiveProcessesSDK.SizeValues?
+  public let margin: EffectiveProcessesSDK.Margins?
+  public init(color: EffectiveProcessesSDK.PlatformAppearance?, size: EffectiveProcessesSDK.SizeValues?, margin: EffectiveProcessesSDK.Margins?)
+  public static var empty: EffectiveProcessesSDK.ImageStyle {
+    get
+  }
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
 @_hasMissingDesignatedInitializers public class DesignTokenLoader {
   public static func loadDesignTokens<T>(for resourceName: Swift.String, as type: T.Type) -> T? where T : Swift.Decodable, T : Swift.Encodable
   @objc deinit
@@ -2616,6 +2723,9 @@ extension EffectiveProcessesSDK.DesignTokenLoader {
   public static func loadInputDesignTokens() -> EffectiveProcessesSDK.EPStyleInput?
   public static func loadSliderDesignTokens() -> EffectiveProcessesSDK.EPStyleSlider?
   public static func loadCheckboxDesignTokens() -> EffectiveProcessesSDK.EPStyleCheckboxBoolean?
+  public static func loadReviewDocumentsDesignTokens() -> EffectiveProcessesSDK.EPStyleReviewDocuments?
+  @discardableResult
+  public static func registerReviewDocumentsDesignTokens() -> Swift.Bool
   public static func loadProductCardDesignTokens() -> EffectiveProcessesSDK.EPStyleProductCard?
   public static func loadDatePickerDesignTokens() -> EffectiveProcessesSDK.EPStyleDatePicker?
   public static func loadNumericStepperDesignTokens() -> EffectiveProcessesSDK.EPStyleNumericStepper?
@@ -3096,37 +3206,6 @@ public enum FieldType : Swift.String {
   public var rawValue: Swift.String {
     get
   }
-}
-public class FilePreviewModel : EffectiveProcessesSDK.ViewModelState {
-  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
-  public init(url: Foundation.URL?, document: EffectiveProcessesSDK.Document? = nil, isTabable: Swift.Bool = true)
-  @Combine.Published @_projectedValueProperty($url) public var url: Foundation.URL? {
-    get
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    set
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    _modify
-  }
-  public var $url: Combine.Published<Foundation.URL?>.Publisher {
-    get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-    set
-  }
-  @Combine.Published @_projectedValueProperty($document) public var document: EffectiveProcessesSDK.Document? {
-    get
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    set
-    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-    _modify
-  }
-  public var $document: Combine.Published<EffectiveProcessesSDK.Document?>.Publisher {
-    get
-    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-    set
-  }
-  public var isTabable: Swift.Bool
-  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
-  @objc deinit
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency open class GenericViewTableView<T> : UIKit.UIView, UIKit.UITableViewDelegate, UIKit.UITableViewDataSource where T : EffectiveProcessesSDK.DescriptiveProtocol {
   @_Concurrency.MainActor @preconcurrency public var didSelect: (T) -> Swift.Void
@@ -3979,6 +4058,102 @@ public enum Result<T> {
   case success(T)
   case failure(any Swift.Error)
 }
+@available(iOS 15.0, *)
+@_Concurrency.MainActor @preconcurrency public struct ReviewDocumentsField : SwiftUICore.View {
+  @SwiftUICore.ObservedObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.ReviewDocumentsModel {
+    get
+    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  @_Concurrency.MainActor @preconcurrency public var $model: SwiftUICore.ObservedObject<EffectiveProcessesSDK.ReviewDocumentsModel>.Wrapper {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public init(model: EffectiveProcessesSDK.ReviewDocumentsModel)
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    get
+  }
+  @available(iOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK20ReviewDocumentsFieldV4bodyQrvp", 0) __
+}
+public class ReviewDocumentsModel : Combine.ObservableObject, EffectiveProcessesSDK.ViewModelState {
+  @Combine.Published @_projectedValueProperty($url) public var url: Foundation.URL? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $url: Combine.Published<Foundation.URL?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($document) public var document: EffectiveProcessesSDK.Document? {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $document: Combine.Published<EffectiveProcessesSDK.Document?>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($isTabable) public var isTabable: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $isTabable: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  @Combine.Published @_projectedValueProperty($showPreview) public var showPreview: Swift.Bool {
+    get
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  public var $showPreview: Combine.Published<Swift.Bool>.Publisher {
+    get
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
+    set
+  }
+  public init(url: Foundation.URL?, document: EffectiveProcessesSDK.Document? = nil, isTabable: Swift.Bool = true)
+  public func onChange(state: EffectiveProcessesSDK.EPState, type: EffectiveProcessesSDK.FieldType)
+  public func markAsRead()
+  public func togglePreview()
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
+@available(iOS 15.0, *)
+@_Concurrency.MainActor @preconcurrency public struct ReviewDocumentsView : SwiftUICore.View, EffectiveProcessesSDK.ModelBindable {
+  @SwiftUICore.ObservedObject @_projectedValueProperty($model) @_Concurrency.MainActor @preconcurrency public var model: EffectiveProcessesSDK.ReviewDocumentsModel {
+    get
+    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    set
+    @available(iOS 15.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
+    _modify
+  }
+  @_Concurrency.MainActor @preconcurrency public var $model: SwiftUICore.ObservedObject<EffectiveProcessesSDK.ReviewDocumentsModel>.Wrapper {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public init(model: EffectiveProcessesSDK.ReviewDocumentsModel)
+  @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
+    get
+  }
+  @available(iOS 15.0, *)
+  public typealias Body = @_opaqueReturnTypeOf("$s21EffectiveProcessesSDK19ReviewDocumentsViewV4bodyQrvp", 0) __
+  @available(iOS 15.0, *)
+  public typealias Model = EffectiveProcessesSDK.ReviewDocumentsModel
+}
 public protocol SSLPinningDelegate : AnyObject {
   func didFailSSLPinning(with error: EffectiveProcessesSDK.SSLPinningError)
 }
@@ -4671,8 +4846,8 @@ public struct ViewControllerProvidiable : EffectiveProcessesSDK.ViewControllerPr
 }
 public protocol ViewDocumentProvider {
   @available(*, deprecated, message: "Use ViewDocumentProvider.fileViewV2")
-  var fileView: (Foundation.URL?, EffectiveProcessesSDK.Document?) -> (EffectiveProcessesSDK.FilePreviewModel, UIKit.UIView) { get set }
-  var fileViewV2: (Foundation.URL?, EffectiveProcessesSDK.Document?, _ isTapable: Swift.Bool) -> (EffectiveProcessesSDK.FilePreviewModel, UIKit.UIView) { get set }
+  var fileView: (Foundation.URL?, EffectiveProcessesSDK.Document?) -> (EffectiveProcessesSDK.ReviewDocumentsModel, UIKit.UIView) { get set }
+  var fileViewV2: (Foundation.URL?, EffectiveProcessesSDK.Document?, _ isTapable: Swift.Bool) -> (EffectiveProcessesSDK.ReviewDocumentsModel, UIKit.UIView) { get set }
 }
 public struct ViewProvidable : EffectiveProcessesSDK.ScreenProvider {
   public init(closure: @escaping (EffectiveProcessesSDK.ProcessInstance) -> UIKit.UIView)
@@ -4767,6 +4942,10 @@ extension EffectiveProcessesSDK.ProductCardView : Swift.Sendable {}
 extension EffectiveProcessesSDK.ProductSelectionListView : Swift.Sendable {}
 @available(iOS 15.0, *)
 extension EffectiveProcessesSDK.RadioButtonFkField : Swift.Sendable {}
+@available(iOS 15.0, *)
+extension EffectiveProcessesSDK.ReviewDocumentsField : Swift.Sendable {}
+@available(iOS 15.0, *)
+extension EffectiveProcessesSDK.ReviewDocumentsView : Swift.Sendable {}
 extension EffectiveProcessesSDK.SSLPinningError : Swift.Equatable {}
 extension EffectiveProcessesSDK.SSLPinningError : Swift.Hashable {}
 @available(iOS 15.0, *)

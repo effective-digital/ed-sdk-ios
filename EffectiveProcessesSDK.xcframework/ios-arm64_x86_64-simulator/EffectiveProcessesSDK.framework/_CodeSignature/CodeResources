@@ -6,11 +6,11 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		jTb/bR8bJEV3QDeyQ0zE9PrhifM=
+		b9D9Vtmu093uTFkGD1LCWzieH7U=
 		</data>
 		<key>Config.plist</key>
 		<data>
-		XAbXA/uV+DZPazxz14Km1DTVIkQ=
+		6jPEgAhAcshwC5+ptRQVPie9BmQ=
 		</data>
 		<key>GeoLocationError.json</key>
 		<data>
@@ -42,43 +42,43 @@
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		4jsQHV7r6yLl7LcP0TisWEQvm3U=
+		OAS5YsrAN5CUptx160o7AJGTzKs=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		luglJ++IpvzC3ZQDdZJzOPdk13o=
+		BTmh5B0IZqClKFV+OiNVraPrYeI=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		AOqAXk5unjsA+t+Xz4pVhRGuJY8=
+		zeWQPPWdTRrb8zk8wN3ouWgJwGQ=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		luglJ++IpvzC3ZQDdZJzOPdk13o=
+		BTmh5B0IZqClKFV+OiNVraPrYeI=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		Va2w5raLNaKWKloc5hxMVclksl0=
+		kB8vNNFXlNp9TNraOulNc3Zyixc=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		4jsQHV7r6yLl7LcP0TisWEQvm3U=
+		OAS5YsrAN5CUptx160o7AJGTzKs=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		zvrDsvPdTJ+zzuJQzRWyJzIHOGY=
+		TezFFFdUeMXrNWueuhOHPRpPrx8=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		pClyLHC0gxbRfjBZPpoEq2GPPvs=
+		jHX2ItLSAnA+6yVbxx8lWwxRuX8=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		zvrDsvPdTJ+zzuJQzRWyJzIHOGY=
+		TezFFFdUeMXrNWueuhOHPRpPrx8=
 		</data>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		fTbrMi64X8DyiWuImLPeRh/kl9k=
+		GUHJTpat7CWQf+5t4rIznX8hLV0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -162,14 +162,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eQfDkIvrCjoXV+KWdirwPqOJlFC2tHFRNV6Nq/C9vZk=
+			KoAG5MXir+vSpZ6tn71OEUmRj0VKDGRuO1zJFxShNC0=
 			</data>
 		</dict>
 		<key>Config.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2yw0eWTPDp1cZp3VLNsNh6dWRHQDRztRHfC62XiOlu0=
+			fPsc+iRX70k01mPTUyxuUOdnvjsbZ6BNa84FfGIK/Ws=
 			</data>
 		</dict>
 		<key>GeoLocationError.json</key>
@@ -218,70 +218,70 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GK8CkTvDJzWAim00WLaLXZSdQ9qsRTOeUWg6H5ijYsI=
+			Zwdv/58WMGp+ki3vtn9yz7ubqBLLnfU2JMWSZPW1rvM=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			DN8QufCjB+R9m6ylGkz9JD6VqLWsl7MqmItjMcJzOgM=
+			2f6amP/NBCfLkNsxzeSQ526eBVfzF3w7Sx4evGzO2SE=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			FYa7sAsgvVLDIwESLjkuDTcwOAECFkT6pKcujour7pk=
+			c6VqhJngHPTEZJFgBuGVHIl8hTacG+9wyqAkRYpDo7Y=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			DN8QufCjB+R9m6ylGkz9JD6VqLWsl7MqmItjMcJzOgM=
+			2f6amP/NBCfLkNsxzeSQ526eBVfzF3w7Sx4evGzO2SE=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			cp/75+S4pfT66DYDrjOQT8rUvUSR7vShFAF4jI95qME=
+			FpIEwnUvnzecwhCHFCyxWVNxD+/qRREZPxgBPLI4jxg=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			GK8CkTvDJzWAim00WLaLXZSdQ9qsRTOeUWg6H5ijYsI=
+			Zwdv/58WMGp+ki3vtn9yz7ubqBLLnfU2JMWSZPW1rvM=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ApDgb8rGIEsdCFBL8oCQBDtsSdYsWkjnM4okG1wri4U=
+			vWs8SWvLsBfGEyTVc6nIEsn55+ffQvo0UB7qHWQ52H8=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			v2bbZNM0KoRiCnbXJJjoYdYAt4FG8jSVh/fLr8caZsE=
+			UvlrFOgf/JYbNXXAmjcNXAVNRgBdLCpdEWiW9UURuqU=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ApDgb8rGIEsdCFBL8oCQBDtsSdYsWkjnM4okG1wri4U=
+			vWs8SWvLsBfGEyTVc6nIEsn55+ffQvo0UB7qHWQ52H8=
 			</data>
 		</dict>
 		<key>Modules/EffectiveProcessesSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jFoU41q7mwfDrtZzjkTniihXAbSg2M+XbBCL4AudWWQ=
+			FCXWMmt1NP7u1c+71DXVHdSzZGJWnBgCgo/2JSj70cM=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
